@@ -58,6 +58,7 @@ section {
 .form-container {
     max-height: 35em;
     min-height: 35em;
+    max-width: 70em;
     height: auto;
     width: auto;
     background-color: #FFF;
