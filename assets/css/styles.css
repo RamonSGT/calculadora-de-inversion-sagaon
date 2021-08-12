@@ -7,6 +7,7 @@ html,
     padding: 0;
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif !important;
+    overflow-x: auto;
 }
 
 .h-65 {
@@ -55,9 +56,12 @@ section {
     justify-content: center;
 }
 
+main {
+    padding-top: 9%;
+}
+
 .form-container {
-    max-height: 35em;
-    min-height: 35em;
+    vertical-align: middle;
     max-width: 70em;
     height: auto;
     width: auto;
