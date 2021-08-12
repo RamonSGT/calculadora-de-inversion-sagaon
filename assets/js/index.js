@@ -159,7 +159,15 @@ $(async function () {
     const costPerChunk = store.calculateCostPerChunkLeaf();
     $("#costoPorHojaInput").val(costPerChunk).trigger("change");
     $("#costoPedazo").val(costPerChunk).trigger("change");
-    document.querySelector("#img-machine").setAttribute("src", store.getState("selectedMachine").imgurls)
+    const selectedMach = store.getState("selectedMachine")
+    if(selectedMach) {
+      document.querySelector("#form-parent-container").style.width = "70%"
+      document.querySelector("#img-container").style.display = "block"
+      document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)
+    } else {
+      document.querySelector("#img-container").style.display = "none"
+      document.querySelector("#form-parent-container").style.width = "100%"
+    }
   });
 
   $("#listaConsumosSelect").on("change", function () {
