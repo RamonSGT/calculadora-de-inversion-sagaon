@@ -143,6 +143,7 @@ $(async function () {
     const consumos = await getConsumptionsByProduct(this.value);
     store.setState("consumptions", consumos);
     store.selectMachine(this.value);
+
     if (!consumos.error) {
       displaySelects({
         tagId: "listaConsumosSelect",
@@ -151,12 +152,14 @@ $(async function () {
         text: "porcentaje_trabajo",
         decorator: "%",
       });
+      
     }
     const totalChunks = store.calculateChunks();
     $("#numeroPedazos").val(totalChunks).trigger("change");
     const costPerChunk = store.calculateCostPerChunkLeaf();
     $("#costoPorHojaInput").val(costPerChunk).trigger("change");
     $("#costoPedazo").val(costPerChunk).trigger("change");
+    document.querySelector("#img-machine").setAttribute("src", store.getState("selectedMachine").imgurls)
   });
 
   $("#listaConsumosSelect").on("change", function () {
