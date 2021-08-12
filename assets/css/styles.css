@@ -1,0 +1,282 @@
+body,
+html,
+* {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.h-65 {
+    height: 65%;
+}
+
+.h-20 {
+    height: 20%;
+}
+
+.h-15 {
+    height: 15%;
+}
+
+.h-auto {
+    height: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}
+
+.banner-container {
+    height: 100px;
+    width: 650px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    /* Vertical center alignment */
+    justify-content: center;
+    /* Horizontal center alignment */
+    background: rgba(31, 31, 31, 0.5);
+}
+
+.banner-title {
+    text-align: center;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 46px;
+    line-height: 40px;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    max-height: 35em;
+    min-height: 35em;
+    height: auto;
+    width: 75em;
+    background-color: #FFF;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 15px;
+    overflow-y: auto;
+    position: relative;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.accordion {
+    overflow-y: auto;
+}
+
+.accordion div {
+    border: none !important;
+}
+
+.accordion-button {
+    font-size: 24px;
+}
+
+.btn-container-calculate {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px 16px 20px;
+}
+
+.btn-ratio-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mr-3px {
+    margin-right: 3px;
+}
+
+.ml-3px {
+    margin-left: 3px;
+}
+
+.btn-calculate {
+    background: rgba(252, 66, 66, 0.76);
+    border-radius: 25px;
+    width: 235px;
+    height: 40px;
+    color: #FFF;
+    box-shadow: none;
+    text-transform: none;
+}
+
+.btn-calculate:hover {
+    color: #FFF;
+    box-shadow: none;
+}
+
+.btn-text-calculate {
+    position: relative;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 300;
+    top: -8px;
+}
+
+select,
+input {
+    border-radius: 15px !important;
+    border-color: #517ED4 !important;
+    box-shadow: none !important;
+    height: 38px !important;
+}
+
+input, #hogar, #dac {
+    background-image: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+footer {
+    background-color: #212121;
+    position: fixed;
+    bottom: 0;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 100%;
+}
+
+.logo {
+    width: 250px;
+    height: 100px;
+    background-image: url("../images/logo-sagaon.png");
+    background-size: cover;
+}
+
+.icons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.icons-container-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+}
+
+.icon {
+    width: 28px !important;
+    height: 28px !important;
+}
+
+.icon-facebook {
+    background-image: url("../icons/FACE.png");
+    background-size: 100% 100%;
+}
+
+.icon-instagram {
+    background-image: url("../icons/INSTAGRAM.png");
+    background-size: 100% 100%;
+}
+
+.icon-youtube {
+    background-image: url("../icons/YOUTUBE.png");
+    background-size: 100% 100%;
+}
+
+.icon-email {
+    background-image: url("../icons/EMAIL.png");
+    background-size: 100% 100%;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+#hogar {
+    background-color: #757575;
+}
+
+#hogar,
+#dac {
+    background-color: #DBDBDB;
+}
+
+.form-outline .form-control.is-invalid~.form-notch .form-notch-leading, .form-outline .form-control.is-invalid~.form-notch .form-notch-middle, .form-outline .form-control.is-invalid~.form-notch .form-notch-trailing, .form-select.is-invalid, .was-validated .form-outline .form-control:invalid~.form-notch .form-notch-leading, .was-validated .form-outline .form-control:invalid~.form-notch .form-notch-middle, .was-validated .form-outline .form-control:invalid~.form-notch .form-notch-trailing, .was-validated .form-select:invalid {
+    /* border-color: transparent !important; */
+    box-shadow: none !important;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    margin-bottom: 0 !important;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid {
+    margin-bottom: 0 !important;
+}
+
+.form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"] {
+    background-image: none !important;
+}
+
+.form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"] {
+    background-image: none !important;
+    /* padding: 0 !important; */
+    /* margin: 0 !important; */
+    /* background-position: 0; */
+    /* background-size: 0; */
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    --mdb-table-active-bg: "#FFF" !important;
+}
+
+.txt-red {
+    color: rgba(252, 66, 66, 0.76) !important;
+}
+
+.background {
+    position: absolute;
+    height: 350px;
+    width: 100%;
+    background-image: url("../images/background.jpg");
+    background-size: 100% 100%;
+    z-index: -9999;
+}
+
+.is-invalid {
+    border-color:rgba(252, 66, 66, 0.76) !important;
+}
+
+#toast-container {
+    height: 55px;
+}
+
+[id^="tippy"] {
+    width: auto !important;
+    height: auto !important;
+}
