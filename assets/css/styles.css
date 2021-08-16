@@ -122,7 +122,6 @@ main {
   font-size: 25px;
   font-style: normal;
   font-weight: 300;
-  top: -8px;
 }
 
 select,
@@ -310,4 +309,60 @@ footer {
 [id^="tippy"] {
   width: auto !important;
   height: auto !important;
+}
+
+input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.25) !important;
+}
+
+@media (max-width: 576px) {
+  .accordion-button {
+    font-size: 18px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+  
+  [id^="popover"] {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  input::-webkit-input-placeholder, select {
+    font-size: 14px !important;
+  }
+
+  .btn-text-calculate {
+    font-size: 14px !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .accordion-button {
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 16px;
+  }
+  
+  [id^="popover"] {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  input::-webkit-input-placeholder, select {
+    font-size: 16px !important;
+  }
+
+  .btn-text-calculate {
+    font-size: 16px !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .btn-text-calculate {
+    top: -8px !important;
+  }
 }

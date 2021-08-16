@@ -74,9 +74,37 @@ class Store {
     const large = parseFloat(store.getState("largeLeaf"))
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!width || !large || !corte_ancho || !corte_largo) return null
-    return parseInt((width * large) / (corte_ancho * corte_largo))
+    return parseFloat((width * large) / ((corte_ancho + 0.5) * (corte_largo + 0.5))).toFixed(2)
+  }
+
+  calculateDesignChunks() {
+    console.log("Design", store.getState("widthLeafDesign"))
+    if(!store.getState("widthLeafDesign") || !store.getState("largeLeafDesign") || !store.getState("selectedMachine")) return null
+    const widthLeafDesign = store.getState("widthLeafDesign")
+    const largeLeafDesign = store.getState("largeLeafDesign")
+    const { corte_ancho, corte_largo } = store.getState("selectedMachine")
+    if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
+    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.5) * (largeLeafDesign + 0.5))
+    store.setState("designPerChunk", designPerChunk)
+    const total = parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)
+    store.setState("totalDesignChunks", total)
+    return total
+  }
+
+  calculateCostDesignChunk() {
+    if(!this.state.widthLeafDesign || !this.state.largeLeafDesign) return null
+    const designPerChunk = parseFloat(store.getState("designPerChunk"))    
+    const costPerChunk = parseFloat($("#costoPedazo").val())
+    console.log("Total design chunks: ", designPerChunk, "Cost per chunk: ", costPerChunk)
+    if(!designPerChunk || !costPerChunk) return null
+    const costPerDesign =  costPerChunk / designPerChunk
+    if(!costPerDesign) return null
+    return costPerDesign.toFixed(2)
+    // return costPerDesign
   }
 }
+
+
 
 // 120 * 198 = 12
 
