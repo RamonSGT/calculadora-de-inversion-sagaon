@@ -317,11 +317,11 @@ input::-webkit-input-placeholder {
 
 @media (max-width: 576px) {
   .accordion-button {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   label {
-    font-size: 14px;
+    font-size: 13px;
   }
   
   [id^="popover"] {
@@ -330,17 +330,17 @@ input::-webkit-input-placeholder {
   }
 
   input::-webkit-input-placeholder, select {
-    font-size: 14px !important;
+    font-size: 13px !important;
   }
 
   .btn-text-calculate {
-    font-size: 14px !important;
+    font-size: 13px !important;
   }
 }
 
 @media (min-width: 576px) and (max-width: 992px) {
   .accordion-button {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   label {
@@ -348,8 +348,8 @@ input::-webkit-input-placeholder {
   }
   
   [id^="popover"] {
-    width: 15px !important;
-    height: 15px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
 
   input::-webkit-input-placeholder, select {
