@@ -362,6 +362,7 @@
   <script type="text/javascript" src="./assets/vendor/dinero.js-1.8.1/package/build/umd/dinero.min.js"></script>
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
+  <script type="text/javascript" src="./assets/js/devices.js"></script>
   <script type="text/javascript" src="./assets/js/notifications.js"></script>
   <script type="text/javascript" src="./assets/js/api.js"></script>
   <script type="text/javascript" src="./assets/js/store.js"></script>
@@ -392,6 +393,8 @@
       tippy(`#popover-${i}`, {
         content: contents[(i - 1)],
         allowHTML: true,
+        animation: "scale",
+        trigger: "click mouseenter focus"
       })
     }
 
