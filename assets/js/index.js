@@ -308,11 +308,7 @@ $(async function () {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
-    if (
-      inputId === INPUT_ID_DAY_WORK_MACHINE &&
-      Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1
-    ) {
+    if (inputId === INPUT_ID_DAY_WORK_MACHINE) {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
@@ -450,6 +446,7 @@ $(async function () {
   }
 
   function calculateUtility(workHouws, workDays) {
+    workDays = (workDays) ? workDays : 1
     const totalHours = workHouws * workDays;
     const materialCost = parseFloat($("#costoInput").val());
     const costPerHourWorker = parseFloat($("#costoHoraOperador").val());
