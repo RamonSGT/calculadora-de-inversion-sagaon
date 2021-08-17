@@ -113,3 +113,11 @@ function sortByMonth(arr) {
     );
   });
 }
+
+function trackUsingTime() {
+  setInterval(() => {
+    console.log("Cada 30 segundos")
+  }, 30000)
+}
+
+trackUsingTime()

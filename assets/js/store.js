@@ -1,6 +1,7 @@
 class Store {
   constructor(initialState) {
     this.state = initialState;
+    this.startDate = new Date()
   }
 
   setState(key, value) {
