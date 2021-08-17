@@ -330,6 +330,11 @@ input::-webkit-input-placeholder {
   margin-top: 7px; */
 }
 
+.required-instructions {
+  height: auto;
+  padding: 0 5% 0;
+}
+
 @media (max-width: 576px) {
   .accordion-button {
     font-size: 16px;

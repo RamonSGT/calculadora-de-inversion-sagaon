@@ -23,6 +23,9 @@
 <body>
   <main class="h-100">
     <!-- <button id="testTippy" style="background-color: red;">Hola mundo</button> -->
+    <!-- <div class="accordion-item px-5"> -->
+    <!-- </div> -->
+    <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son requeridos</p>
     <section class="row form-container">
       <div class="col-sm-12" id="form-parent-container">
         <div>
@@ -40,13 +43,13 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="animate__zoomIn col-sm-12 col-md-6">
-                        <label for="listaMaquinasSelect" class="form-label"><span class="required-icon-field">*</span> Máquina</label>
+                        <label for="listaMaquinasSelect" class="form-label">Máquina <span class="required-icon-field">*</span></label>
                         <select name="maquinas-select" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaConsumosSelect" class="form-label"><span class="required-icon-field">*</span> Porcentaje de trabajo <img data-bottom id="popover-1" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo <span class="required-icon-field">*</span> <img data-bottom id="popover-1" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
@@ -54,7 +57,7 @@
                     </div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="horasTrabajoMaquina" class="form-label"><span class="required-icon-field">*</span> Horas de trabajo por día</label>
+                        <label for="horasTrabajoMaquina" class="form-label">Horas de trabajo por día <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="horasTrabajoMaquina"
                           placeholder="5" required>
                       </div>
@@ -81,17 +84,17 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="costoInput" class="form-label"><span class="required-icon-field">*</span> Costo total de la hoja</label>
+                        <label for="costoInput" class="form-label">Costo total de la hoja <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="costoInput"
                           placeholder="350" required>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="widthLeaf" class="form-label"><span class="required-icon-field">*</span> Ancho de la hoja</label>
+                        <label for="widthLeaf" class="form-label">Ancho de la hoja <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeaf"
                           placeholder="244" required>
                       </div>
                       <div class="col-sm-12 col-lg-4">
-                        <label for="largeLeaf" class="form-label"><span class="required-icon-field">*</span> Largo de la hoja</label>
+                        <label for="largeLeaf" class="form-label">Largo de la hoja <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
                           placeholder="122" required>
                       </div>
@@ -127,12 +130,12 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
-                        <label for="widthLeafDesign" class="form-label"><span class="required-icon-field">*</span> Ancho del diseño</label>
+                        <label for="widthLeafDesign" class="form-label">Ancho del diseño <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeafDesign"
                           placeholder="20" required>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="largeLeafDesign" class="form-label"><span class="required-icon-field">*</span> Largo del diseño</label>
+                        <label for="largeLeafDesign" class="form-label">Largo del diseño <span class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeafDesign"
                           placeholder="10" required>
                       </div>
@@ -175,13 +178,13 @@
                   <div id="cargoCustomContainer">
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaTarifaHogarSelect" class="form-label"><span class="required-icon-field">*</span> Tarifa</label>
+                        <label for="listaTarifaHogarSelect" class="form-label">Tarifa <span class="required-icon-field">*</span></label>
                         <select name="tarifas-select" id="listaTarifaHogarSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaCargoSelect" class="form-label"><span class="required-icon-field">*</span> Mes <img id="popover-4"
+                        <label for="listaCargoSelect" class="form-label">Mes <span class="required-icon-field">*</span> <img id="popover-4"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="mes-select" id="listaCargoSelect" class="form-field-select form-input form-select"
                           required>
@@ -193,7 +196,7 @@
                   <div id="cargosContainer">
                     <div class="row">
                       <div class="col-12">
-                        <label for="listaTarifaDACSelect" class="form-label"><span class="required-icon-field">*</span> Región <img id="popover-5"
+                        <label for="listaTarifaDACSelect" class="form-label">Región <img id="popover-5"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="cargos-select" id="listaTarifaDACSelect"
                           class="form-field-select form-input form-select" required>
@@ -248,7 +251,7 @@
                   <div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="valuePerPiece" class="form-label"><span class="required-icon-field">*</span> Valor por pieza <span>(MXN)</span> <img id="popover-7" src="./assets/icons/question-mark.svg"
+                        <label for="valuePerPiece" class="form-label">Valor por pieza <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7" src="./assets/icons/question-mark.svg"
                             style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="valuePerPiece"
                           placeholder="500">
@@ -369,15 +372,6 @@
   <script type="text/javascript" src="./assets/js/helpers.js"></script>
   <script type="text/javascript" src="./assets/js/index.js"></script>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script type="text/javascript">
-    window._mfq = window._mfq || [];
-    (function() {
-      var mf = document.createElement("script");
-      mf.type = "text/javascript"; mf.defer = true;
-      mf.src = "//cdn.mouseflow.com/projects/4d398c08-3e64-4931-8ac9-fb1433121cec.js";
-      document.getElementsByTagName("head")[0].appendChild(mf);
-    })();
-  </script>
   <script>
     tippy('#tippy', {
       content: 'My tooltip!',
