@@ -114,9 +114,15 @@ function sortByMonth(arr) {
   });
 }
 
+function getValuesFromInput() {
+  const valueFromInput = store.getState("metadata")
+  valueFromInput.designDimensions.large = 0
+  valueFromInput.designDimensions.width = 
+  console.log("Value from input", valueFromInput)
+}
+
 function trackUsingTime() {
   setInterval(() => {
-    console.log("Cada 30 segundos")
   }, 30000)
 }
 

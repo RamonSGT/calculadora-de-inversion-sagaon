@@ -99,7 +99,7 @@ $(async function () {
     console.log("LARGE LEAF DESIGN: ", parseFloat($(this).val()))
     store.setState("largeLeafDesign", parseFloat($(this).val()))
     $("#numeroPedazosDesign").val(store.calculateDesignChunks())
-    $("#costoPedazoDesign").val(store.calculateCostDesignChunk())    
+    $("#costoPedazoDesign").val(store.calculateCostDesignChunk())
   })
 
   $("#hogar").on("click", function () {
@@ -219,6 +219,181 @@ $(async function () {
   $("#calcular").on("click", function () {
     const invalidFields = areInvalidFields();
     if (invalidFields) return toastr["error"]("Ha ingresado datos erroneos!");
+    handleCalculator()
+  });
+  
+  $(".form-input").on("keyup", function () {
+    const inputValue = $(this).val();
+    const inputId = $(this).attr("id");
+    const inputValueNumber = parseInt(inputValue);
+    $(this).addClass("is-invalid");
+    if (
+      inputId === INPUT_ID_HOURS_PER_DAY_MACHINE &&
+      Number.isInteger(inputValueNumber) &&
+      inputValueNumber >= 1 &&
+      inputValueNumber <= 24
+    ) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (inputId === INPUT_ID_DAY_WORK_MACHINE) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (
+      inputId === INPUT_ID_COST_TOTAL_LEAF &&
+      Number.isInteger(inputValueNumber) &&
+      inputValueNumber >= 1
+    ) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (
+      inputId === INPUT_ID_WIDTH_LEAF &&
+      Number.isInteger(inputValueNumber) &&
+      inputValueNumber >= 1
+    ) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (
+      inputId === INPUT_ID_LARGE_LEAF &&
+      Number.isInteger(inputValueNumber) &&
+      inputValueNumber >= 1
+    ) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (inputId === INPUT_ID_MONTHLY_PAYMENT || inputId === INPUT_ID_MONTHLY_HOURS) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (
+      inputId === "widthLeafDesign" &&
+      Number.isInteger(inputValueNumber)
+    ) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (inputId === "largeLeafDesign" && Number.isInteger(inputValueNumber)) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (inputId === "valuePerPiece" && Number.isInteger(inputValueNumber)) {
+      $(this).removeClass("is-invalid")
+      $(this).addClass("is-valid")
+    }
+  });
+
+  $(".form-select").on("change", function () {
+    const selectValue = $(this).val();
+    const selectId = $(this).attr("id");
+    $(this).addClass("is-invalid");
+    if (selectId === SELECT_ID_LIST_MACHINES && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (selectId === SELECT_ID_CONSUMPTION_RATE && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (selectId === SELECT_ID_RATE_CFE && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (selectId === SELECT_ID_RATE_MONTHLY && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+    if (selectId === SELECT_ID_RATE_DAC_LIST && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
+  });
+
+  // Prevent -, + and e fields and allowed only positive numbers included decimals
+  $("input[type=number]").keypress(function (e) {
+    var txt = String.fromCharCode(e.which);
+    if (!txt.match(/[0-9]/)) {
+      return false;
+    }
+  });
+
+  function areInvalidFields(onlyCheck = false) {
+    const rateFlag = store.getState("rateFlag");
+    const formFields = document.querySelectorAll(".form-input");
+    let invalidValues = false;
+    let showedAccordion = false;
+    for (const form of formFields) {
+      if (form.classList.contains("no-validate")) continue
+      if (rateFlag === 0 && form.id === SELECT_ID_RATE_DAC_LIST) continue;
+      if (rateFlag === 1 && (form.id === SELECT_ID_RATE_CFE || form.id === SELECT_ID_RATE_MONTHLY)) continue;
+      if (form.value !== "") {
+        form.classList.remove("is-invalid");
+        continue;
+      }
+      if (!showedAccordion && !onlyCheck) {
+        const collapseParent = getParentAccordion(form);
+        showedAccordion = true;
+        collapseParent.classList.add("show");
+      }
+      if(!onlyCheck) {
+        form.classList.add("is-invalid");
+      }
+      invalidValues = true;
+    }
+    return invalidValues;
+  }
+
+  function getParentAccordion(element) {
+    while (element) {
+      element = element.parentElement;
+      if (element.className.indexOf("accordion-collapse collapse") >= 0)
+        return element;
+    }
+    return null;
+  }
+
+  function calculateUtility(workHouws, workDays) {
+    workDays = (workDays) ? workDays : 1
+    const totalHours = workHouws * workDays;
+    const materialCost = parseFloat($("#costoInput").val());
+    const costPerHourWorker = parseFloat($("#costoHoraOperador").val());
+    const numChunks = parseInt($("#numeroPedazos").val());
+    const totalConsumptionKWh = store.getState("totalConsumptionKWh");
+    const valuePerPiece = parseFloat(store.getState("valuePerPiece"));
+    const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
+    const priceMachine = store.getState("selectedMachine").precio_shopify
+    // This is the TOTAL cost in hours
+    // console.log("totalHours: ", totalHours)
+    // console.log("totalCost: ", totalCost)
+    // This is the cost per one hour of work including; material cost, total electricity consumption and all operator hours worked
+    // console.log("totalCostPerHour: ", totalCostPerHour)
+    // We divide the totalHours of machine work (totalHours) / num of pieces (numChunks)
+    // const hoursPerChunk = totalHours / numChunks
+    // console.log("hoursPerChunk: ", hoursPerChunk)
+    // const utilityPerPiece = valuePerPiece - (hoursPerChunk * totalCostPerHour);
+    // console.log("utilityPerPiece: ", utilityPerPiece)
+    // // const totalUtility = (valuePerPiece * numChunks) - totalCost;
+    // const totalUtility = utilityPerPiece * numChunks
+    // console.log("totalUtility: ", totalUtility)
+    // console.log("Precio de la máquina", priceMachine)
+    // const roiPieces = priceMachine / utilityPerPiece
+
+    const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0));
+    const totalCostPerHour = totalCost / totalHours; // Cost one hour
+    const hoursPerDesign = totalHours / numeroPedazosDesign
+    const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
+    const totalUtility = utilityPerDesign * numeroPedazosDesign
+    const roiPieces = priceMachine / utilityPerDesign
+
+
+    $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
+    $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
+    $("#roiPieces").val(roiPieces >= 0 ? roiPieces.toFixed(2) : 0).trigger("change");
+  }
+  // ========================== End Handlers ========================== //
+  function handleCalculator() {
     const {
       selectedMachine,
       selectedConsumption,
@@ -231,9 +406,7 @@ $(async function () {
       $("#corrienteMax").text(selectedConsumption.corriente_maxima + "A");
       $("#voltaje").text(selectedConsumption.voltaje + "V");
       $("#potencia").text(selectedConsumption.potencia_kwh + "KWh");
-      $("#precio").text(
-        numberFormat.format(selectedMachine.precio_shopify) + " MXN"
-      );
+      $("#precio").text(numberFormat.format(selectedMachine.precio_shopify) + " MXN");
     }
     let workHours = $("#horasTrabajoMaquina").val();
     let workDays = $("#diasTrabajoMaquina").val();
@@ -292,196 +465,6 @@ $(async function () {
       100
     );
     calculatedROI = true
-  });
-
-  $(".form-input").on("keyup", function () {
-    const inputValue = $(this).val();
-    const inputId = $(this).attr("id");
-    const inputValueNumber = parseInt(inputValue);
-    $(this).addClass("is-invalid");
-    if (
-      inputId === INPUT_ID_HOURS_PER_DAY_MACHINE &&
-      Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1 &&
-      inputValueNumber <= 24
-    ) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (inputId === INPUT_ID_DAY_WORK_MACHINE) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (
-      inputId === INPUT_ID_COST_TOTAL_LEAF &&
-      Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1
-    ) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (
-      inputId === INPUT_ID_WIDTH_LEAF &&
-      Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1
-    ) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (
-      inputId === INPUT_ID_LARGE_LEAF &&
-      Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1
-    ) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if(inputId === INPUT_ID_MONTHLY_PAYMENT || inputId === INPUT_ID_MONTHLY_HOURS) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    // if (
-    //   inputId === INPUT_ID_MONTHLY_PAYMENT &&
-    //   Number.isInteger(inputValueNumber) &&
-    //   inputValueNumber >= 1
-    // ) {
-    //   $(this).removeClass("is-invalid");
-    //   $(this).addClass("is-valid");
-    // }
-    // if (
-    //   inputId === INPUT_ID_MONTHLY_HOURS &&
-    //   Number.isInteger(inputValueNumber) &&
-    //   inputValueNumber >= 1 &&
-    //   inputValueNumber <= 720
-    // ) {
-    //   $(this).removeClass("is-invalid");
-    //   $(this).addClass("is-valid");
-    // }
-    if (
-      inputId === "widthLeafDesign" &&
-      Number.isInteger(inputValueNumber)
-    ) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (inputId === "largeLeafDesign" && Number.isInteger(inputValueNumber)) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if(inputId === "valuePerPiece" && Number.isInteger(inputValueNumber)) {
-      $(this).removeClass("is-invalid")
-      $(this).addClass("is-valid")
-    }
-  });
-
-  $(".form-select").on("change", function () {
-    const selectValue = $(this).val();
-    const selectId = $(this).attr("id");
-    $(this).addClass("is-invalid");
-    if (selectId === SELECT_ID_LIST_MACHINES && selectValue) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (selectId === SELECT_ID_CONSUMPTION_RATE && selectValue) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (selectId === SELECT_ID_RATE_CFE && selectValue) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (selectId === SELECT_ID_RATE_MONTHLY && selectValue) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-    if (selectId === SELECT_ID_RATE_DAC_LIST && selectValue) {
-      $(this).removeClass("is-invalid");
-      $(this).addClass("is-valid");
-    }
-  });
-
-  // Prevent -, + and e fields and allowed only positive numbers included decimals
-  $("input[type=number]").keypress(function (e) {
-    var txt = String.fromCharCode(e.which);
-    if (!txt.match(/[0-9]/)) {
-      return false;
-    }
-  });
-
-  function areInvalidFields() {
-    const rateFlag = store.getState("rateFlag");
-    const formFields = document.querySelectorAll(".form-input");
-    let invalidValues = false;
-    let showedAccordion = false;
-    for (const form of formFields) {
-      if(form.classList.contains("no-validate")) continue
-      if (rateFlag === 0 && form.id === SELECT_ID_RATE_DAC_LIST) continue;
-      if (
-        rateFlag === 1 &&
-        (form.id === SELECT_ID_RATE_CFE || form.id === SELECT_ID_RATE_MONTHLY)
-      )
-        continue;
-      if (form.value !== "") {
-        form.classList.remove("is-invalid");
-        continue;
-      }
-      if (!showedAccordion) {
-        const collapseParent = getParentAccordion(form);
-        showedAccordion = true;
-        collapseParent.classList.add("show");
-      }
-      form.classList.add("is-invalid");
-      invalidValues = true;
-    }
-    return invalidValues;
+    getValuesFromInput()
   }
-
-  function getParentAccordion(element) {
-    while (element) {
-      element = element.parentElement;
-      if (element.className.indexOf("accordion-collapse collapse") >= 0)
-        return element;
-    }
-    return null;
-  }
-
-  function calculateUtility(workHouws, workDays) {
-    workDays = (workDays) ? workDays : 1
-    const totalHours = workHouws * workDays;
-    const materialCost = parseFloat($("#costoInput").val());
-    const costPerHourWorker = parseFloat($("#costoHoraOperador").val());
-    const numChunks = parseInt($("#numeroPedazos").val());
-    const totalConsumptionKWh = store.getState("totalConsumptionKWh");
-    const valuePerPiece = parseFloat(store.getState("valuePerPiece"));
-    const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
-    const priceMachine = store.getState("selectedMachine").precio_shopify
-    // This is the TOTAL cost in hours
-    // console.log("totalHours: ", totalHours)
-    // console.log("totalCost: ", totalCost)
-    // This is the cost per one hour of work including; material cost, total electricity consumption and all operator hours worked
-    // console.log("totalCostPerHour: ", totalCostPerHour)
-    // We divide the totalHours of machine work (totalHours) / num of pieces (numChunks)
-    // const hoursPerChunk = totalHours / numChunks
-    // console.log("hoursPerChunk: ", hoursPerChunk)
-    // const utilityPerPiece = valuePerPiece - (hoursPerChunk * totalCostPerHour);
-    // console.log("utilityPerPiece: ", utilityPerPiece)
-    // // const totalUtility = (valuePerPiece * numChunks) - totalCost;
-    // const totalUtility = utilityPerPiece * numChunks
-    // console.log("totalUtility: ", totalUtility)
-    // console.log("Precio de la máquina", priceMachine)
-    // const roiPieces = priceMachine / utilityPerPiece
-
-    const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0));
-    const totalCostPerHour = totalCost / totalHours; // Cost one hour
-    const hoursPerDesign = totalHours / numeroPedazosDesign
-    const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
-    const totalUtility = utilityPerDesign * numeroPedazosDesign
-    const roiPieces = priceMachine / utilityPerDesign
-
-
-    $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
-    $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
-    $("#roiPieces").val(roiPieces >= 0 ? roiPieces.toFixed(2) : 0).trigger("change");
-  }
-  // ========================== End Handlers ========================== //
 });

@@ -1,7 +1,36 @@
 class Store {
   constructor(initialState) {
     this.state = initialState;
-    this.startDate = new Date()
+    this.state.metadata = {
+      loadDate: new Date(),
+      endDate: null,
+      machine: {
+        model: null,
+        workRate: null,
+        hoursPerDay: null,
+        daysWork: null
+      },
+      rawMaterial: {
+        costMaterial: null,
+        width: null,
+        large: null,
+      },
+      designDimensions: {
+        width: null,
+        large: null
+      },
+      rateElectricity: {
+        rate: null,
+        monthly: null
+      },
+      worker: {
+        monthlyPayment: null,
+        monthlyHours: null
+      },
+      priceProduct: {
+        valuePerPiece: null
+      }
+    }
   }
 
   setState(key, value) {

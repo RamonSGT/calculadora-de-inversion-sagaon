@@ -8,7 +8,7 @@
 
 async function getRates(type) {
     return await $.ajax({
-        url: `https://jsfn-stech.azurewebsites.net/api/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
+        url: `http://127.0.0.1:7071/api/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
     })
     .then(res => {
         const { tarifas } = JSON.parse(res)
@@ -21,7 +21,7 @@ async function getRates(type) {
 
 async function getChargesByRegion(region) {
     return await $.ajax({
-        url: `https://jsfn-stech.azurewebsites.net/api/cfe/regions/${region}/charges?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
+        url: `http://127.0.0.1:7071/api/cfe/regions/${region}/charges?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
     })
     .then(res => {
         const { cargos } = JSON.parse(res)
@@ -34,7 +34,7 @@ async function getChargesByRegion(region) {
 
 async function getProducts() {
     return await $.ajax({
-        url: 'https://jsfn-stech.azurewebsites.net/api/products/byConsumption?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA=='
+        url: 'http://127.0.0.1:7071/api/products/byConsumption?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA=='
     })
     .then(res => {
         const { productos } = JSON.parse(res)
@@ -47,7 +47,7 @@ async function getProducts() {
 
 async function getConsumptionsByProduct(id) {
     return await $.ajax({
-        url: 'https://jsfn-stech.azurewebsites.net/api/products/consumptions?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==',
+        url: 'http://127.0.0.1:7071/api/products/consumptions?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==',
         method: 'POST',
         data: JSON.stringify({ product: id }),
         contentType: 'application/json',
