@@ -29,7 +29,6 @@ function calculateExpenses({
   charge,
   rateFlag,
   workHours,
-  workDays,
 }) {
   let cargosHogarList = [
     "basico",
@@ -39,7 +38,7 @@ function calculateExpenses({
   ];
   let cargosDACList = ["fijo", "basico"];
 
-  let totalKWh = (consumption.potencia_kwh * workHours * workDays).toFixed(2);
+  let totalKWh = (consumption.potencia_kwh * workHours).toFixed(2);
 
   store.setState("totalConsumptionKWh", 0)
   if (!rateFlag) {

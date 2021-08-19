@@ -65,9 +65,9 @@ $(async function () {
   });
 
   $("#widthLeaf").on("input", function () {
-    console.log(
-      "----------------------------------> Este es el ancho de la hoja"
-    );
+    // console.log(
+    //   "----------------------------------> Este es el ancho de la hoja"
+    // );
     const widthLeaf = $(this).val();
     store.setState("widthLeaf", widthLeaf);
     const totalChunks = store.calculateChunks();
@@ -230,9 +230,7 @@ $(async function () {
     if (
       inputId === INPUT_ID_HOURS_PER_DAY_MACHINE &&
       Number.isInteger(inputValueNumber) &&
-      inputValueNumber >= 1 &&
-      inputValueNumber <= 24
-    ) {
+      inputValueNumber >= 0) {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
@@ -314,7 +312,7 @@ $(async function () {
   // Prevent -, + and e fields and allowed only positive numbers included decimals
   $("input[type=number]").keypress(function (e) {
     var txt = String.fromCharCode(e.which);
-    if (!txt.match(/[0-9]/)) {
+    if (!txt.match(/[0-9.]/)) {
       return false;
     }
   });
@@ -354,39 +352,21 @@ $(async function () {
     return null;
   }
 
-  function calculateUtility(workHouws, workDays) {
-    workDays = (workDays) ? workDays : 1
-    const totalHours = workHouws * workDays;
-    const materialCost = parseFloat($("#costoInput").val());
-    const costPerHourWorker = parseFloat($("#costoHoraOperador").val());
-    const numChunks = parseInt($("#numeroPedazos").val());
-    const totalConsumptionKWh = store.getState("totalConsumptionKWh");
-    const valuePerPiece = parseFloat(store.getState("valuePerPiece"));
+  function calculateUtility(totalHours) {
+    const materialCost = parseFloat($("#costoInput").val())
+    const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
+    // const numChunks = parseInt($("#numeroPedazos").val());
+    const totalConsumptionKWh = store.getState("totalConsumptionKWh")
+    const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
     const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
     const priceMachine = store.getState("selectedMachine").precio_shopify
-    // This is the TOTAL cost in hours
-    // console.log("totalHours: ", totalHours)
-    // console.log("totalCost: ", totalCost)
-    // This is the cost per one hour of work including; material cost, total electricity consumption and all operator hours worked
-    // console.log("totalCostPerHour: ", totalCostPerHour)
-    // We divide the totalHours of machine work (totalHours) / num of pieces (numChunks)
-    // const hoursPerChunk = totalHours / numChunks
-    // console.log("hoursPerChunk: ", hoursPerChunk)
-    // const utilityPerPiece = valuePerPiece - (hoursPerChunk * totalCostPerHour);
-    // console.log("utilityPerPiece: ", utilityPerPiece)
-    // // const totalUtility = (valuePerPiece * numChunks) - totalCost;
-    // const totalUtility = utilityPerPiece * numChunks
-    // console.log("totalUtility: ", totalUtility)
-    // console.log("Precio de la máquina", priceMachine)
-    // const roiPieces = priceMachine / utilityPerPiece
 
-    const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0));
-    const totalCostPerHour = totalCost / totalHours; // Cost one hour
+    const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0))
+    const totalCostPerHour = totalCost / totalHours // Cost one hour
     const hoursPerDesign = totalHours / numeroPedazosDesign
     const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
     const totalUtility = utilityPerDesign * numeroPedazosDesign
     const roiPieces = priceMachine / utilityPerDesign
-
 
     $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
     $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
@@ -409,7 +389,6 @@ $(async function () {
       $("#precio").text(numberFormat.format(selectedMachine.precio_shopify) + " MXN");
     }
     let workHours = $("#horasTrabajoMaquina").val();
-    let workDays = $("#diasTrabajoMaquina").val();
 
     const cargosData = calculateExpenses({
       machine: selectedMachine,
@@ -417,10 +396,10 @@ $(async function () {
       rate: selectedRate,
       charge: selectedCharge,
       workHours,
-      workDays,
       rateFlag,
     });
-    calculateUtility(workHours, workDays);
+
+    calculateUtility(workHours);
 
     let header = `<tr>
             <th scope="col">Concepto</th>
@@ -431,8 +410,7 @@ $(async function () {
         </tr>`;
     let totalKWh = (
       selectedConsumption.potencia_kwh *
-      workHours *
-      workDays
+      workHours
     ).toFixed(2);
     console.log("TOTAL KWH: ", parseFloat(totalKWh))
     console.log("SELECTED RATE: ", parseFloat(selectedRate.uso_dac))
@@ -468,3 +446,19 @@ $(async function () {
     getValuesFromInput()
   }
 });
+
+    // This is the TOTAL cost in hours
+    // console.log("totalHours: ", totalHours)
+    // console.log("totalCost: ", totalCost)
+    // This is the cost per one hour of work including; material cost, total electricity consumption and all operator hours worked
+    // console.log("totalCostPerHour: ", totalCostPerHour)
+    // We divide the totalHours of machine work (totalHours) / num of pieces (numChunks)
+    // const hoursPerChunk = totalHours / numChunks
+    // console.log("hoursPerChunk: ", hoursPerChunk)
+    // const utilityPerPiece = valuePerPiece - (hoursPerChunk * totalCostPerHour);
+    // console.log("utilityPerPiece: ", utilityPerPiece)
+    // // const totalUtility = (valuePerPiece * numChunks) - totalCost;
+    // const totalUtility = utilityPerPiece * numChunks
+    // console.log("totalUtility: ", totalUtility)
+    // console.log("Precio de la máquina", priceMachine)
+    // const roiPieces = priceMachine / utilityPerPiece
