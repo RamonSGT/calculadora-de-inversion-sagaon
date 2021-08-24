@@ -353,6 +353,7 @@ $(async function () {
   }
 
   function calculateUtility(totalHours) {
+    console.log("Horas totales: ", parseFloat(totalHours))
     const materialCost = parseFloat($("#costoInput").val())
     const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
     // const numChunks = parseInt($("#numeroPedazos").val());
@@ -362,11 +363,17 @@ $(async function () {
     const priceMachine = store.getState("selectedMachine").precio_shopify
 
     const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0))
+    console.log("Costo total: ", totalCost)
     const totalCostPerHour = totalCost / totalHours // Cost one hour
+    console.log("Costo por hora: ", totalCostPerHour)
     const hoursPerDesign = totalHours / numeroPedazosDesign
+    console.log("Hora por diseño: ", hoursPerDesign)
     const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
+    console.log("Utilidad por diseño: ", utilityPerDesign)
     const totalUtility = utilityPerDesign * numeroPedazosDesign
+    console.log("Utilidad total: ", totalUtility)
     const roiPieces = priceMachine / utilityPerDesign
+    console.log("ROI: ", roiPieces)
 
     $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
     $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
@@ -389,6 +396,7 @@ $(async function () {
       $("#precio").text(numberFormat.format(selectedMachine.precio_shopify) + " MXN");
     }
     let workHours = $("#horasTrabajoMaquina").val();
+    workHours = parseFloat(workHours) / 60 // De minutos a horas
 
     const cargosData = calculateExpenses({
       machine: selectedMachine,
