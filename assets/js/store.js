@@ -1,9 +1,8 @@
 class Store {
   constructor(initialState) {
     this.state = initialState;
+    this.state.loadDate = new Date()
     this.state.metadata = {
-      loadDate: new Date(),
-      endDate: null,
       machine: {
         model: null,
         workRate: null,

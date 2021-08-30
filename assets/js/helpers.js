@@ -120,9 +120,16 @@ function getValuesFromInput() {
   console.log("Value from input", valueFromInput)
 }
 
-function trackUsingTime() {
-  setInterval(() => {
-  }, 30000)
-}
+// function trackUsingTime() {
+//   setInterval(async () => {
+//     // console.log(store.getState("loadDate"))
+//     const elapsedTime = (new Date() - store.getState("loadDate")) / 1000
+//     console.log("Tiempo transcurrido: ", elapsedTime)
+//     await fetch("http://localhost:7071/api/tracktime/calculator", {
+//       method: "POST",
+//       body: JSON.stringify({time: elapsedTime})
+//     })
+//   }, 30000)
+// }
 
-trackUsingTime()
+// trackUsingTime()
