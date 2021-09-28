@@ -79,3 +79,18 @@ async function storeHistoryCalculator() {
             return { error: { message: error.responseJSON?.message } }
         })
 }
+
+async function countCalculatorView() {
+    return await $.ajax({
+        url: 'https://jsfn-stech.azurewebsites.net/api/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==',
+        method: 'POST',
+        data: JSON.stringify({}),
+        contentType: 'application/json',
+    })
+        .then(_ => _)
+        .catch(error => {
+            return { error: { message: error.responseJSON?.message } }
+        })
+}
+
+countCalculatorView()
