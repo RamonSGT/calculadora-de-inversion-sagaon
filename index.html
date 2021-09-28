@@ -73,37 +73,35 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
-                        <!-- <label for="type-material" class="form-label">Tipo de material a utilizar<span
+                        <label for="type-material" class="form-label">Tipo de material a utilizar <span
                             class="required-icon-field">*</span></label>
                         <select class="form-field-select form-input form-select" id="type-material" required>
                           <option selected disabled>Selecciona el tipo de material que vas a utilizar</option>
-                          <option>MDF</option>
-                          <option>Triplay</option>
-                          <option>Acrilico</option>
-                          <option>Tela</option>
-                        </select> -->
+                          <option value="MDF">MDF</option>
+                          <option value="Triplay">Triplay</option>
+                          <option value="Acrilico">Acrilico</option>
+                          <option value="Tela">Tela</option>
+                          <option value="Papel picado">Papel picado</option>
+                          <option value="Vinil">Vinil</option>
+                          <option value="Piel">Piel</option>
+                          <option value="Aluminio Anodizado">Aluminio Anodizado</option>
+                        </select>
                       </div>
-                      <!-- <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6">
                         <label for="costoInput" class="form-label">Costo total de la hoja <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="costoInput"
                           placeholder="350" required>
-                      </div> -->
+                      </div>
                     </div>
                     <div class="row pt-4">
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="costoInput" class="form-label">Costo total de la hoja <span
-                            class="required-icon-field">*</span></label>
-                        <input type="number" class="form-field-input form-input form-control" id="costoInput"
-                          placeholder="350" required>
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6">
                         <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeaf"
                           placeholder="244" required>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6">
                         <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
@@ -428,7 +426,7 @@
 
     // Create a toast
     toastr.options = {
-      closeButton: true,
+      closeButton: false,
       debug: false,
       newestOnTop: false,
       rogressBar: false,
@@ -443,7 +441,6 @@
       hideEasing: "linear",
       showMethod: "fadeIn",
       hideMethod: "fadeOut",
-      placement: "right",
     }
 
   </script>
