@@ -43,7 +43,6 @@ $(async function () {
   }
 
   const productos = await getProducts();
-  console.log("Productos: ", productos);
   if (!productos.error) {
     store.setState("machines", productos);
     displaySelects({
@@ -65,9 +64,6 @@ $(async function () {
   });
 
   $("#widthLeaf").on("input", function () {
-    // console.log(
-    //   "----------------------------------> Este es el ancho de la hoja"
-    // );
     const widthLeaf = $(this).val();
     store.setState("widthLeaf", widthLeaf);
     const totalChunks = store.calculateChunks();
@@ -77,9 +73,6 @@ $(async function () {
   });
 
   $("#largeLeaf").on("input", function () {
-    console.log(
-      "----------------------------------> Este es el largo de la hoja"
-    );
     const largeLeaf = $(this).val();
     store.setState("largeLeaf", largeLeaf);
     const totalChunks = store.calculateChunks();
@@ -89,14 +82,12 @@ $(async function () {
   });
 
   $("#widthLeafDesign").on("input", function () {
-    console.log("WIDTH LEAF DES ", parseFloat($(this).val()))
     store.setState("widthLeafDesign", parseFloat($(this).val()))
     $("#numeroPedazosDesign").val(store.calculateDesignChunks())
     $("#costoPedazoDesign").val(store.calculateCostDesignChunk())
   })
 
   $("#largeLeafDesign").on("input", function () {
-    console.log("LARGE LEAF DESIGN: ", parseFloat($(this).val()))
     store.setState("largeLeafDesign", parseFloat($(this).val()))
     $("#numeroPedazosDesign").val(store.calculateDesignChunks())
     $("#costoPedazoDesign").val(store.calculateCostDesignChunk())
@@ -307,6 +298,10 @@ $(async function () {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
+    if(selectId === "type-material" && selectValue) {
+      $(this).removeClass("is-invalid");
+      $(this).addClass("is-valid");
+    }
   });
 
   // Prevent -, + and e fields and allowed only positive numbers included decimals
@@ -353,27 +348,19 @@ $(async function () {
   }
 
   function calculateUtility(totalHours) {
-    console.log("Horas totales: ", parseFloat(totalHours))
     const materialCost = parseFloat($("#costoInput").val())
     const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
-    // const numChunks = parseInt($("#numeroPedazos").val());
     const totalConsumptionKWh = store.getState("totalConsumptionKWh")
     const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
     const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
     const priceMachine = store.getState("selectedMachine").precio_shopify
 
     const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0))
-    console.log("Costo total: ", totalCost)
     const totalCostPerHour = totalCost / totalHours // Cost one hour
-    console.log("Costo por hora: ", totalCostPerHour)
     const hoursPerDesign = totalHours / numeroPedazosDesign
-    console.log("Hora por diseño: ", hoursPerDesign)
     const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
-    console.log("Utilidad por diseño: ", utilityPerDesign)
     const totalUtility = utilityPerDesign * numeroPedazosDesign
-    console.log("Utilidad total: ", totalUtility)
     const roiPieces = priceMachine / utilityPerDesign
-    console.log("ROI: ", roiPieces)
 
     $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
     $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
@@ -420,9 +407,6 @@ $(async function () {
       selectedConsumption.potencia_kwh *
       workHours
     ).toFixed(2);
-    console.log("TOTAL KWH: ", parseFloat(totalKWh))
-    console.log("SELECTED RATE: ", parseFloat(selectedRate.uso_dac))
-    console.log("RATE FLAG: ", rateFlag)
     if (parseFloat(totalKWh) > parseFloat(selectedRate.uso_dac) && rateFlag === 0) {
       toastr["warning"]("La cuota de electricidad excede la categoría hogar, seleccione una región");
       document.querySelector("#collapseThree").classList.add("show")
@@ -451,22 +435,6 @@ $(async function () {
       100
     );
     calculatedROI = true
-    getValuesFromInput()
+    storeHistoryCalculator()
   }
 });
-
-    // This is the TOTAL cost in hours
-    // console.log("totalHours: ", totalHours)
-    // console.log("totalCost: ", totalCost)
-    // This is the cost per one hour of work including; material cost, total electricity consumption and all operator hours worked
-    // console.log("totalCostPerHour: ", totalCostPerHour)
-    // We divide the totalHours of machine work (totalHours) / num of pieces (numChunks)
-    // const hoursPerChunk = totalHours / numChunks
-    // console.log("hoursPerChunk: ", hoursPerChunk)
-    // const utilityPerPiece = valuePerPiece - (hoursPerChunk * totalCostPerHour);
-    // console.log("utilityPerPiece: ", utilityPerPiece)
-    // // const totalUtility = (valuePerPiece * numChunks) - totalCost;
-    // const totalUtility = utilityPerPiece * numChunks
-    // console.log("totalUtility: ", totalUtility)
-    // console.log("Precio de la máquina", priceMachine)
-    // const roiPieces = priceMachine / utilityPerPiece

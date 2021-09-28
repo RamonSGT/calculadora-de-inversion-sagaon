@@ -1,35 +1,6 @@
 class Store {
   constructor(initialState) {
     this.state = initialState;
-    this.state.loadDate = new Date()
-    this.state.metadata = {
-      machine: {
-        model: null,
-        workRate: null,
-        hoursPerDay: null,
-        daysWork: null
-      },
-      rawMaterial: {
-        costMaterial: null,
-        width: null,
-        large: null,
-      },
-      designDimensions: {
-        width: null,
-        large: null
-      },
-      rateElectricity: {
-        rate: null,
-        monthly: null
-      },
-      worker: {
-        monthlyPayment: null,
-        monthlyHours: null
-      },
-      priceProduct: {
-        valuePerPiece: null
-      }
-    }
   }
 
   setState(key, value) {
@@ -47,12 +18,9 @@ class Store {
   }
 
   selectMachine(id_producto) {
-    console.log("ID DEL PRODUCTO: ", id_producto)
-    console.log("PRODUCTOS: ", this.state.machines)
     this.state.selectedMachine = this.state.machines.find(
       (m) => m.id_producto === id_producto
     );
-    console.log("SELECTED MACHINE ------", this.state.selectedMachine)
     /**
      * Eliminar lo que se encuentra debajo - Es solo para hacer test de campos que serán requeridos en el futuro, sin embargo
      * tendrán que venir desde el servidor
@@ -97,7 +65,6 @@ class Store {
   }
 
   calculateChunks() {
-    console.log("CALCULATE CHUNK: --->", store.state.widthLeaf, store.state.largeLeaf, store.state.selectedMachine)
     if(!store.getState("widthLeaf") || !store.getState("largeLeaf") || !store.getState("selectedMachine")) return null
     const width = parseFloat(store.getState("widthLeaf"))
     const large = parseFloat(store.getState("largeLeaf"))
@@ -107,7 +74,6 @@ class Store {
   }
 
   calculateDesignChunks() {
-    console.log("Design", store.getState("widthLeafDesign"))
     if(!store.getState("widthLeafDesign") || !store.getState("largeLeafDesign") || !store.getState("selectedMachine")) return null
     const widthLeafDesign = store.getState("widthLeafDesign")
     const largeLeafDesign = store.getState("largeLeafDesign")
@@ -124,7 +90,6 @@ class Store {
     if(!this.state.widthLeafDesign || !this.state.largeLeafDesign) return null
     const designPerChunk = parseFloat(store.getState("designPerChunk"))    
     const costPerChunk = parseFloat($("#costoPedazo").val())
-    console.log("Total design chunks: ", designPerChunk, "Cost per chunk: ", costPerChunk)
     if(!designPerChunk || !costPerChunk) return null
     const costPerDesign =  costPerChunk / designPerChunk
     if(!costPerDesign) return null

@@ -113,23 +113,30 @@ function sortByMonth(arr) {
   });
 }
 
-function getValuesFromInput() {
-  const valueFromInput = store.getState("metadata")
-  valueFromInput.designDimensions.large = 0
-  valueFromInput.designDimensions.width = 
-  console.log("Value from input", valueFromInput)
+function saveDataCalculator() {
+  return {
+    machine: document.querySelector("#listaMaquinasSelect").value.toString(),
+    power_rate: document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim(),
+    material: document.querySelector("#type-material").value.toString(),
+    cost_material: document.querySelector("#costoInput").value.toString(),
+    width_material: document.querySelector("#widthLeaf").value.toString(),
+    height_material: document.querySelector("#largeLeaf").value.toString(),
+    number_pieces_material: document.querySelector("#numeroPedazos").value.toString(),
+    cost_per_piece_material: document.querySelector("#costoPedazo").value.toString(),
+    width_design: document.querySelector("#widthLeafDesign").value.toString(),
+    height_design: document.querySelector("#largeLeafDesign").value.toString(),
+    time_per_design: document.querySelector("#horasTrabajoMaquina").value.toString(),
+    number_pieces_design: document.querySelector("#numeroPedazosDesign").value.toString(),
+    cost_per_piece_design: document.querySelector("#costoPedazoDesign").value.toString(),
+    electricity_rate: document.querySelector("#listaTarifaHogarSelect").value.toString(),
+    electricity_rate_month: document.querySelector("#listaCargoSelect").value.toString(),
+    electricity_rate_region: document.querySelector("#listaTarifaDACSelect").value.toString(),
+    worker_salary: document.querySelector("#pagoMensuOperador").value.toString(),
+    worker_hours_monthly: document.querySelector("#horasTrabajoOperador").value.toString(),
+    cost_per_hour_worker: document.querySelector("#costoHoraOperador").value.toString(),
+    value_per_piece: document.querySelector("#valuePerPiece").value.toString(),
+    utilty_per_piece: document.querySelector("#utilityPerPiece").value.toString(),
+    total_utility: document.querySelector("#totalUtility").value.toString(),
+    return_of_investment: document.querySelector("#roiPieces").value.toString()
+  }
 }
-
-// function trackUsingTime() {
-//   setInterval(async () => {
-//     // console.log(store.getState("loadDate"))
-//     const elapsedTime = (new Date() - store.getState("loadDate")) / 1000
-//     console.log("Tiempo transcurrido: ", elapsedTime)
-//     await fetch("http://localhost:7071/api/tracktime/calculator", {
-//       method: "POST",
-//       body: JSON.stringify({time: elapsedTime})
-//     })
-//   }, 30000)
-// }
-
-// trackUsingTime()
