@@ -22,7 +22,8 @@
 
 <body>
   <main class="h-100">
-    <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son requeridos</p>
+    <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son
+      requeridos</p>
     <section class="row form-container">
       <div class="col-sm-12" id="form-parent-container">
         <div>
@@ -40,13 +41,16 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="animate__zoomIn col-sm-12 col-md-6">
-                        <label for="listaMaquinasSelect" class="form-label">Máquina <span class="required-icon-field">*</span></label>
+                        <label for="listaMaquinasSelect" class="form-label">Máquina <span
+                            class="required-icon-field">*</span></label>
                         <select name="maquinas-select" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo <span class="required-icon-field">*</span> <img data-bottom id="popover-1" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo <span
+                            class="required-icon-field">*</span> <img data-bottom id="popover-1"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
@@ -68,31 +72,49 @@
                 <div class="accordion-body">
                   <div class="inputs-container">
                     <div class="row">
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="costoInput" class="form-label">Costo total de la hoja <span class="required-icon-field">*</span></label>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="type-material" class="form-label">Tipo de material a utilizar<span
+                            class="required-icon-field">*</span></label>
+                        <select class="form-field-select form-input form-select" id="type-material" required>
+                          <option selected disabled>Selecciona el tipo de material que vas a utilizar</option>
+                          <option>MDF</option>
+                          <option>Triplay</option>
+                          <option>Acrilico</option>
+                          <option>Tela</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="costoInput" class="form-label">Costo total de la hoja <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="costoInput"
                           placeholder="350" required>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span class="required-icon-field">*</span></label>
+                    </div>
+                    <div class="row pt-4">
+                      <div class="col-sm-12 col-md-6">
+                        <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeaf"
                           placeholder="244" required>
                       </div>
-                      <div class="col-sm-12 col-lg-4">
-                        <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span class="required-icon-field">*</span></label>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
                           placeholder="122" required>
                       </div>
                     </div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="numeroPedazos" class="form-label"><span class="required-icon-field"></span>Número de pedazos <img id="popover-2"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="numeroPedazos" class="form-label"><span class="required-icon-field"></span>Número de
+                          pedazos <img id="popover-2" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="numeroPedazos"
                           placeholder="18.15" disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="costoPedazo" class="form-label"><span class="required-icon-field"></span>Costo por pedazo de material (MXN)</label>
+                        <label for="costoPedazo" class="form-label"><span class="required-icon-field"></span>Costo por
+                          pedazo de material (MXN)</label>
                         <input type="number" class="form-field-input form-control" id="costoPedazo" placeholder="19.28"
                           disabled>
                       </div>
@@ -115,29 +137,35 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="widthLeafDesign" class="form-label">Ancho del diseño (cm)<span class="required-icon-field">*</span></label>
+                        <label for="widthLeafDesign" class="form-label">Ancho del diseño (cm) <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeafDesign"
                           placeholder="20" required>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-4">
-                        <label for="largeLeafDesign" class="form-label">Largo del diseño (cm)<span class="required-icon-field">*</span></label>
+                        <label for="largeLeafDesign" class="form-label">Largo del diseño (cm) <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeafDesign"
                           placeholder="10" required>
                       </div>
                       <div class="col-sm-12 col-lg-4">
-                        <label for="horasTrabajoMaquina" class="form-label">Tiempo de trabajo por diseño (Minutos)<span class="required-icon-field">*</span></label>
+                        <label for="horasTrabajoMaquina" class="form-label">Tiempo de trabajo por diseño (minutos) <span
+                            class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="horasTrabajoMaquina"
                           placeholder="25" required>
                       </div>
                     </div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="numeroPedazosDesign" class="form-label"><span class="required-icon-field"></span>Número de piezas <img id="popover-2" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="numeroPedazosDesign" class="form-label"><span
+                            class="required-icon-field"></span>Número de piezas <img id="popover-2"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="numeroPedazosDesign"
                           placeholder="135" disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="costoPedazoDesign" class="form-label"><span class="required-icon-field"></span>Costo por pieza de tu diseño (MXN)</label>
+                        <label for="costoPedazoDesign" class="form-label"><span class="required-icon-field"></span>Costo
+                          por pieza de tu diseño (MXN)</label>
                         <input type="number" class="form-field-input form-control" id="costoPedazoDesign"
                           placeholder="2.59" disabled>
                       </div>
@@ -168,14 +196,16 @@
                   <div id="cargoCustomContainer">
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaTarifaHogarSelect" class="form-label">Tarifa <span class="required-icon-field">*</span></label>
+                        <label for="listaTarifaHogarSelect" class="form-label">Tarifa <span
+                            class="required-icon-field">*</span></label>
                         <select name="tarifas-select" id="listaTarifaHogarSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaCargoSelect" class="form-label">Mes <span class="required-icon-field">*</span> <img id="popover-4"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="listaCargoSelect" class="form-label">Mes <span class="required-icon-field">*</span>
+                          <img id="popover-4" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
                         <select name="mes-select" id="listaCargoSelect" class="form-field-select form-input form-select"
                           required>
                         </select>
@@ -209,17 +239,20 @@
                 <div class="accordion-body">
                   <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
-                      <label for="pagoMensuOperador" class="form-label">Pago mensual del operador <span>(MXN)</span> <span class="required-icon-field"></span></label>
+                      <label for="pagoMensuOperador" class="form-label">Pago mensual del operador <span>(MXN)</span>
+                        <span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate"
                         id="pagoMensuOperador" placeholder="3000" required>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
-                      <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <span class="required-icon-field"></span></label>
+                      <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <span
+                          class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate"
                         id="horasTrabajoOperador" placeholder="30" required>
                     </div>
                     <div class="col-sm-12 col-lg-4">
-                      <label for="costoHoraOperador" class="form-label">Costo por hora del operador <span>(MXN)</span> <span class="required-icon-field"></span></label>
+                      <label for="costoHoraOperador" class="form-label">Costo por hora del operador <span>(MXN)</span>
+                        <span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-control" id="costoHoraOperador"
                         placeholder="100" disabled>
                     </div>
@@ -241,31 +274,32 @@
                   <div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="valuePerPiece" class="form-label">Valor por pieza <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7" src="./assets/icons/question-mark.svg"
-                            style="width: 15px; height: 15px;"></label>
+                        <label for="valuePerPiece" class="form-label">Valor por pieza <span>(MXN)</span> <span
+                            class="required-icon-field">*</span> <img id="popover-7"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="valuePerPiece"
                           placeholder="500">
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span class="required-icon-field"></span> <img
-                            id="popover-8" src="./assets/icons/question-mark.svg"
-                            style="width: 15px; height: 15px;"></label>
+                        <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span
+                            class="required-icon-field"></span> <img id="popover-8"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="utilityPerPiece" placeholder="0"
                           disabled>
                       </div>
                     </div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span class="required-icon-field"></span> <img
-                            id="popover-9" src="./assets/icons/question-mark.svg"
-                            style="width: 15px; height: 15px;"></label>
+                        <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span
+                            class="required-icon-field"></span> <img id="popover-9"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="totalUtility" placeholder="0"
                           disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="roiPieces" class="form-label">Piezas a vender para recuperar inversión <span class="required-icon-field"></span> <img
-                            id="popover-10" src="./assets/icons/question-mark.svg"
-                            style="width: 15px; height: 15px;"></label>
+                        <label for="roiPieces" class="form-label">Piezas a vender para recuperar inversión <span
+                            class="required-icon-field"></span> <img id="popover-10"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="roiPieces" placeholder="0"
                           disabled>
                       </div>
@@ -383,7 +417,7 @@
         animation: "scale",
         trigger: "mouseenter focus",
         placement: (i === 3) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
-        
+
       })
     }
 
