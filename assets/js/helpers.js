@@ -144,7 +144,7 @@ function saveDataCalculator() {
 
 function recordTimeTool() {
   setInterval(async () => {
-    store.setState("timeElapsed", store.getState("timeElapsed") + 15)
+    store.setState("timeElapsed", store.getState("timeElapsed") + 60)
     await countCalculatorView("POST", JSON.stringify({
       api_key: sessionStorage.getItem("uuidv4"),
       time_elapsed: store.getState("timeElapsed").toString()
