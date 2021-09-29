@@ -137,7 +137,8 @@ function saveDataCalculator() {
     value_per_piece: document.querySelector("#valuePerPiece").value.toString(),
     utilty_per_piece: document.querySelector("#utilityPerPiece").value.toString(),
     total_utility: document.querySelector("#totalUtility").value.toString(),
-    return_of_investment: document.querySelector("#roiPieces").value.toString()
+    return_of_investment: document.querySelector("#roiPieces").value.toString(),
+    api_key: sessionStorage.getItem("uuidv4")
   }
 }
 

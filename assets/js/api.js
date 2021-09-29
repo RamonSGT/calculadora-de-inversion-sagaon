@@ -89,7 +89,7 @@ async function countCalculatorView(method = "GET", body = null) {
     })
         .then(response => {
             console.log(response)
-            if (method === "GET") {
+            if (method === "GET" && response) {
                 sessionStorage.setItem("uuidv4", response)
                 recordTimeTool()
             }
