@@ -80,14 +80,20 @@ async function storeHistoryCalculator() {
         })
 }
 
-async function countCalculatorView() {
+async function countCalculatorView(method = "GET", body = null) {
     return await $.ajax({
         url: 'https://jsfn-stech.azurewebsites.net/api/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==',
-        method: 'POST',
-        data: JSON.stringify({}),
+        method,
+        data: body,
         contentType: 'application/json',
     })
-        .then(_ => _)
+        .then(response => {
+            console.log(response)
+            if (method === "GET") {
+                sessionStorage.setItem("uuidv4", response)
+                recordTimeTool()
+            }
+        })
         .catch(error => {
             return { error: { message: error.responseJSON?.message } }
         })

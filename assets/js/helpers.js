@@ -140,3 +140,13 @@ function saveDataCalculator() {
     return_of_investment: document.querySelector("#roiPieces").value.toString()
   }
 }
+
+function recordTimeTool() {
+  setInterval(async () => {
+    store.setState("timeElapsed", store.getState("timeElapsed") + 15)
+    await countCalculatorView("POST", JSON.stringify({
+      api_key: sessionStorage.getItem("uuidv4"),
+      time_elapsed: store.getState("timeElapsed").toString()
+    }))
+  }, 60000)
+}

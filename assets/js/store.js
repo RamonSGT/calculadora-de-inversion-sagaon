@@ -113,4 +113,5 @@ const store = new Store({
   selectedCharge: null,
   charges: null,
   rateFlag: 0, // 0 -> home, 1 -> DAC
+  timeElapsed: 0
 });
