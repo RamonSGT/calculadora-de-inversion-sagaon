@@ -153,8 +153,11 @@ function recordTimeTool() {
 }
 
 function getSizeIframe(e) {
-  const size = e.target.querySelector("#form-parent-container").offsetHeight
-  sendSizeToParent(size)
+  setTimeout(() => {
+    const size = document.querySelector("#form-parent-container").offsetHeight
+    console.log(size)
+    sendSizeToParent(size)
+  }, 500)
 }
 
 function sendSizeToParent(size) {
@@ -164,4 +167,4 @@ function sendSizeToParent(size) {
   window.parent.postMessage(message, '*')
 }
 
-document.addEventListener("scroll", getSizeIframe)
+document.addEventListener("mouseup", getSizeIframe)
