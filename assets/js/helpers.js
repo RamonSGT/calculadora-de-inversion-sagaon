@@ -152,6 +152,7 @@ function recordTimeTool() {
   }, 60000)
 }
 
-windows.onmessage = function(event) {
-  event.source.postMessage(document.body.innerHTML, event.origin)
-}
+window.onmessage = function(event) {
+  var evt = event || window.event;
+  evt.source.postMessage('Message from iFrame', evt.origin);
+};
