@@ -386,3 +386,7 @@ input::-webkit-input-placeholder {
     top: -8px !important;
   }
 }
+
+#form-parent-container {
+  overflow: hidden;
+}
