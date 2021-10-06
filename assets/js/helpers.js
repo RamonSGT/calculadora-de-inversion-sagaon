@@ -155,14 +155,14 @@ function recordTimeTool() {
 function getSizeIframe(e) {
   setTimeout(() => {
     const size = document.querySelector("#form-parent-container").offsetHeight
-    console.log(size)
-    sendSizeToParent(size)
+    sendSizeToParent(size, false)
   }, 500)
 }
 
-function sendSizeToParent(size) {
+function sendSizeToParent(size, firstTime = true) {
   const message = JSON.stringify({
     size,
+    firstTime
   });
   window.parent.postMessage(message, '*')
 }
