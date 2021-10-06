@@ -152,10 +152,8 @@ function recordTimeTool() {
   }, 60000)
 }
 
-window.onmessage = function(event) {
-  var evt = event || window.event;
-  evt.source.postMessage('Message from iFrame', evt.origin);
-  console.log(event)
-  console.log("=====================")
-  console.log(event.data)
-};
+const message = JSON.stringify({
+  message: 'Hello from iframe',
+  date: Date.now(),
+});
+window.parent.postMessage(message, '*')
