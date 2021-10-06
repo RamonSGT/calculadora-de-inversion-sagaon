@@ -168,3 +168,4 @@ function sendSizeToParent(size) {
 }
 
 document.addEventListener("mouseup", getSizeIframe)
+document.addEventListener("DOMContentLoaded", getSizeIframe)
