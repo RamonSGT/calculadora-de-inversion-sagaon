@@ -154,5 +154,5 @@ function recordTimeTool() {
 
 window.onmessage = function(event) {
   var evt = event || window.event;
-  evt.source.postMessage('Message from iFrame', evt.origin);
+  evt.source.postMessage('Message from iFrame', "Hola mundo");
 };
