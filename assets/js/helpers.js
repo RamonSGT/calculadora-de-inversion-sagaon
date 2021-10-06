@@ -152,8 +152,16 @@ function recordTimeTool() {
   }, 60000)
 }
 
-const message = JSON.stringify({
-  message: 'Hello from iframe',
-  date: Date.now(),
-});
-window.parent.postMessage(message, '*')
+function getSizeIframe(e) {
+  const size = e.target.querySelector("#form-parent-container").offsetHeight
+  sendSizeToParent(size)
+}
+
+function sendSizeToParent(size) {
+  const message = JSON.stringify({
+    size,
+  });
+  window.parent.postMessage(message, '*')
+}
+
+document.addEventListener("scroll", getSizeIframe)
