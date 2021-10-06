@@ -152,14 +152,14 @@ function recordTimeTool() {
   }, 60000)
 }
 
-function getSizeIframe(e) {
+function getSizeIframe(e, firstTime = false) {
   setTimeout(() => {
     const size = document.querySelector("#form-parent-container").offsetHeight
-    sendSizeToParent(size, false)
+    sendSizeToParent(size, firstTime)
   }, 500)
 }
 
-function sendSizeToParent(size, firstTime = true) {
+function sendSizeToParent(size, firstTime) {
   const message = JSON.stringify({
     size,
     firstTime
@@ -168,4 +168,4 @@ function sendSizeToParent(size, firstTime = true) {
 }
 
 document.addEventListener("mouseup", getSizeIframe)
-document.addEventListener("DOMContentLoaded", getSizeIframe)
+document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
