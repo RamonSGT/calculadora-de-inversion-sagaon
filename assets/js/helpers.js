@@ -151,3 +151,7 @@ function recordTimeTool() {
     }))
   }, 60000)
 }
+
+windows.onmessage = function(event) {
+  event.source.postMessage(document.body.innerHTML, event.origin)
+}
