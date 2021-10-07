@@ -347,18 +347,22 @@ $(async function () {
     return null;
   }
 
-  function calculateUtility(totalHours) {
+  function calculateUtility(totalHoursMachinePerDesign) {
     const materialCost = parseFloat($("#costoInput").val())
     const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
     const totalConsumptionKWh = store.getState("totalConsumptionKWh")
     const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
+    const costPerPiece = parseFloat($("#costoPedazoDesign").val())
     const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
     const priceMachine = store.getState("selectedMachine").precio_shopify
-
-    const totalCost = materialCost + totalConsumptionKWh + ((costPerHourWorker || 0) * (totalHours || 0))
-    const totalCostPerHour = totalCost / totalHours // Cost one hour
-    const hoursPerDesign = totalHours / numeroPedazosDesign
-    const utilityPerDesign = valuePerPiece - (hoursPerDesign * totalCostPerHour)
+    const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
+    store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
+    console.log("Costo del material: " + materialCost)
+    console.log("Consumo total de electricidad: " + totalConsumptionKWh)
+    console.log("Costo del trabajador: " + costPerWorkerPiece )
+    console.log("Valor por pieza: " + costPerPiece)
+    const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
+    const utilityPerDesign = valuePerPiece - totalCostPerDesign
     const totalUtility = utilityPerDesign * numeroPedazosDesign
     const roiPieces = priceMachine / utilityPerDesign
 
@@ -377,9 +381,9 @@ $(async function () {
     } = store.getState();
 
     if (selectedMachine && selectedConsumption) {
-      $("#corrienteMax").text(selectedConsumption.corriente_maxima + "A");
+      $("#corrienteMax").text(Number(selectedConsumption.corriente_maxima).toFixed(2) + "A");
       $("#voltaje").text(selectedConsumption.voltaje + "V");
-      $("#potencia").text(selectedConsumption.potencia_kwh + "KWh");
+      $("#potencia").text(Number(selectedConsumption.potencia_kwh).toFixed(2) + "KWh");
       $("#precio").text(numberFormat.format(selectedMachine.precio_shopify) + " MXN");
     }
     let workHours = $("#horasTrabajoMaquina").val();
@@ -396,12 +400,10 @@ $(async function () {
 
     calculateUtility(workHours);
 
-    let header = `<tr>
-            <th scope="col">Concepto</th>
-            <th scope="col">Lectura Actual</th>
-            <th scope="col">Precio(MXN)</th>
-            <th scope="col">Total Periodo(KWh)</th>
-            <th scope="col">Subtotal(MXN)</th>
+    let header = `
+        <tr>
+          <th scope="col" colspan="50%"><strong>Concepto</strong></th>
+          <th scope="col" colspan="50%"><strong>Costo (MXN)</strong></th>
         </tr>`;
     let totalKWh = (
       selectedConsumption.potencia_kwh *
@@ -417,12 +419,39 @@ $(async function () {
       store.setState("rateFlag", 1);
       return;
     }
-    let energy = `<tr>
-            <th scope="col">Energía (KWh)</th>
-            <td colspan="4">${totalKWh}</td>
-        </tr>`;
+    const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece")).toFixed(2)
+    let energy = `
+        <tr>
+          <th colspan="50%">Costo por pieza</th>
+          <td colspan="50%">$ ${parseFloat($("#costoPedazoDesign").val())}</td>
+        </tr>
+        <tr>
+          <th colspan="50%">Costo de electricidad</th>
+          <td colspan="50%">$ ${store.getState("totalConsumptionKWh")}</td>
+        </tr>
+        <tr>
+          <th colspan="50%">Costo del operador</th>
+          <td colspan="50%">$ ${store.getState("costPerWorkerPerPiece").toFixed(2)}</td>
+        </tr>
+        <tr>
+          <th colspan="50%"><strong>Costo total por pieza</storng></th>
+          <th colspan="50%"><strong>$ ${totalCost}</strong></th>
+        </tr>
+        <tr>
+          <th colspan="100%" style="text-align: center; color: green;">Retorno de la inversión</td>
+        </tr>
+        <tr>
+          <th colspan="50%">Utilidad por pieza</th>
+          <td colspan="50%">$ ${$("#utilityPerPiece").val()}</td>
+        </tr>
+        <tr>
+          <th colspan="50%"><strong>Piezas a vender para recuperar la inversión</storng></th>
+          <th colspan="50%"><strong>${$("#roiPieces").val()}</strong></th>
+        </tr>
+        `;
 
-    $("#listaConsumos").html(header + energy + cargosData);
+    // console.log("CARGOS DATA JEJE", cargosData)
+    $("#listaConsumos").html(header + energy);
 
     $("#gastosContainer").css("display", "block");
     $("#results-table").css("display", "block");
