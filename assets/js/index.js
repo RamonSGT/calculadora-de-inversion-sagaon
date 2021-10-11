@@ -445,7 +445,7 @@ $(async function () {
           <td colspan="50%">$ ${$("#utilityPerPiece").val()}</td>
         </tr>
         <tr>
-          <th colspan="50%"><strong>Piezas a vender para recuperar la inversión</storng></th>
+          <th colspan="50%"><strong>Piezas a vender para recuperar la inversión de la máquina</storng></th>
           <th colspan="50%"><strong>${$("#roiPieces").val()}</strong></th>
         </tr>
         `;
@@ -467,3 +467,7 @@ $(async function () {
     storeHistoryCalculator()
   }
 });
+
+
+
+document.querySelector("#generate-pdf").addEventListener("click", generatePdf)
