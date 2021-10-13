@@ -6,12 +6,18 @@
 //     }
 // })
 
-const BASE_URL = "jsfn-stech.azurewebsites.net"
-// const BASE_URL = "localhost:7071"
+/***
+ * Hacer testing de DAC y más test generales
+ * PDF con imagen del diseño del usuario
+ * Descripción del contexto del cotizador pdf
+ */
+
+const BASE_URL = "https://jsfn-stech.azurewebsites.net"
+// const BASE_URL = "http://localhost:7071"
 
 async function getRates(type) {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
+        url: `${BASE_URL}/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
     })
         .then(res => {
             const { tarifas } = JSON.parse(res)
@@ -24,7 +30,7 @@ async function getRates(type) {
 
 async function getChargesByRegion(region) {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/cfe/regions/${region}/charges?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
+        url: `${BASE_URL}/cfe/regions/${region}/charges?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
     })
         .then(res => {
             const { cargos } = JSON.parse(res)
@@ -37,7 +43,7 @@ async function getChargesByRegion(region) {
 
 async function getProducts() {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/products/byConsumption?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
+        url: `${BASE_URL}/products/byConsumption?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
     })
         .then(res => {
             const { productos } = JSON.parse(res)
@@ -50,7 +56,7 @@ async function getProducts() {
 
 async function getConsumptionsByProduct(id) {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/products/consumptions?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
+        url: `${BASE_URL}/products/consumptions?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method: 'POST',
         data: JSON.stringify({ product: id }),
         contentType: 'application/json',
@@ -72,7 +78,7 @@ async function getConsumptionsByProduct(id) {
 
 async function storeHistoryCalculator() {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/save/calculator-history?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
+        url: `${BASE_URL}/save/calculator-history?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method: 'POST',
         data: JSON.stringify(saveDataCalculator()),
         contentType: 'application/json',
@@ -85,7 +91,7 @@ async function storeHistoryCalculator() {
 
 async function generatePdf() {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/generate-pdf`,
+        url: `${BASE_URL}/generate-pdf`,
         method: 'POST',
         data: JSON.stringify({
             maxCurrent: document.querySelector("#corrienteMax").innerText,
@@ -115,7 +121,7 @@ async function generatePdf() {
 
 async function countCalculatorView(method = "GET", body = null) {
     return await $.ajax({
-        url: `http://${BASE_URL}/api/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
+        url: `${BASE_URL}/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method,
         data: body,
         contentType: 'application/json',
