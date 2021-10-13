@@ -12,8 +12,8 @@
  * Descripción del contexto del cotizador pdf
  */
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net"
-// const BASE_URL = "http://localhost:7071"
+const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+// const BASE_URL = "http://localhost:7071/api"
 
 async function getRates(type) {
     return await $.ajax({
