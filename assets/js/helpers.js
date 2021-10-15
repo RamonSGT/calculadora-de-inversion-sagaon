@@ -167,5 +167,26 @@ function sendSizeToParent(size, firstTime) {
   window.parent.postMessage(message, '*')
 }
 
+async function getBufferFromImage() {
+  const customFileNode = document.querySelector("#customFile")
+  if(!customFileNode || !customFileNode.files[0]) return null 
+  const file = customFileNode.files[0]
+  const bs64 = await getBase64(file)
+  return bs64
+}
+
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      resolve(reader.result)
+    }
+    reader.onerror = function (error) {
+      reject(error)
+    }
+  })
+}
+
 document.addEventListener("mouseup", getSizeIframe)
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))

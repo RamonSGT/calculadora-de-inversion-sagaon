@@ -10,6 +10,7 @@
  * Hacer testing de DAC y más test generales
  * PDF con imagen del diseño del usuario
  * Descripción del contexto del cotizador pdf
+ * Eliminar el voltaje del pdf
  */
 
 const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
@@ -103,6 +104,15 @@ async function generatePdf() {
             costTotalPerPiece: document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong").innerText,
             utilityPerPiece: document.querySelector("#listaConsumos > tr:nth-child(7) > td").innerText,
             piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(8) > th:nth-child(2) > strong").innerText,
+            imgDesign: await getBufferFromImage(),
+            machine: document.querySelector("#listaMaquinasSelect").value,
+            powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
+            typeMaterial: document.querySelector("#type-material").value,
+            widthMaterial: document.querySelector("#widthLeaf").innerText,
+            largeMaterial: document.querySelector("#largeLeaf").innerText,
+            designWidth: document.querySelector("#widthLeafDesign").innerText,
+            designLarge: document.querySelector("#largeLeafDesign").innerText,
+            timePerDesign: document.querySelector("#horasTrabajoMaquina").innerText
         }),
         contentType: 'application/json',
     })
