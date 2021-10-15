@@ -178,8 +178,14 @@
                       <div class="col-sm-12 col-md-6">
                         <label for="costoPedazoDesign" class="form-label"><span class="required-icon-field"></span>Costo
                           por pieza de tu diseño (MXN)</label>
-                        <input type="number" class="form-field-input form-control" id="costoPedazoDesign"
+                        <input type="number" class="form-field-input form-input form-control" id="costoPedazoDesign"
                           placeholder="2.59" disabled>
+                      </div>
+                    </div>
+                    <div class="row pt-4">
+                      <div class="col-sm-12">
+                        <label class="form-label" for="customFile">Sube tu diseño</label>
+                        <input type="file" class="form-control" id="customFile" style="background-color: white;">
                       </div>
                     </div>
                   </div>
@@ -324,8 +330,8 @@
             </div>
             <div id="results-table" class="accordion-item px-5" style="display: none;">
               <h2 class="accordion-header" id="headingSix">
-                <button class="accordion-button" type="button" data-mdb-toggle="collapse"
-                  data-mdb-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                <button class="accordion-button" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseSix"
+                  aria-expanded="true" aria-controls="collapseSix">
                   Resumen de los gastos
                 </button>
               </h2>
@@ -343,10 +349,10 @@
                           <th scope="col">Corriente máxima</th>
                           <td id="corrienteMax"></td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                           <th scope="col">Voltaje</th>
                           <td id="voltaje"></td>
-                        </tr>
+                        </tr> -->
                         <tr>
                           <th scope="col">Potencia</th>
                           <td id="potencia"></td>
@@ -385,7 +391,8 @@
         </div>
       </div>
     </section>
-    <p class="required-instructions" style="padding-top: 20px; padding-bottom: 20px;"><i>* Los calculos realizados y mostrados anteriormente son solo una aproximación a los gastos y el retorno de la inversión.</i></p>
+    <p class="required-instructions" style="padding-top: 20px; padding-bottom: 20px;"><i>* Los calculos realizados y
+        mostrados anteriormente son solo una aproximación a los gastos y el retorno de la inversión.</i></p>
 
   </main>
   <!-- jQuery loader -->
