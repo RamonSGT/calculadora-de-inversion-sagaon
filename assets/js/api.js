@@ -13,8 +13,8 @@
  * Eliminar el voltaje del pdf
  */
 
-// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
-const BASE_URL = "http://localhost:7071/api"
+const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+// const BASE_URL = "http://localhost:7071/api"
 
 async function getRates(type) {
     return await $.ajax({
