@@ -92,7 +92,7 @@ async function storeHistoryCalculator() {
 
 async function generatePdf() {
     return await $.ajax({
-        url: `${BASE_URL}/generate-pdf`,
+        url: `${BASE_URL}/generate-pdf?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method: 'POST',
         data: JSON.stringify({
             maxCurrent: document.querySelector("#corrienteMax").innerText,
