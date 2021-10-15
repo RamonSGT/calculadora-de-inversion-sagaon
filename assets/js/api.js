@@ -13,8 +13,8 @@
  * Eliminar el voltaje del pdf
  */
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
-// const BASE_URL = "http://localhost:7071/api"
+// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+const BASE_URL = "http://localhost:7071/api"
 
 async function getRates(type) {
     return await $.ajax({
@@ -96,7 +96,6 @@ async function generatePdf() {
         method: 'POST',
         data: JSON.stringify({
             maxCurrent: document.querySelector("#corrienteMax").innerText,
-            volts: document.querySelector("#voltaje").innerText,
             power: document.querySelector("#potencia").innerText,
             costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
             costElectricity: document.querySelector("#listaConsumos > tr:nth-child(3) > td").innerText,
@@ -108,11 +107,11 @@ async function generatePdf() {
             machine: document.querySelector("#listaMaquinasSelect").value,
             powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
             typeMaterial: document.querySelector("#type-material").value,
-            widthMaterial: document.querySelector("#widthLeaf").innerText,
-            largeMaterial: document.querySelector("#largeLeaf").innerText,
-            designWidth: document.querySelector("#widthLeafDesign").innerText,
-            designLarge: document.querySelector("#largeLeafDesign").innerText,
-            timePerDesign: document.querySelector("#horasTrabajoMaquina").innerText
+            widthMaterial: document.querySelector("#widthLeaf").value,
+            largeMaterial: document.querySelector("#largeLeaf").value,
+            designWidth: document.querySelector("#widthLeafDesign").value,
+            designLarge: document.querySelector("#largeLeafDesign").value,
+            timePerDesign: document.querySelector("#horasTrabajoMaquina").value
         }),
         contentType: 'application/json',
     })
