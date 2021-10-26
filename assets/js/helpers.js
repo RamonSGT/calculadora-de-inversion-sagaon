@@ -79,7 +79,7 @@ function calculateExpenses({
 
   store.setState("totalConsumptionKWh", 0)
   const totalHours = parseInt(document.querySelector("#horasTrabajoMaquina").value) / 60 // Convert minutes to hours
-  store.setState("costDAC",  totalHours / fixedCost)
+  store.setState("costDAC", totalHours / fixedCost)
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
@@ -160,10 +160,8 @@ function recordTimeTool() {
 }
 
 function getSizeIframe(e, firstTime = false) {
-  setTimeout(() => {
-    const size = document.querySelector("#form-parent-container").offsetHeight
-    sendSizeToParent(size, firstTime)
-  }, 500)
+  const size = document.querySelector(".row.form-container").offsetHeight
+  sendSizeToParent(size, firstTime)
 }
 
 function sendSizeToParent(size, firstTime) {
@@ -176,7 +174,7 @@ function sendSizeToParent(size, firstTime) {
 
 async function getBufferFromImage() {
   const customFileNode = document.querySelector("#customFile")
-  if(!customFileNode || !customFileNode.files[0]) return null 
+  if (!customFileNode || !customFileNode.files[0]) return null
   const file = customFileNode.files[0]
   const bs64 = await getBase64(file)
   return bs64
@@ -195,5 +193,6 @@ function getBase64(file) {
   })
 }
 
-document.addEventListener("mouseup", getSizeIframe)
+// document.addEventListener("mouseup", getSizeIframe)
+new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
