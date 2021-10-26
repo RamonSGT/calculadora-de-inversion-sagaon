@@ -207,7 +207,7 @@ $(async function () {
 
   $("#calcular").on("click", function () {
     const invalidFields = areInvalidFields();
-    if (invalidFields) return toastr["error"]("Ha ingresado datos erroneos!");
+    if (invalidFields) return sendMessageToastToParent("error", "Ha ingresado datos erroneos!")
     handleCalculator()
   });
 
