@@ -8,13 +8,17 @@
 
 /***
  * Hacer testing de DAC y más test generales
- * PDF con imagen del diseño del usuario
- * Descripción del contexto del cotizador pdf
- * Eliminar el voltaje del pdf
+ * Modificar el disñeo del pdf de tal forma que quede en formato tabla o algo similar
+ * Agregar campos de formulario avanzado para que el usuario pueda calcular su costo de luz segùn la cantidad de electricidad que ha utilizando viendo el medidor
+ * Cambiar la imàgen de la calculadora, de tal forma que siga el movimiento del usuario y este la pueda ver pasando el mouse en algun icono.
+ * 
  */
 
 const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
 // const BASE_URL = "http://localhost:7071/api"
+
+const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
+// const BASE_PDF_URL = "http://localhost:3030/api"
 
 async function getRates(type) {
     return await $.ajax({
@@ -90,9 +94,13 @@ async function storeHistoryCalculator() {
         })
 }
 
+/**
+ * 
+ * 
+ */
 async function generatePdf() {
     return await $.ajax({
-        url: `${BASE_URL}/generate-pdf?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
+        url: `${BASE_PDF_URL}/calculator/generate-pdf`,
         method: 'POST',
         data: JSON.stringify({
             maxCurrent: document.querySelector("#corrienteMax").innerText,
@@ -136,7 +144,6 @@ async function countCalculatorView(method = "GET", body = null) {
         contentType: 'application/json',
     })
         .then(response => {
-            console.log(response)
             if (method === "GET" && response) {
                 sessionStorage.setItem("uuidv4", response)
                 recordTimeTool()

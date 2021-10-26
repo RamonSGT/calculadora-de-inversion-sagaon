@@ -169,11 +169,9 @@ $(async function () {
     const imgContainer = document.querySelector("#img-container")
     if (selectedMach) {
       document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)
-      parentContainer.classList.add("col-lg-9")
       imgContainer.style.display = "block"
     } else {
       imgContainer.style.display = "none"
-      parentContainer.style.width = parentContainer.classList.remove("col-lg-9")
     }
   });
 
@@ -212,7 +210,7 @@ $(async function () {
     if (invalidFields) return toastr["error"]("Ha ingresado datos erroneos!");
     handleCalculator()
   });
-  
+
   $(".form-input").on("keyup", function () {
     const inputValue = $(this).val();
     const inputId = $(this).attr("id");
@@ -298,7 +296,7 @@ $(async function () {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
-    if(selectId === "type-material" && selectValue) {
+    if (selectId === "type-material" && selectValue) {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
@@ -330,7 +328,7 @@ $(async function () {
         showedAccordion = true;
         collapseParent.classList.add("show");
       }
-      if(!onlyCheck) {
+      if (!onlyCheck) {
         form.classList.add("is-invalid");
       }
       invalidValues = true;
@@ -357,10 +355,6 @@ $(async function () {
     const priceMachine = store.getState("selectedMachine").precio_shopify
     const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
     store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
-    console.log("Costo del material: " + materialCost)
-    console.log("Consumo total de electricidad: " + totalConsumptionKWh)
-    console.log("Costo del trabajador: " + costPerWorkerPiece )
-    console.log("Valor por pieza: " + costPerPiece)
     const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
     const utilityPerDesign = valuePerPiece - totalCostPerDesign
     const totalUtility = utilityPerDesign * numeroPedazosDesign
@@ -419,16 +413,26 @@ $(async function () {
       store.setState("rateFlag", 1);
       return;
     }
-    const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece")).toFixed(2)
+    const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("DACFixedPrice"))).toFixed(2)
     let energy = `
         <tr>
           <th colspan="50%">Costo por pieza</th>
           <td colspan="50%">$ ${parseFloat($("#costoPedazoDesign").val())}</td>
         </tr>
+        ${(store.getState("DACFixedPrice") === 0) ? "" : `
+        <tr>
+          <th colspan="50%">Tarifa fija de electricidad DAC</th>
+          <td>$ ${store.getState("DACFixedPrice")}</td>
+        </tr>
+        <tr>
+          <th colspan="50%">Costo de la tarifa fija por el precio del trabajo</th>
+          <td>$ ${store.getState("costDAC").toFixed(4)}</td>
+        </tr>
+        `}
         <tr>
           <th colspan="50%">Costo de electricidad</th>
           <td colspan="50%">$ ${store.getState("totalConsumptionKWh")}</td>
-        </tr>
+          </tr>
         <tr>
           <th colspan="50%">Costo del operador</th>
           <td colspan="50%">$ ${store.getState("costPerWorkerPerPiece").toFixed(2)}</td>
@@ -450,7 +454,6 @@ $(async function () {
         </tr>
         `;
 
-    // console.log("CARGOS DATA JEJE", cargosData)
     $("#listaConsumos").html(header + energy);
 
     $("#gastosContainer").css("display", "block");

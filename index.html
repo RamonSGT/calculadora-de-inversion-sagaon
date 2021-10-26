@@ -36,6 +36,16 @@
     <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son
       requeridos</p>
     <section class="row form-container">
+      <!-- style="display: flex; justify-content: center; align-content: center; width: 30%; display: none; padding-top: 2.5%;" -->
+      <div id="img-container" class="col-sm-12" style="display: none;">
+        <div style="display: flex; justify-content: center;">
+          <!-- Use it like any other HTML element -->
+          <model-viewer id="img-machine" src="https://model3d.shopifycdn.com/models/o/9e01ad5ee44fe4ef/404073axis.glb"
+            alt="A 3D model of an astronaut" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral"
+            auto-rotate camera-controls style="width: 80%; height: 300px; margin: 0 auto;"></model-viewer>
+        </div>
+      </div>
+
       <div class="col-sm-12" id="form-parent-container">
         <div>
           <div class="accordion" id="accordionExample">
@@ -51,12 +61,14 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="animate__zoomIn col-sm-12 col-md-6">
-                        <label for="listaMaquinasSelect" class="form-label">Máquina <span
+                        <!-- ---- -->
+                        <label for="listaMaquinasSelect" class="form-label">Máquina <span 
                             class="required-icon-field">*</span></label>
                         <select name="maquinas-select" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
+                      <!-- ...... -->
                       <div class="col-sm-12 col-md-6">
                         <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo <span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
@@ -82,6 +94,7 @@
                   <div class="inputs-container">
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
+                        <!-- ..... -->
                         <label for="type-material" class="form-label">Tipo de material a utilizar<span
                             class="required-icon-field">*</span></label>
                         <select class="form-field-select form-input form-select" id="type-material" required>
@@ -97,6 +110,7 @@
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
+                        <!-- ..... -->
                         <label for="costoInput" class="form-label">Costo total de la hoja <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="costoInput"
@@ -104,6 +118,7 @@
                       </div>
                     </div>
                     <div class="row pt-4">
+                      <!-- ...... -->
                       <div class="col-sm-12 col-md-6">
                         <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span
                             class="required-icon-field">*</span></label>
@@ -111,6 +126,7 @@
                           placeholder="244" required>
                       </div>
                       <div class="col-sm-12 col-md-6">
+                        <!-- ..... -->
                         <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
@@ -322,6 +338,45 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="accordion-item px-5">
+              <h2 class="accordion-header" id="headingEigth">
+                <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                  data-mdb-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                  Opciones avanzadas <img class="mx-2" id="popover-6" src="./assets/icons/question-mark.svg"
+                    style="width: 15px; height: 15px;">
+                </button>
+              </h2>
+              <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEigth">
+                <div class="accordion-body">
+                  <div>
+                    <div class="row pt-4">
+                      <div class="col-sm-12">
+                        <label for="currentUserConsumption" class="form-label">Consumo actual <span>(KWh)</span> <img id="popover-12"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-control" id="currentUserConsumption"
+                          placeholder="20">
+                      </div>
+                    </div>
+                    <!-- <div class="row pt-4">
+                      <div class="col-sm-12 col-md-12">
+                        <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span
+                            class="required-icon-field"></span> <img id="popover-9"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-control" id="totalUtility" placeholder="0"
+                          disabled>
+                      </div>
+                      <div class="col-sm-12 col-md-6" style="display: none;">
+                        <label for="roiPieces" class="form-label">Piezas a vender para recuperar inversión<span
+                            class="required-icon-field"></span> <img id="popover-10"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-control" id="roiPieces" placeholder="0"
+                          disabled>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
               <div class="btn-container-calculate">
                 <button type="button" class="btn btn-calculate" id="calcular">
                   <span class="btn-text-calculate">Calcular</span>
@@ -380,16 +435,6 @@
           </div>
         </div>
       </div>
-
-      <!-- style="display: flex; justify-content: center; align-content: center; width: 30%; display: none; padding-top: 2.5%;" -->
-      <div id="img-container" class="col-sm-12 col-lg-3" style="display: none;">
-        <div style="display: flex; justify-content: center;">
-          <!-- Use it like any other HTML element -->
-          <model-viewer id="img-machine" src="https://model3d.shopifycdn.com/models/o/9e01ad5ee44fe4ef/404073axis.glb"
-            alt="A 3D model of an astronaut" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral"
-            auto-rotate camera-controls style="width: 80%; height: 300px; margin: 0 auto;"></model-viewer>
-        </div>
-      </div>
     </section>
     <p class="required-instructions" style="padding-top: 20px; padding-bottom: 20px;"><i>* Los calculos realizados y
         mostrados anteriormente son solo una aproximación a los gastos y el retorno de la inversión.</i></p>
@@ -424,9 +469,10 @@
       "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
       "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
       "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
-      "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador"
+      "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
+      "Es tú consumo actual de electricidad. Para poder calcularlo"
     ]
-    for (let i = 1; i <= 11; i++) {
+    for (let i = 1; i <= 12; i++) {
       tippy(`#popover-${i}`, {
         content: contents[(i - 1)],
         allowHTML: true,

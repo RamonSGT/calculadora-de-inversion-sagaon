@@ -1,3 +1,5 @@
+const fixedCost = 730
+
 function displaySelects({ tagId, options, value = "", text, decorator = "" }) {
   $(`#${tagId}`).append(
     `<option 
@@ -38,7 +40,10 @@ function calculateExpenses({
   ];
   let cargosDACList = ["fijo", "basico"];
 
-  let totalKWh = (consumption.potencia_kwh * workHours).toFixed(2);
+  store.setState("DACFixedPrice", charge["fijo"])
+
+  const consumptionClientKWh = parseFloat(document.querySelector("#currentUserConsumption").value)
+  let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
 
   store.setState("totalConsumptionKWh", 0)
   if (!rateFlag) {
@@ -73,10 +78,12 @@ function calculateExpenses({
   }
 
   store.setState("totalConsumptionKWh", 0)
+  const totalHours = parseInt(document.querySelector("#horasTrabajoMaquina").value) / 60 // Convert minutes to hours
+  store.setState("costDAC",  totalHours / fixedCost)
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
-    store.setState("totalConsumptionKWh", (store.getState("totalConsumptionKWh") + parseFloat(subtotal)))
+    store.setState("totalConsumptionKWh", parseFloat(subtotal))
     return `<tr>
             <th scope="col" colspan="2">Consumo ${c}</th>
             <td>${charge[c].toFixed(2)}</td>
