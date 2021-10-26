@@ -169,7 +169,15 @@ function sendSizeToParent(size, firstTime) {
     size,
     firstTime
   });
-  window.parent.postMessage(message, '*')
+  window.parent.postMessage(message, "*")
+}
+
+function sendMessageToastToParent(statusMessage, messageToast) {
+  const message = JSON.stringify({
+    status: statusMessage,
+    message: messageToast
+  })
+  window.parent.postMessage(message, "*")
 }
 
 async function getBufferFromImage() {

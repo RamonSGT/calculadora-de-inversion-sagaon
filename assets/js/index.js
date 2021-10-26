@@ -404,7 +404,8 @@ $(async function () {
       workHours
     ).toFixed(2);
     if (parseFloat(totalKWh) > parseFloat(selectedRate.uso_dac) && rateFlag === 0) {
-      toastr["warning"]("La cuota de electricidad excede la categoría hogar, seleccione una región");
+      sendMessageToastToParent("warning", "La cuota de electricidad excede la categoría hogar, seleccione una región")
+      // toastr["warning"]("La cuota de electricidad excede la categoría hogar, seleccione una región");
       document.querySelector("#collapseThree").classList.add("show")
       $("#dac").css("background-color", "#757575");
       $("#hogar").css("background-color", "#DBDBDB");
@@ -459,7 +460,8 @@ $(async function () {
     $("#gastosContainer").css("display", "block");
     $("#results-table").css("display", "block");
     document.querySelector("#results-table").classList.add("show")
-    toastr["success"]("Se ha calculado el retorno de inversión exitosamente!");
+    sendMessageToastToParent("success", "Se ha calculado el retorno de inversión exitosamente!")
+    // toastr["success"]("Se ha calculado el retorno de inversión exitosamente!");
     $("html").animate(
       {
         scrollTop: $("#results-table").offset().top,
