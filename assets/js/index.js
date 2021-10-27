@@ -446,6 +446,10 @@ $(async function () {
           <th colspan="100%" style="text-align: center; color: green;">Retorno de la inversión</td>
         </tr>
         <tr>
+          <th colspan="50%">Precio del producto</th>
+          <th colspan="50%">$ ${$("#valuePerPiece").val()}</th>
+        </tr>
+        <tr>
           <th colspan="50%">Utilidad por pieza</th>
           <td colspan="50%">$ ${$("#utilityPerPiece").val()}</td>
         </tr>
