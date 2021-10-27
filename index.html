@@ -192,9 +192,9 @@
                           placeholder="135" disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="costoPedazoDesign" class="form-label"><span class="required-icon-field"></span>Costo
+                        <label for="costoPedazoDesign" class="form-label"><span></span>Costo
                           por pieza de tu diseño (MXN)</label>
-                        <input type="number" class="form-field-input form-input form-control" id="costoPedazoDesign"
+                        <input type="number" class="form-field-input form-control" id="costoPedazoDesign"
                           placeholder="2.59" disabled>
                       </div>
                     </div>
@@ -305,7 +305,7 @@
                   <div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="valuePerPiece" class="form-label">Valor por pieza <span>(MXN)</span> <span
+                        <label for="valuePerPiece" class="form-label">Precio a publico de diseño/producto <span>(MXN)</span> <span
                             class="required-icon-field">*</span> <img id="popover-7"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="valuePerPiece"
@@ -343,7 +343,7 @@
               <h2 class="accordion-header" id="headingEigth">
                 <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
                   data-mdb-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                  Opciones avanzadas <img class="mx-2" id="popover-6" src="./assets/icons/question-mark.svg"
+                  Opciones avanzadas <img class="mx-2" id="popover-12" src="./assets/icons/question-mark.svg"
                     style="width: 15px; height: 15px;">
                 </button>
               </h2>
@@ -352,7 +352,7 @@
                   <div>
                     <div class="row pt-4">
                       <div class="col-sm-12">
-                        <label for="currentUserConsumption" class="form-label">Consumo actual <span>(KWh)</span> <img id="popover-12"
+                        <label for="currentUserConsumption" class="form-label">Consumo actual <span>(KWh)</span> <img id="popover-13"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="currentUserConsumption"
                           placeholder="20">
@@ -470,9 +470,10 @@
       "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
       "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
       "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
-      "Es tú consumo actual de electricidad. Para poder calcularlo"
+      "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos.",
+      "Es tú consumo actual de electricidad en KWh. Para poder realizar el calculo resta la lectura actual de tu medidor menos la última lectura en tu recibo."
     ]
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= 13; i++) {
       tippy(`#popover-${i}`, {
         content: contents[(i - 1)],
         allowHTML: true,
@@ -482,7 +483,7 @@
 
       })
     }
-    
+
     // Create a toast
     toastr.options = {
       closeButton: false,
