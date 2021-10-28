@@ -62,7 +62,7 @@
                     <div class="row">
                       <div class="animate__zoomIn col-sm-12 col-md-6">
                         <!-- ---- -->
-                        <label for="listaMaquinasSelect" class="form-label">Máquina <span 
+                        <label for="listaMaquinasSelect" class="form-label">Máquina <span
                             class="required-icon-field">*</span></label>
                         <select name="maquinas-select" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
@@ -305,8 +305,8 @@
                   <div>
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
-                        <label for="valuePerPiece" class="form-label">Precio a publico de diseño/producto <span>(MXN)</span> <span
-                            class="required-icon-field">*</span> <img id="popover-7"
+                        <label for="valuePerPiece" class="form-label">Precio a publico de diseño/producto
+                          <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="valuePerPiece"
                           placeholder="500">
@@ -351,29 +351,30 @@
                 <div class="accordion-body">
                   <div>
                     <div class="row pt-4">
+                      <div class="col-sm-12 col-md-6">
+                        <label for="currentValueKWh" class="form-label">Lectura actual <span>(KWh)</span> <img
+                            id="popover-13" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-control" id="currentValueKWh"
+                          placeholder="20">
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="lastValueKWh" class="form-label">Lectura anterior <span>(KWh)</span> <img
+                            id="popover-14" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-control" id="lastValueKWh"
+                          placeholder="20">
+                      </div>
+                    </div>
+                    <div class="row pt-4">
                       <div class="col-sm-12">
-                        <label for="currentUserConsumption" class="form-label">Consumo actual <span>(KWh)</span> <img id="popover-13"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <label for="currentUserConsumption" class="form-label">Consumo actual <span>(KWh)</span> <img
+                            id="popover-15" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="currentUserConsumption"
                           placeholder="20">
                       </div>
                     </div>
-                    <!-- <div class="row pt-4">
-                      <div class="col-sm-12 col-md-12">
-                        <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span
-                            class="required-icon-field"></span> <img id="popover-9"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <input type="number" class="form-field-input form-control" id="totalUtility" placeholder="0"
-                          disabled>
-                      </div>
-                      <div class="col-sm-12 col-md-6" style="display: none;">
-                        <label for="roiPieces" class="form-label">Piezas a vender para recuperar inversión<span
-                            class="required-icon-field"></span> <img id="popover-10"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <input type="number" class="form-field-input form-control" id="roiPieces" placeholder="0"
-                          disabled>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </div>
@@ -461,7 +462,7 @@
     let contents = [
       "Hace referencia a la potencia con la que usas tu máquina de forma cotidiana. Esto tiene un efecto directo al consumo de electricidad.",
       "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja.",
-      "<img src='./assets/images/tipo_tarifa.jpg' height: 5px; !important>",
+      "<img src='./assets/images/tarifa_CFE.jpg' height=400px width=250px>",
       "El mes en el que deseas realizar el calculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
       "Es la región a la cual corresponde tu localidad.",
       "Esta sección va dirigida a tí como vendedor, es decir, podrás obtener una estimación de tu utilidad y tu retorno de inversión.",
@@ -471,16 +472,17 @@
       "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
       "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
       "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos.",
-      "Es tú consumo actual de electricidad en KWh. Para poder realizar el calculo resta la lectura actual de tu medidor menos la última lectura en tu recibo."
+      "Es la lectura actual que se muestra en tu medidor.",
+      "Es el consumo anterior que tuviste en tu recibo de pago de la CFE <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
+      "Es la diferencia entre la lectura actual y el consumo anterior."
     ]
-    for (let i = 1; i <= 13; i++) {
+    for (let i = 1; i <= contents.length; i++) {
       tippy(`#popover-${i}`, {
         content: contents[(i - 1)],
         allowHTML: true,
         animation: "scale",
         trigger: "mouseenter focus",
-        placement: (i === 3) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
-
+        placement: (i === 3 || i === 14) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
       })
     }
 

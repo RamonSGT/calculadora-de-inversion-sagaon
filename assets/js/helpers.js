@@ -43,6 +43,7 @@ function calculateExpenses({
   store.setState("DACFixedPrice", charge["fijo"])
 
   const consumptionClientKWh = parseFloat(document.querySelector("#currentUserConsumption").value)
+
   let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
 
   store.setState("totalConsumptionKWh", 0)

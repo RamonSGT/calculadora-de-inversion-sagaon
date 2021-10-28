@@ -111,6 +111,28 @@ $(async function () {
     if (calculatedROI) listDacSelect()
   });
 
+  // const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value) 
+  // const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
+
+  $("#currentValueKWh").on('focusout', function () {
+    console.log("Hola mundo")
+    const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
+    const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
+    if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
+    document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
+
+  })
+
+  $("#lastValueKWh").on('focusout', function () {
+    const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
+    const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
+    console.log("El valor es: ", currentValueKWh)
+    console.log("El ultimo valor es: ", lastValueKWh)
+    if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
+
+    document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
+  })
+
   $("#listaTarifaHogarSelect").on("change", listRatesHomeSelect);
 
   async function listRatesHomeSelect() {
