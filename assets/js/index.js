@@ -111,11 +111,7 @@ $(async function () {
     if (calculatedROI) listDacSelect()
   });
 
-  // const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value) 
-  // const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
-
   $("#currentValueKWh").on('focusout', function () {
-    console.log("Hola mundo")
     const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
     const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
     if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
@@ -126,10 +122,15 @@ $(async function () {
   $("#lastValueKWh").on('focusout', function () {
     const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
     const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
-    console.log("El valor es: ", currentValueKWh)
-    console.log("El ultimo valor es: ", lastValueKWh)
     if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
+    document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
+  })
 
+  $("#currentUserConsumption").on('focusout', function() {
+    const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
+    const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
+    console.log("JEJEJE", currentValueKWh, lastValueKWh)
+    if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
     document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
   })
 
@@ -181,13 +182,13 @@ $(async function () {
       });
 
     }
+
     const totalChunks = store.calculateChunks();
     $("#numeroPedazos").val(totalChunks).trigger("change");
     const costPerChunk = store.calculateCostPerChunkLeaf();
     $("#costoPorHojaInput").val(costPerChunk).trigger("change");
     $("#costoPedazo").val(costPerChunk).trigger("change");
     const selectedMach = store.getState("selectedMachine")
-    const parentContainer = document.querySelector("#form-parent-container")
     const imgContainer = document.querySelector("#img-container")
     if (selectedMach) {
       document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)

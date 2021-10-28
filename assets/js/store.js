@@ -25,8 +25,7 @@ class Store {
      * Eliminar lo que se encuentra debajo - Es solo para hacer test de campos que serán requeridos en el futuro, sin embargo
      * tendrán que venir desde el servidor
      */
-    this.state.selectedMachine.corte_ancho = 40
-    this.state.selectedMachine.corte_largo = 40
+    console.log("Máquina seleccionada: ", this.state.selectedMachine)
     /**
      * Eliminar lo que se encuentra por encima
      */
