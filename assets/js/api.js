@@ -14,11 +14,11 @@
  * 
  */
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
-// const BASE_URL = "http://localhost:7071/api"
+// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+const BASE_URL = "http://localhost:7071/api"
 
-const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
-// const BASE_PDF_URL = "http://localhost:3030/api"
+// const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
+const BASE_PDF_URL = "http://localhost:3030/api"
 
 async function getRates(type) {
     return await $.ajax({
@@ -101,7 +101,7 @@ async function generatePdf() {
             costOperator: document.querySelector("#listaConsumos > tr:nth-child(4) > td").innerText,
             costTotalPerPiece: document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong").innerText,
             utilityPerPiece: document.querySelector("#listaConsumos > tr:nth-child(8) > td").innerText,
-            piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(9) > th:nth-child(2) > strong").innerText,
+            piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong").innerText,
             imgDesign: await getBufferFromImage(),
             machine: document.querySelector("#listaMaquinasSelect").value,
             powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
