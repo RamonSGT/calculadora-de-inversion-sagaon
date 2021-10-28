@@ -209,7 +209,7 @@ document.addEventListener("message", e => {
   try {
     const data = e.data
     const decoded = JSON.parse(data)
-    console.log(decoded)
+    console.log("El mensaje desde la calcu es: ", decoded)
   } catch (error) {
     console.error(error)
   }
