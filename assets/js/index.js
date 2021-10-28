@@ -188,12 +188,11 @@ $(async function () {
     $("#costoPorHojaInput").val(costPerChunk).trigger("change");
     $("#costoPedazo").val(costPerChunk).trigger("change");
     const selectedMach = store.getState("selectedMachine")
-    const imgContainer = document.querySelector("#img-container")
+    // const imgContainer = document.querySelector("#img-container")
     if (selectedMach) {
-      document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)
-      imgContainer.style.display = "block"
-    } else {
-      imgContainer.style.display = "none"
+      sendImgMachineToParent(selectedMach.imgurls)
+      // document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)
+      // imgContainer.style.display = "block"
     }
   });
 
@@ -447,13 +446,10 @@ $(async function () {
           <th colspan="50%">Tarifa fija de electricidad DAC</th>
           <td>$ ${store.getState("DACFixedPrice")}</td>
         </tr>
-        <tr>
-          <th colspan="50%">Costo de la tarifa fija por el precio del trabajo</th>
-          <td>$ ${store.getState("costDAC").toFixed(4)}</td>
-        </tr>
         `}
         <tr>
-          <th colspan="50%">Costo de electricidad</th>
+          <th colspan="50%">Costo de electricidad <img id="popover-16"
+          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${store.getState("totalConsumptionKWh")}</td>
           </tr>
         <tr>
@@ -472,8 +468,14 @@ $(async function () {
           <th colspan="50%">$ ${$("#valuePerPiece").val()}</th>
         </tr>
         <tr>
-          <th colspan="50%">Utilidad por pieza</th>
+          <th colspan="50%">Utilidad por pieza <img id="popover-17"
+          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${$("#utilityPerPiece").val()}</td>
+        </tr>
+        <tr>
+          <th colspan="50%">Utilidad total <img id="popover-18"
+          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
+          <td colspan="50%">$ ${$("#totalUtility").val()}</td>
         </tr>
         <tr>
           <th colspan="50%"><strong>Piezas a vender para recuperar la inversión de la máquina</storng></th>
@@ -496,6 +498,7 @@ $(async function () {
     );
     calculatedROI = true
     storeHistoryCalculator()
+    createPopOver()
   }
 });
 

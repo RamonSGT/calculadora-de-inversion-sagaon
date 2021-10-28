@@ -304,14 +304,14 @@
                 <div class="accordion-body">
                   <div>
                     <div class="row pt-4">
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12">
                         <label for="valuePerPiece" class="form-label">Precio a publico de diseño/producto
                           <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="valuePerPiece"
                           placeholder="500">
                       </div>
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12 col-md-6" style="display: none;">
                         <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span
                             class="required-icon-field"></span> <img id="popover-8"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
@@ -319,7 +319,7 @@
                           disabled>
                       </div>
                     </div>
-                    <div class="row pt-4">
+                    <div class="row pt-4" style="display: none;">
                       <div class="col-sm-12 col-md-12">
                         <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span
                             class="required-icon-field"></span> <img id="popover-9"
@@ -362,8 +362,7 @@
                         <label for="lastValueKWh" class="form-label">Lectura anterior <span>(KWh)</span> <img
                             id="popover-14" src="./assets/icons/question-mark.svg"
                             style="width: 15px; height: 15px;"></label>
-                        <input type="number" class="form-field-input form-control" id="lastValueKWh"
-                          placeholder="20">
+                        <input type="number" class="form-field-input form-control" id="lastValueKWh" placeholder="20">
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -459,32 +458,39 @@
   <script type="text/javascript" src="./assets/js/index.js"></script>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script>
-    let contents = [
-      "Hace referencia a la potencia con la que usas tu máquina de forma cotidiana. Esto tiene un efecto directo al consumo de electricidad.",
-      "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja.",
-      "<img src='./assets/images/tarifa_CFE.jpg' height=400px width=250px>",
-      "El mes en el que deseas realizar el calculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
-      "Es la región a la cual corresponde tu localidad.",
-      "Esta sección va dirigida a tí como vendedor, es decir, podrás obtener una estimación de tu utilidad y tu retorno de inversión.",
-      "Es el precio de venta de tu producto.",
-      "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
-      "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
-      "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
-      "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
-      "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos.",
-      "Es la lectura actual que se muestra en tu medidor.",
-      "Es el consumo anterior que tuviste en tu recibo de pago de la CFE <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
-      "Es la diferencia entre la lectura actual y el consumo anterior."
-    ]
-    for (let i = 1; i <= contents.length; i++) {
-      tippy(`#popover-${i}`, {
-        content: contents[(i - 1)],
-        allowHTML: true,
-        animation: "scale",
-        trigger: "mouseenter focus",
-        placement: (i === 3 || i === 14) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
-      })
+    function createPopOver() {
+      let contents = [
+        "Hace referencia a la potencia con la que usas tu máquina de forma cotidiana. Esto tiene un efecto directo al consumo de electricidad.",
+        "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja.",
+        "<img src='./assets/images/tarifa_CFE.jpg' height=400px width=100%>",
+        "El mes en el que deseas realizar el calculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
+        "Es la región a la cual corresponde tu localidad. Por cada región existe un costo fijo que se aplica a los hogares o pequeños negocios con un elevado consumo eléctrico. Aplica solo si en tu recibo te marca el tipo de tarifa <strong>DAC</strong> <img src='./assets/images/tarifa_dac.webp' height=200px width=100%>",
+        "Esta sección va dirigida a tí como vendedor, es decir, podrás obtener una estimación de tu utilidad y tu retorno de inversión.",
+        "Es el precio de venta de tu producto.",
+        "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
+        "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
+        "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
+        "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
+        "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos.",
+        "Es la lectura actual que se muestra en tu medidor.",
+        "Es el consumo anterior que tuviste en tu recibo de pago de la CFE <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
+        "Es la diferencia entre la lectura actual y el consumo anterior.",
+        "Es el costo aplicado por la CFE a los hogares o pequeños negocios que tienen un consumo electrico elevado. Es una tarifa fija por región más el costo de consumo electrico por KWh",
+        "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
+        "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
+      ]
+      for (let i = 1; i <= contents.length; i++) {
+        tippy(`#popover-${i}`, {
+          content: contents[(i - 1)],
+          allowHTML: true,
+          animation: "scale",
+          trigger: "mouseenter focus",
+          placement: (i === 3 || i === 14 || i === 5) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
+        })
+      }
     }
+
+    createPopOver()
 
     // Create a toast
     toastr.options = {
