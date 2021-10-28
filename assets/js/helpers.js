@@ -121,7 +121,7 @@ function sortByMonth(arr) {
   });
 }
 
-function saveDataCalculator() {
+function getDataCalculator() {
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
     power_rate: document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim(),
@@ -177,6 +177,14 @@ function sendMessageToastToParent(statusMessage, messageToast) {
   const message = JSON.stringify({
     status: statusMessage,
     message: messageToast
+  })
+  window.parent.postMessage(message, "*")
+}
+
+function sendDataCalculatorToParent(data) {
+  const message = JSON.stringify({
+    saveData: true,
+    data
   })
   window.parent.postMessage(message, "*")
 }
