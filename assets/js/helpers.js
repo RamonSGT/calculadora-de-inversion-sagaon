@@ -210,15 +210,5 @@ function getBase64(file) {
   })
 }
 
-// document.addEventListener("mouseup", getSizeIframe)
 new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
-document.addEventListener("message", e => {
-  try {
-    const data = e.data
-    const decoded = JSON.parse(data)
-    console.log("El mensaje desde la calcu es: ", decoded)
-  } catch (error) {
-    console.error(error)
-  }
-})

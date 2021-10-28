@@ -21,14 +21,6 @@ class Store {
     this.state.selectedMachine = this.state.machines.find(
       (m) => m.id_producto === id_producto
     );
-    /**
-     * Eliminar lo que se encuentra debajo - Es solo para hacer test de campos que serán requeridos en el futuro, sin embargo
-     * tendrán que venir desde el servidor
-     */
-    console.log("Máquina seleccionada: ", this.state.selectedMachine)
-    /**
-     * Eliminar lo que se encuentra por encima
-     */
   }
 
   selectConsumption(id_consumo) {

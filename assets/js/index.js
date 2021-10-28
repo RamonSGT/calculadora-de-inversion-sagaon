@@ -129,7 +129,6 @@ $(async function () {
   $("#currentUserConsumption").on('focusout', function() {
     const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
     const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
-    console.log("JEJEJE", currentValueKWh, lastValueKWh)
     if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
     document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
   })
