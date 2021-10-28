@@ -82,16 +82,7 @@ async function getConsumptionsByProduct(id) {
 }
 
 async function storeHistoryCalculator() {
-    return await $.ajax({
-        url: `${BASE_URL}/save/calculator-history?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
-        method: 'POST',
-        data: JSON.stringify(saveDataCalculator()),
-        contentType: 'application/json',
-    })
-        .then(_ => _)
-        .catch(error => {
-            return { error: { message: error.responseJSON?.message } }
-        })
+    sendDataCalculatorToParent(getDataCalculator())
 }
 
 /**
@@ -109,8 +100,8 @@ async function generatePdf() {
             costElectricity: document.querySelector("#listaConsumos > tr:nth-child(3) > td").innerText,
             costOperator: document.querySelector("#listaConsumos > tr:nth-child(4) > td").innerText,
             costTotalPerPiece: document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong").innerText,
-            utilityPerPiece: document.querySelector("#listaConsumos > tr:nth-child(7) > td").innerText,
-            piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(8) > th:nth-child(2) > strong").innerText,
+            utilityPerPiece: document.querySelector("#listaConsumos > tr:nth-child(8) > td").innerText,
+            piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(9) > th:nth-child(2) > strong").innerText,
             imgDesign: await getBufferFromImage(),
             machine: document.querySelector("#listaMaquinasSelect").value,
             powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
@@ -119,7 +110,8 @@ async function generatePdf() {
             largeMaterial: document.querySelector("#largeLeaf").value,
             designWidth: document.querySelector("#widthLeafDesign").value,
             designLarge: document.querySelector("#largeLeafDesign").value,
-            timePerDesign: document.querySelector("#horasTrabajoMaquina").value
+            timePerDesign: document.querySelector("#horasTrabajoMaquina").value,
+            pricePerDesign: document.querySelector("#valuePerPiece").value
         }),
         contentType: 'application/json',
     })
