@@ -88,6 +88,9 @@ async function storeHistoryCalculator() {
  * 
  */
 async function generatePdf() {
+    const rateElectricity = (document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong")) ? document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong")
+    const utilityPerPiece = document.querySelector("#listaConsumos > tr:nth-child(8) > td") ? document.querySelector("#listaConsumos > tr:nth-child(8) > td") : document.querySelector("#listaConsumos > tr:nth-child(9) > td")
+    const piecesToSell = document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") ? document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(11) > th:nth-child(2) > strong")
     return await $.ajax({
         url: `${BASE_PDF_URL}/calculator/generate-pdf`,
         method: 'POST',
@@ -97,9 +100,9 @@ async function generatePdf() {
             costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
             costElectricity: document.querySelector("#listaConsumos > tr:nth-child(3) > td").innerText,
             costOperator: document.querySelector("#listaConsumos > tr:nth-child(4) > td").innerText,
-            costTotalPerPiece: document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong").innerText,
-            utilityPerPiece: document.querySelector("#listaConsumos > tr:nth-child(8) > td").innerText,
-            piecesToSell: document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong").innerText,
+            costTotalPerPiece: rateElectricity.innerText,
+            utilityPerPiece: utilityPerPiece.innerText,
+            piecesToSell: piecesToSell.innerText,
             imgDesign: await getBufferFromImage(),
             machine: document.querySelector("#listaMaquinasSelect").value,
             powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
@@ -109,7 +112,9 @@ async function generatePdf() {
             designWidth: document.querySelector("#widthLeafDesign").value,
             designLarge: document.querySelector("#largeLeafDesign").value,
             timePerDesign: document.querySelector("#horasTrabajoMaquina").value,
-            pricePerDesign: document.querySelector("#valuePerPiece").value
+            pricePerDesign: document.querySelector("#valuePerPiece").value,
+            rateElectricity: store.getState("selectedRate").id_tarifa,
+            typeRateElectricity: store.getState("selectedRate").tipo
         }),
         contentType: 'application/json',
     })

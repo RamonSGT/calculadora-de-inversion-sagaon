@@ -46,6 +46,7 @@ function calculateExpenses({
 
   let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
 
+  console.log("El rateflag es", rateFlag, rate, charge, consumption)
   store.setState("totalConsumptionKWh", 0)
   if (!rateFlag) {
     const consumos = cargosHogarList.map((c) => {
