@@ -443,13 +443,13 @@ $(async function () {
         </tr>
         ${(store.getState("DACFixedPrice") === 0) ? "" : `
         <tr>
-          <th colspan="50%">Tarifa fija de electricidad DAC</th>
+          <th colspan="50%">Tarifa fija de electricidad DAC <img id="popover-16"
+          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td>$ ${store.getState("DACFixedPrice")}</td>
         </tr>
         `}
         <tr>
-          <th colspan="50%">Costo de electricidad <img id="popover-16"
-          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
+          <th colspan="50%">Costo de electricidad</th>
           <td colspan="50%">$ ${store.getState("totalConsumptionKWh")}</td>
           </tr>
         <tr>

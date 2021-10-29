@@ -7,18 +7,16 @@
 // })
 
 /***
- * Hacer testing de DAC y más test generales
- * Modificar el disñeo del pdf de tal forma que quede en formato tabla o algo similar
- * Agregar campos de formulario avanzado para que el usuario pueda calcular su costo de luz segùn la cantidad de electricidad que ha utilizando viendo el medidor
- * Cambiar la imàgen de la calculadora, de tal forma que siga el movimiento del usuario y este la pueda ver pasando el mouse en algun icono.
+    Agregar el tipo de tarifa en la cotización pdf
+    Agregar el costo de la tarifa fija en caso de que el usuario ponga tarifa DAC
  * 
  */
 
-// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
-const BASE_URL = "http://localhost:7071/api"
+const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+// const BASE_URL = "http://localhost:7071/api"
 
-// const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
-const BASE_PDF_URL = "http://localhost:3030/api"
+const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
+// const BASE_PDF_URL = "http://localhost:3030/api"
 
 async function getRates(type) {
     return await $.ajax({
