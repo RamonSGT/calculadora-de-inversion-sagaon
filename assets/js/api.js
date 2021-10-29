@@ -12,11 +12,11 @@
  * 
  */
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
-// const BASE_URL = "http://localhost:7071/api"
+// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
+const BASE_URL = "http://localhost:7071/api"
 
-const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
-// const BASE_PDF_URL = "http://localhost:3030/api"
+// const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
+const BASE_PDF_URL = "http://localhost:3030/api"
 
 async function getRates(type) {
     return await $.ajax({
@@ -89,8 +89,21 @@ async function storeHistoryCalculator() {
  */
 async function generatePdf() {
     const rateElectricity = (document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong")) ? document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong")
-    const utilityPerPiece = document.querySelector("#listaConsumos > tr:nth-child(8) > td") ? document.querySelector("#listaConsumos > tr:nth-child(8) > td") : document.querySelector("#listaConsumos > tr:nth-child(9) > td")
+
+
+    const utilityPerPiece = document.querySelector("#listaConsumos > tr:nth-child(8) > td") ? document.querySelector("#listaConsumos > tr:nth-child(8) > td") : (store.getState("selectedRate").tipo !== "DAC") ? document.querySelector(`#listaConsumos > tr:nth-child(10) > td`) : document.querySelector(`#listaConsumos > tr:nth-child(9) > td`)
+
+
     const piecesToSell = document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") ? document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(11) > th:nth-child(2) > strong")
+
+
+    const fixedCostElectricity = document.querySelector("#listaConsumos > tr:nth-child(3) > td") ? document.querySelector("#listaConsumos > tr:nth-child(3) > td") : ""
+
+    
+    const costElectricity = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(4) > td") : document.querySelector("#listaConsumos > tr:nth-child(3) > td")
+
+    const costOperator = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(5) > td") : document.querySelector("#listaConsumos > tr:nth-child(4) > td")
+
     return await $.ajax({
         url: `${BASE_PDF_URL}/calculator/generate-pdf`,
         method: 'POST',
@@ -98,8 +111,8 @@ async function generatePdf() {
             maxCurrent: document.querySelector("#corrienteMax").innerText,
             power: document.querySelector("#potencia").innerText,
             costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
-            costElectricity: document.querySelector("#listaConsumos > tr:nth-child(3) > td").innerText,
-            costOperator: document.querySelector("#listaConsumos > tr:nth-child(4) > td").innerText,
+            costElectricity: costElectricity.innerText,
+            costOperator: costOperator.innerText,
             costTotalPerPiece: rateElectricity.innerText,
             utilityPerPiece: utilityPerPiece.innerText,
             piecesToSell: piecesToSell.innerText,
@@ -114,7 +127,8 @@ async function generatePdf() {
             timePerDesign: document.querySelector("#horasTrabajoMaquina").value,
             pricePerDesign: document.querySelector("#valuePerPiece").value,
             rateElectricity: store.getState("selectedRate").id_tarifa,
-            typeRateElectricity: store.getState("selectedRate").tipo
+            typeRateElectricity: store.getState("selectedRate").tipo,
+            fixedCostElectricity: fixedCostElectricity.innerText
         }),
         contentType: 'application/json',
     })
