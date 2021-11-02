@@ -53,7 +53,8 @@
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne"
                   aria-expanded="false" aria-controls="collapseOne">
-                  Selecciona tu máquina
+                  Selecciona tu máquina <img class="mx-2" data-bottom id="popover-19"
+                    src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
                 </button>
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
@@ -63,7 +64,9 @@
                       <div class="animate__zoomIn col-sm-12 col-md-6">
                         <!-- ---- -->
                         <label for="listaMaquinasSelect" class="form-label">Máquina <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img data-bottom id="popover-20"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                        </label>
                         <select name="maquinas-select" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
@@ -86,7 +89,8 @@
               <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
                   data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Materia prima
+                  Materia prima<img class="mx-2" data-bottom id="popover-21" src="./assets/icons/question-mark.svg"
+                    style="width: 15px; height: 15px;">
                 </button>
               </h2>
               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
@@ -95,8 +99,9 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
                         <!-- ..... -->
-                        <label for="type-material" class="form-label">Tipo de material a utilizar<span
-                            class="required-icon-field">*</span></label>
+                        <label for="type-material" class="form-label">Tipo de material a utilizar <span
+                            class="required-icon-field">*</span> <img data-bottom id="popover-22"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select class="form-field-select form-input form-select" id="type-material" required>
                           <option selected disabled>Selecciona el tipo de material que vas a utilizar</option>
                           <option value="MDF">MDF</option>
@@ -107,12 +112,14 @@
                           <option value="Vinil">Vinil</option>
                           <option value="Piel">Piel</option>
                           <option value="Aluminio Anodizado">Aluminio Anodizado</option>
+                          <option value="Otro">Otro</option>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <!-- ..... -->
                         <label for="costoInput" class="form-label">Costo total de la hoja <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img data-bottom id="popover-23"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="costoInput"
                           placeholder="350" required>
                       </div>
@@ -121,14 +128,16 @@
                       <!-- ...... -->
                       <div class="col-sm-12 col-md-6">
                         <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img data-bottom id="popover-24"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeaf"
                           placeholder="244" required>
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <!-- ..... -->
                         <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img data-bottom id="popover-25"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
                           placeholder="122" required>
                       </div>
@@ -143,7 +152,8 @@
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <label for="costoPedazo" class="form-label"><span class="required-icon-field"></span>Costo por
-                          pedazo de material (MXN)</label>
+                          pedazo de material (MXN) <img data-bottom id="popover-26"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="costoPedazo" placeholder="19.28"
                           disabled>
                       </div>
@@ -166,19 +176,22 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="widthLeafDesign" class="form-label">Ancho del diseño (cm) <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img id="popover-27"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeafDesign"
                           placeholder="20" required>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-4">
                         <label for="largeLeafDesign" class="form-label">Largo del diseño (cm) <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img id="popover-28"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeafDesign"
                           placeholder="10" required>
                       </div>
                       <div class="col-sm-12 col-lg-4">
-                        <label for="horasTrabajoMaquina" class="form-label">Tiempo de trabajo por diseño (minutos)<span
-                            class="required-icon-field">*</span></label>
+                        <label for="horasTrabajoMaquina" class="form-label">Tiempo de trabajo por diseño (minutos) <span
+                            class="required-icon-field">*</span> <img id="popover-29"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="horasTrabajoMaquina"
                           placeholder="25" required>
                       </div>
@@ -186,21 +199,23 @@
                     <div class="row pt-4">
                       <div class="col-sm-12 col-md-6">
                         <label for="numeroPedazosDesign" class="form-label"><span
-                            class="required-icon-field"></span>Número de piezas <img id="popover-2"
+                            class="required-icon-field"></span>Número de piezas <img id="popover-30"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="numeroPedazosDesign"
                           placeholder="135" disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <label for="costoPedazoDesign" class="form-label"><span></span>Costo
-                          por pieza de tu diseño (MXN)</label>
+                          por pieza de tu diseño (MXN) <img id="popover-31" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="costoPedazoDesign"
                           placeholder="2.59" disabled>
                       </div>
                     </div>
                     <div class="row pt-4">
                       <div class="col-sm-12">
-                        <label class="form-label" for="customFile">Sube tu diseño</label>
+                        <label class="form-label" for="customFile">Sube tu diseño <img id="popover-32"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="file" class="form-control" id="customFile" style="background-color: white;">
                       </div>
                     </div>
@@ -230,7 +245,8 @@
                     <div class="row">
                       <div class="col-sm-12 col-md-6">
                         <label for="listaTarifaHogarSelect" class="form-label">Tarifa <span
-                            class="required-icon-field">*</span></label>
+                            class="required-icon-field">*</span> <img id="popover-37"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="tarifas-select" id="listaTarifaHogarSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
@@ -264,26 +280,32 @@
               <h2 class="accordion-header" id="headingFour">
                 <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
                   data-mdb-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  Operador
+                  Operador <img class="mx-2" id="popover-33" src="./assets/icons/question-mark.svg"
+                    style="width: 15px; height: 15px;">
                 </button>
               </h2>
               <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
                 <div class="accordion-body">
                   <div class="row">
                     <div class="col-sm-12 col-md-6 col-lg-4">
-                      <label for="pagoMensuOperador" class="form-label">Pago mensual del operador <span>(MXN)</span>
+                      <label for="pagoMensuOperador" class="form-label">Pago mensual del operador <span>(MXN) <img
+                            id="popover-34" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></span>
                         <span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate"
                         id="pagoMensuOperador" placeholder="3000" required>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
-                      <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <span
+                      <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <img
+                          id="popover-35" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"><span
                           class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate"
                         id="horasTrabajoOperador" placeholder="30" required>
                     </div>
                     <div class="col-sm-12 col-lg-4">
-                      <label for="costoHoraOperador" class="form-label">Costo por hora del operador <span>(MXN)</span>
+                      <label for="costoHoraOperador" class="form-label">Costo por hora del operador <span>(MXN) <img
+                            id="popover-36" src="./assets/icons/question-mark.svg"
+                            style="width: 15px; height: 15px;"></span>
                         <span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-control" id="costoHoraOperador"
                         placeholder="100" disabled>
@@ -461,23 +483,42 @@
     function createPopOver() {
       let contents = [
         "Hace referencia a la potencia con la que usas tu máquina de forma cotidiana. Esto tiene un efecto directo al consumo de electricidad.",
-        "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja.",
-        "<img src='./assets/images/tarifa_CFE.jpg' height=400px width=100%>",
+        "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja. <strong>Aqui se tiene en cuenta un pequeño margen de desperdicio que es solo una aproximación.</strong>",
+        "En esta sección se elegirá el tipo de tarifa y la categoría que aparece en nuestro recibo de pago de la CFE.<img src='./assets/images/tarifa_CFE.jpg' height=400px width=100%>",
         "El mes en el que deseas realizar el calculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
         "Es la región a la cual corresponde tu localidad. Por cada región existe un costo fijo que se aplica a los hogares o pequeños negocios con un elevado consumo eléctrico. Aplica solo si en tu recibo te marca el tipo de tarifa <strong>DAC</strong> <img src='./assets/images/tarifa_dac.webp' height=200px width=100%>",
-        "Esta sección va dirigida a tí como vendedor, es decir, podrás obtener una estimación de tu utilidad y tu retorno de inversión.",
-        "Es el precio de venta de tu producto.",
+        "Esta sección va dirigida a tí como vendedor, es decir, se asignara el precio de tu producto.",
+        "Es el precio que le asignas a tu diseño para tus clientes.",
         "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
         "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
         "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
         "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
-        "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos.",
-        "Es la lectura actual que se muestra en tu medidor.",
-        "Es el consumo anterior que tuviste en tu recibo de pago de la CFE <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
+        "En esta sección vienen campos complementario que te ayudarán a realizar un calculo más preciso de los costos de electricidad.",
+        "Es la lectura actual en que se muestra en tu medidor.",
+        "Es el consumo anterior que tuviste en tu recibo de pago de la CFE. <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
         "Es la diferencia entre la lectura actual y el consumo anterior.",
         "Es el costo aplicado por la CFE a los hogares o pequeños negocios que tienen un consumo electrico elevado. Es una tarifa fija por región más el costo de consumo electrico por KWh",
         "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
         "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
+        "En esta sección se ingresan los datos relacionados con tu máquina como el tipo de la máquina y el porcentaje de trabajo. Dichos datos son importantes para un calculo más preciso.",
+        "Es el modelo de la máquina que usaras para realizar los calculos.",
+        "En esta sección se ingresarán los datos como el tipo de material, el costo, ancho, entre otros datos que serán de utilidad para un calculo más preciso.<br>Tenga en cuenta que el costo calculado en esta sección solo contempla la medida ingresada y el costo del material.",
+        "Es el tipo de material a utilizar en la máquina. En caso de que el material no se muestre en la lista, seleccionar la opción <strong>otro</strong>",
+        "Es el precio al cual adquiriste la hoja completa de material.",
+        "Es la medida (ancho) de la hoja antes de ser utilizada por primera vez.",
+        "Es la medida (largo) de la hoja antes de ser utilizada por primera vez.",
+        "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja.",
+        "Es la medida (ancho) del diseño que plasmaras con la máquina CNC.",
+        "Es la medida (largo) del diseño que plasmaras con la máquina CNC.",
+        "Es la cantidad de minutos que tardára tu máquina de forma aproximada para plasmar el diseño.",
+        "Es la cantidad de diseños que se pueden obtener. Esto se calcula en base a las medidas ingresadas en la sección de <i>Materia prima</i>",
+        "Es el precio calculado de tu diseño según la medida y el costo de material. Tenga en cuenta que no se considerá en este resultado el costo de electricidad y el salario.",
+        "Es el diseño que se plasmará en la máquina CNC, el mismo aparecerá en el resumen de los gastos que podrá imprimir posteriormente.",
+        "En esta sección se detallaran los costos asociados con el salario del operador. Es importante resaltar que a pesar de que el dueño de la máquina sea el operador tome en cuenta asignarse un salario, esto con la finalidad de que el resultado sea más exacto.",
+        "Es el salario mensual que recibe el que se encarga de utilizar la máquina.",
+        "Es la cantidad de horas trabajadas por el operador de la máquina.",
+        "Es el resultado del pago mensual del operador entre la cantidad de horas que trabaja.",
+        "Es el tipo de tarifa que aparece en tu recibo de la CFE."
       ]
       for (let i = 1; i <= contents.length; i++) {
         tippy(`#popover-${i}`, {
