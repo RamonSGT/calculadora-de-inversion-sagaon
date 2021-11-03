@@ -154,7 +154,7 @@ function getDataCalculator() {
 function recordTimeTool() {
   setInterval(() => {
     store.setState("timeElapsed", store.getState("timeElapsed") + 60)
-    sendElapsedTimeToParent("POST", {
+    sendElapsedTimeToParent({
       api_key: sessionStorage.getItem("uuidv4"),
       time_elapsed: store.getState("timeElapsed").toString()
     })
