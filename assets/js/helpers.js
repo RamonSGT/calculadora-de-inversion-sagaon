@@ -199,6 +199,7 @@ function sendImgMachineToParent(imgMachine) {
 
 function sendElapsedTimeToParent(method, body) {
   const message = JSON.stringify({
+    saveDataView: true,
     method,
     body
   })
