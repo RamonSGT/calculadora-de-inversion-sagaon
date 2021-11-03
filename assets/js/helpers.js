@@ -152,9 +152,9 @@ function getDataCalculator() {
 }
 
 function recordTimeTool() {
-  setInterval(async () => {
+  setInterval(() => {
     store.setState("timeElapsed", store.getState("timeElapsed") + 60)
-    await sendElapsedTimeToParent("POST", {
+    sendElapsedTimeToParent("POST", {
       api_key: sessionStorage.getItem("uuidv4"),
       time_elapsed: store.getState("timeElapsed").toString()
     })
@@ -197,7 +197,7 @@ function sendImgMachineToParent(imgMachine) {
   window.parent.postMessage(message, "*")
 }
 
-function sendElapsedTimeToParent(method, body) {
+function sendElapsedTimeToParent(data) {
   const message = JSON.stringify({
     saveDataView: true,
     data

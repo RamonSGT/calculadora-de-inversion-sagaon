@@ -147,6 +147,7 @@ async function generatePdf() {
 
 async function countCalculatorView(method = "GET", body = null) {
     if(method !== "GET") return
+    console.log("Ha entrado aquí")
     return await $.ajax({
         url: `${BASE_URL}/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method,
@@ -154,6 +155,7 @@ async function countCalculatorView(method = "GET", body = null) {
         contentType: 'application/json',
     })
         .then(response => {
+            console.log("Se recibio la respuesta", response)
             if (method === "GET" && response) {
                 sessionStorage.setItem("uuidv4", response)
                 recordTimeTool()
