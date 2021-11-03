@@ -146,6 +146,7 @@ async function generatePdf() {
 }
 
 async function countCalculatorView(method = "GET", body = null) {
+    console.log("Entro en la función")
     if(method !== "GET") return
     console.log("Ha entrado aquí")
     return await $.ajax({
@@ -166,4 +167,4 @@ async function countCalculatorView(method = "GET", body = null) {
         })
 }
 
-document.addEventListener("DOMContentLoaded", countCalculatorView)
+countCalculatorView()
