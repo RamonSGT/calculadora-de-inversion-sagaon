@@ -45,9 +45,10 @@ $(async function () {
   const productos = await getProducts();
   if (!productos.error) {
     store.setState("machines", productos);
+    productos.forEach(val => val.size = val.corte_ancho * val.corte_largo)
     displaySelects({
       tagId: "listaMaquinasSelect",
-      options: productos,
+      options: productos.sort((a, b) => a.size - b.size),
       value: "id_producto",
       text: "nombre_producto",
     });
