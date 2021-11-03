@@ -197,6 +197,14 @@ function sendImgMachineToParent(imgMachine) {
   window.parent.postMessage(message, "*")
 }
 
+function sendElapsedTimeToParent(method, body) {
+  const message = JSON.stringify({
+    method,
+    body
+  })
+  window.parent.postMessage(message, "*")
+}
+
 async function getBufferFromImage() {
   const customFileNode = document.querySelector("#customFile")
   if (!customFileNode || !customFileNode.files[0]) return null
