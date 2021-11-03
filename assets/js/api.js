@@ -146,7 +146,7 @@ async function generatePdf() {
 }
 
 async function countCalculatorView(method = "GET", body = null) {
-    sendElapsedTimeToParent(method, body)
+    if(method !== "GET") return
     return await $.ajax({
         url: `${BASE_URL}/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
         method,
@@ -164,4 +164,4 @@ async function countCalculatorView(method = "GET", body = null) {
         })
 }
 
-countCalculatorView()
+document.addEventListener("DOMContentLoaded", countCalculatorView)
