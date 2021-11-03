@@ -80,7 +80,17 @@ async function getConsumptionsByProduct(id) {
 }
 
 async function storeHistoryCalculator() {
-    sendDataCalculatorToParent(getDataCalculator())
+    sendDataCalculatorToParent(await getDataCalculator())
+    // return await $.ajax({
+    //     url: `${BASE_URL}/save/calculator-history?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
+    //     method: 'POST',
+    //     data: JSON.stringify(await getDataCalculator()),
+    //     contentType: 'application/json',
+    // })
+    //     .then(_ => _)
+    //     .catch(error => {
+    //         return { error: { message: error.responseJSON?.message } }
+    //     })
 }
 
 /**
@@ -99,7 +109,7 @@ async function generatePdf() {
 
     const fixedCostElectricity = document.querySelector("#listaConsumos > tr:nth-child(3) > td") ? document.querySelector("#listaConsumos > tr:nth-child(3) > td") : ""
 
-    
+
     const costElectricity = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(4) > td") : document.querySelector("#listaConsumos > tr:nth-child(3) > td")
 
     const costOperator = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(5) > td") : document.querySelector("#listaConsumos > tr:nth-child(4) > td")
@@ -147,7 +157,7 @@ async function generatePdf() {
 
 async function countCalculatorView(method = "GET", body = null) {
     console.log("Entro en la función")
-    if(method !== "GET") return
+    if (method !== "GET") return
     console.log("Ha entrado aquí")
     return await $.ajax({
         url: `${BASE_URL}/count/calculator-view?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`,
@@ -159,6 +169,10 @@ async function countCalculatorView(method = "GET", body = null) {
             console.log("Se recibio la respuesta", response)
             if (method === "GET" && response) {
                 sessionStorage.setItem("uuidv4", response)
+                sendElapsedTimeToParent({
+                    api_key: sessionStorage.getItem("uuidv4"),
+                    time_elapsed: store.getState("timeElapsed").toString()
+                })
                 recordTimeTool()
             }
         })

@@ -122,7 +122,7 @@ function sortByMonth(arr) {
   });
 }
 
-function getDataCalculator() {
+async function getDataCalculator() {
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
     power_rate: document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim(),
@@ -147,7 +147,26 @@ function getDataCalculator() {
     utilty_per_piece: document.querySelector("#utilityPerPiece").value.toString(),
     total_utility: document.querySelector("#totalUtility").value.toString(),
     return_of_investment: document.querySelector("#roiPieces").value.toString(),
-    api_key: sessionStorage.getItem("uuidv4")
+    api_key: sessionStorage.getItem("uuidv4"),
+    img: await getImgDesignData()
+  }
+}
+
+async function getImgDesignData() {
+  const files = document.querySelector("#customFile").files
+  if(!files || !files.length) return
+  const file = files[0]
+  const bs64 = await getBase64(file)
+  let filename = file.name.split(".")
+  const extension = filename.pop()
+  filename.push(Math.floor(new Date() / 1000))
+  filename.push(extension)
+  filename = filename.join(".")
+  const mimetype = file.type
+  return {
+    bs64,
+    filename,
+    mimetype
   }
 }
 
