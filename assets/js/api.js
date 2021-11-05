@@ -145,7 +145,7 @@ async function generatePdf() {
         .then(pdf => {
             const pdfurl = `data:application/pdf;base64,${pdf}`
             const downloadLink = document.createElement("a");
-            const fileName = "cotizacion.pdf";
+            const fileName = "detalles-gastos.pdf";
             downloadLink.href = pdfurl;
             downloadLink.download = fileName;
             downloadLink.click()
