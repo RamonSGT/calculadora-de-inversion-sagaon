@@ -112,6 +112,7 @@
                           <option value="Vinil">Vinil</option>
                           <option value="Piel">Piel</option>
                           <option value="Aluminio Anodizado">Aluminio Anodizado</option>
+                          <option value="Cartulina">Cartulina</option>
                           <option value="Otro">Otro</option>
                         </select>
                       </div>
@@ -492,12 +493,12 @@
         "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
         "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
         "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
-        "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el calculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
+        "En esta sección podrás calcular el precio de tus diseños que tengan medidas especificas. Para poder realizar el cálculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador",
         "En esta sección vienen campos complementarios que te ayudarán a realizar un cálculo más preciso de los costos de electricidad.",
         "Es la lectura actual que se muestra en tu medidor.",
         "Es el consumo anterior que tuviste en tu recibo de pago de la CFE. <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
         "Es la diferencia entre la lectura actual y el consumo anterior.",
-        "Es el costo aplicado por la CFE a los hogares o pequeños negocios que tienen un consumo electrico elevado. Es una tarifa fija por región más el costo de consumo electrico por KWh",
+        `Por defecto la CFE aplica un costo fijo a la tarifa DAC. Según la selcción de tú región el costo que se te aplica es de: <strong>$ ${store.getState("DACFixedPrice")}</strong>. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo para cada pieza.`,
         "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
         "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
         "En esta sección se ingresan los datos relacionados con tu máquina como el tipo de la máquina y el porcentaje de trabajo. Dichos datos son importantes para un cálculo más preciso.",
