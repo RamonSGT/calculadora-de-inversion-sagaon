@@ -50,7 +50,7 @@ $(async function () {
       tagId: "listaMaquinasSelect",
       options: productos.sort((a, b) => a.size - b.size),
       value: "id_producto",
-      text: "nombre_producto",
+      text: "id_producto",
     });
   }
   // ========================== End Calling APIs ========================== //
@@ -127,7 +127,7 @@ $(async function () {
     document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
   })
 
-  $("#currentUserConsumption").on('focusout', function() {
+  $("#currentUserConsumption").on('focusout', function () {
     const currentValueKWh = parseFloat(document.querySelector("#currentValueKWh").value)
     const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
     if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
@@ -277,14 +277,16 @@ $(async function () {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
+
     if (
       inputId === "widthLeafDesign" &&
-      Number.isInteger(inputValueNumber)
+      Number.isInteger(inputValueNumber) && inputValueNumber <= store.getState("selectedMachine").corte_ancho
     ) {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
-    if (inputId === "largeLeafDesign" && Number.isInteger(inputValueNumber)) {
+    if (inputId === "largeLeafDesign" &&
+      Number.isInteger(inputValueNumber) && inputValueNumber <= store.getState("selectedMachine").corte_largo) {
       $(this).removeClass("is-invalid");
       $(this).addClass("is-valid");
     }
@@ -381,6 +383,12 @@ $(async function () {
     const utilityPerDesign = valuePerPiece - totalCostPerDesign
     const totalUtility = utilityPerDesign * numeroPedazosDesign
     const roiPieces = priceMachine / utilityPerDesign
+    const fixedDacPricePerDesign = store.getState("DACFixedPrice")
+    if (fixedDacPricePerDesign > 0) {
+      store.setState("costDACPerDesign", (fixedDacPricePerDesign / numeroPedazosDesign).toFixed(2))
+    } else {
+      store.setState("costDACPerDesign", 0)
+    }
 
     $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
     $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
@@ -436,18 +444,18 @@ $(async function () {
       store.setState("rateFlag", 1);
       return;
     }
-    const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("DACFixedPrice"))).toFixed(2)
+    const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("costDACPerDesign"))).toFixed(2);
     let energy = `
         <tr>
           <th colspan="50%">Costo por pieza</th>
           <td colspan="50%">$ ${parseFloat($("#costoPedazoDesign").val())}</td>
         </tr>
         ${(store.getState("DACFixedPrice") === 0) ? "" : `
-        <tr>
-          <th colspan="50%">Tarifa fija de electricidad DAC <img id="popover-16"
-          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
-          <td>$ ${store.getState("DACFixedPrice")}</td>
-        </tr>
+          <tr>
+            <th colspan="50%">Costo de tarifa DAC por pieza <img id="popover-16"
+            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
+            <td>$ ${store.getState("costDACPerDesign")}</td>
+          </tr>
         `}
         <tr>
           <th colspan="50%">Costo de electricidad</th>
