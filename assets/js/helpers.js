@@ -1,5 +1,3 @@
-const fixedCost = 730
-
 function displaySelects({ tagId, options, value = "", text, decorator = "" }) {
   $(`#${tagId}`).append(
     `<option 
@@ -46,7 +44,6 @@ function calculateExpenses({
 
   let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
 
-  console.log("El rateflag es", rateFlag, rate, charge, consumption)
   store.setState("totalConsumptionKWh", 0)
   if (!rateFlag) {
     const consumos = cargosHogarList.map((c) => {
@@ -81,7 +78,6 @@ function calculateExpenses({
 
   store.setState("totalConsumptionKWh", 0)
   const totalHours = parseInt(document.querySelector("#horasTrabajoMaquina").value) / 60 // Convert minutes to hours
-  store.setState("costDAC", totalHours / fixedCost)
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
