@@ -29,6 +29,7 @@ function hidePopoverElements(popoverElements) {
 function showPopoverElements(popoverElements) {
   popoverElements.forEach(element => {
     element.removeAttribute("style")
+    element.setAttribute("style", "width: 15px; height: 15px;")
   })
 }
 
