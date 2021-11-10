@@ -28,14 +28,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/introjs.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@4.3.0/themes/introjs-modern.css">
   <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 
 <body>
-  <main class="h-100">
+  <main class="h-10">
+    <!-- <a href='http://example.com/' ></a> -->
     <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son
       requeridos</p>
-    <section class="row form-container">
+    <section class="tutorial row form-container introjs-container">
       <!-- style="display: flex; justify-content: center; align-content: center; width: 30%; display: none; padding-top: 2.5%;" -->
       <div id="img-container" class="col-sm-12" style="display: none;">
         <div style="display: flex; justify-content: center;">
@@ -49,43 +52,35 @@
       <div class="col-sm-12" id="form-parent-container">
         <div>
           <div class="accordion" id="accordionExample">
-            <div class="accordion-item px-5">
+            <div class="accordion-item px-5 introjs-section-machine">
               <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne"
+                <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne"
                   aria-expanded="false" aria-controls="collapseOne">
-                  Selecciona tu máquina <img class="mx-2" data-bottom id="popover-19"
+                  Selecciona tu máquina <img class="mx-2 introjs-section-machine-popover-1" data-bottom id="popover-19"
                     src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-                <div class="accordion-body">
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                <div class="accordion-body introjs-section-machine-body">
                   <div class="inputs-container">
                     <div class="row">
-                      <div class="animate__zoomIn col-sm-12 col-md-6">
+                      <div class="animate__zoomIn col-sm-12 col-md-12">
                         <!-- ---- -->
                         <label for="listaMaquinasSelect" class="form-label">Máquina <span
-                            class="required-icon-field">*</span> <img data-bottom id="popover-20"
+                            class="required-icon-field introjs-section-machine-body-required">*</span> <img class="introjs-section-machine-body-popover-1" data-bottom id="popover-20"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
                         </label>
-                        <select name="maquinas-select" id="listaMaquinasSelect"
+                        <select name="maquinas-select introjs-sectrion-machine-body-machines" id="listaMaquinasSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
                       </div>
                       <!-- ...... -->
-                      <div class="col-sm-12 col-md-6">
-                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo <span
-                            class="required-icon-field">*</span> <img data-bottom id="popover-1"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <select name="maquinas-select" id="listaConsumosSelect"
-                          class="form-field-select form-input form-select" required>
-                        </select>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="accordion-item px-5">
+            <div class="accordion-item px-5 introjs-section-raw">
               <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
                   data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -127,20 +122,27 @@
                     </div>
                     <div class="row pt-4">
                       <!-- ...... -->
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12 col-md-4">
                         <label for="widthLeaf" class="form-label">Ancho de la hoja (cm) <span
                             class="required-icon-field">*</span> <img data-bottom id="popover-24"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="widthLeaf"
                           placeholder="244" required>
                       </div>
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12 col-md-4">
                         <!-- ..... -->
                         <label for="largeLeaf" class="form-label">Largo de la hoja (cm) <span
                             class="required-icon-field">*</span> <img data-bottom id="popover-25"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control" id="largeLeaf"
                           placeholder="122" required>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
+                        <!-- ..... -->
+                        <label for="thicknessLeaf" class="form-label">Grosor de la hoja (cm) <span
+                            class="required-icon-field">*</span></label>
+                        <input type="number" class="form-field-input form-input form-control" id="thicknessLeaf"
+                          placeholder="10" required>
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -167,7 +169,7 @@
               <h2 class="accordion-header" id="headingSeven">
                 <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
                   data-mdb-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                  Dimensiones del diseño <img class="mx-2" id="popover-11" src="./assets/icons/question-mark.svg"
+                  Diseño <img class="mx-2" id="popover-11" src="./assets/icons/question-mark.svg"
                     style="width: 15px; height: 15px;">
                 </button>
               </h2>
@@ -198,14 +200,20 @@
                       </div>
                     </div>
                     <div class="row pt-4">
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12 col-md-4">
                         <label for="numeroPedazosDesign" class="form-label"><span
                             class="required-icon-field"></span>Número de piezas <img id="popover-30"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-control" id="numeroPedazosDesign"
                           placeholder="135" disabled>
                       </div>
-                      <div class="col-sm-12 col-md-6">
+                      <div class="col-sm-12 col-md-4">
+                        <label for="numeroPedazos" class="form-label"><span class="required-icon-field"></span>Número de
+                          piezas del tamaño de una hoja</label>
+                        <input type="number" class="form-field-input form-control" id="numeroPedazosPorHoja"
+                          placeholder="18.15" disabled>
+                      </div>
+                      <div class="col-sm-12 col-md-4">
                         <label for="costoPedazoDesign" class="form-label"><span></span>Costo
                           por pieza de tu diseño (MXN) <img id="popover-31" src="./assets/icons/question-mark.svg"
                             style="width: 15px; height: 15px;"></label>
@@ -213,11 +221,50 @@
                           placeholder="2.59" disabled>
                       </div>
                     </div>
+                    <div class="row py-3" id="btn-options-machine-container">
+                      <div class="col-sm-12 col-md-6">
+                        <button id="cut-or-engrave" class="btn mr-lg-3px"
+                          style="margin-bottom: 20px; background-color: rgb(117, 117, 117);">Cortar <strong>o</strong>
+                          grabar</button>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <button id="cut-and-engrave" class="btn ml-lg-3px">Cortar <strong>y</strong> grabar</button>
+                      </div>
+                    </div>
+                    <div class="row" id="row-cut-or-engrave">
+                      <div class="col-sm-12 col-md-12">
+                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo para el trabajo<span
+                            class="required-icon-field">*</span> <img data-bottom id="popover-1"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <select name="maquinas-select" id="listaConsumosSelect"
+                          class="form-field-select form-input form-select" required>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row" id="row-cut-and-engrave" style="display: none;">
+                      <div class="col-sm-12 col-md-6">
+                        <label for="listaConsumosSelect-2" class="form-label">Porcentaje de trabajo para el grabado<span
+                            class="required-icon-field">*</span> <img data-bottom id="popover-1"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <select name="maquinas-select" id="listaConsumosSelect-2"
+                          class="form-field-select form-input form-select" required>
+                        </select>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="listaConsumosSelect-3" class="form-label">Porcentaje de trabajo para el corte<span
+                            class="required-icon-field">*</span> <img data-bottom id="popover-1"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <select name="maquinas-select" id="listaConsumosSelect-3"
+                          class="form-field-select form-input form-select" required>
+                        </select>
+                      </div>
+                    </div>
                     <div class="row pt-4">
                       <div class="col-sm-12">
                         <label class="form-label" for="customFile">Sube tu diseño <img id="popover-32"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <input type="file" accept="image/*" class="form-control" id="customFile" style="background-color: white;">
+                        <input type="file" accept="image/*" class="form-control" id="customFile"
+                          style="background-color: white;">
                       </div>
                     </div>
                   </div>
@@ -298,8 +345,8 @@
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <img
-                          id="popover-35" src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"><span
-                          class="required-icon-field"></span></label>
+                          id="popover-35" src="./assets/icons/question-mark.svg"
+                          style="width: 15px; height: 15px;"><span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate"
                         id="horasTrabajoOperador" placeholder="30" required>
                     </div>
@@ -461,8 +508,9 @@
     </section>
     <p class="required-instructions" style="padding-top: 20px; padding-bottom: 20px;"><i>* Los cálculos realizados y
         mostrados anteriormente son solo una aproximación a los gastos y el retorno de la inversión.</i></p>
-
   </main>
+
+
   <!-- jQuery loader -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -483,7 +531,7 @@
   <script>
     function createPopOver() {
       let contents = [
-        "Hace referencia a la potencia de trabajo de tu máquina. Esto tiene un efecto directo al consumo de electricidad.",
+        "Es la potencia promedio a lo que trabajará tú máquina para realizar el diseño ingresado.",
         "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja. <strong>Aqui se tiene en cuenta un pequeño margen de desperdicio que es solo una aproximación.</strong>",
         "En esta sección se elegirá el tipo de tarifa y la categoría que aparece en nuestro recibo de pago de la CFE.<img src='./assets/images/tarifa_CFE.jpg' height=400px width=100%>",
         "Es el mes en el que deseas realizar el cálculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
@@ -553,7 +601,10 @@
       hideMethod: "fadeOut",
     }
 
+    // Put overlay class to all childrens of tag main including the childrens of childrens
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@4.3.0/intro.js"></script>
+  <script type="text/javascript" src="./assets/js/tutorial.js" defer></script>
 </body>
 
 </html>
