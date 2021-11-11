@@ -36,6 +36,9 @@ function showPopoverElements(popoverElements) {
 
 function loadTutorial() {
   introJs().setOptions({
+    exitOnOverlayClick: false,
+    exitOnEsc: false,
+    scrollToElement: false,
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
     disableInteraction: true,
