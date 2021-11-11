@@ -14,7 +14,6 @@
 
 const BASE_URL = "https://jsfn-stech.azurewebsites.net/api"
 // const BASE_URL = "http://localhost:7071/api"
-
 const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api"
 // const BASE_PDF_URL = "http://localhost:3030/api"
 
