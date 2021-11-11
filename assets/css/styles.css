@@ -133,7 +133,9 @@ input {
 
 input,
 #hogar,
-#dac {
+#dac,
+#cut-or-engrave,
+#cut-and-engrave {
   background-image: none !important;
   width: 100%;
 }
@@ -215,12 +217,14 @@ footer {
   width: 45%;
 }
 
-#hogar {
+#hogar, #cut-or-engrave {
   background-color: #757575;
 }
 
 #hogar,
-#dac {
+#dac,
+#cut-or-engrave,
+#cut-and-engrave {
   background-color: #dbdbdb;
 }
 
@@ -393,4 +397,39 @@ input::-webkit-input-placeholder {
 
 .cpointer {
   cursor: pointer;
+}
+
+/* 
+  Tutorial classes
+*/
+
+/* overlay background of element without position absolute */
+.overlay {
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.2s ease-in;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: all 0.2s ease-in;  /* Firefox 4-15 */
+  -o-transition: all 0.2s ease-in;  /* Opera 10.50–12.00 */
+  transition: all 0.2s ease-in;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+}
+
+.overlay:before {
+  -webkit-transition: all 0.2s ease-in;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: all 0.2s ease-in;  /* Firefox 4-15 */
+  -o-transition: all 0.2s ease-in;  /* Opera 10.50–12.00 */
+  transition: all 0.2s ease-in;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.z-index-999 {
+  z-index: 999;
+  transition: opacity 0.5s ease-in, width 1.5s ease-out;
+
 }

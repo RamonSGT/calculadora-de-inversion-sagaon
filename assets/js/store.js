@@ -24,7 +24,7 @@ class Store {
   }
 
   selectConsumption(id_consumo) {
-    this.state.selectedConsumption = this.state.consumptions.find(
+    return this.state.selectedConsumption = this.state.consumptions.find(
       (c) => c.id_consumo === id_consumo
     );
   }
@@ -61,7 +61,7 @@ class Store {
     const large = parseFloat(store.getState("largeLeaf"))
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!width || !large || !corte_ancho || !corte_largo) return null
-    return parseFloat((width * large) / ((corte_ancho + 0.5) * (corte_largo + 0.5))).toFixed(2)
+    return parseFloat((width * large) / ((corte_ancho) * (corte_largo))).toFixed(2)
   }
 
   calculateDesignChunks() {
@@ -70,9 +70,22 @@ class Store {
     const largeLeafDesign = store.getState("largeLeafDesign")
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
-    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.5) * (largeLeafDesign + 0.5))
+    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.1) * (largeLeafDesign + 0.1))
     store.setState("designPerChunk", designPerChunk)
     const total = parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)
+    store.setState("totalDesignChunks", total)
+    return total
+  }
+
+  calculateDesignsChunksPerLeaf() {
+    if(!store.getState("widthLeafDesign") || !store.getState("largeLeafDesign") || !store.getState("selectedMachine")) return null
+    const widthLeafDesign = store.getState("widthLeafDesign")
+    const largeLeafDesign = store.getState("largeLeafDesign")
+    const { corte_ancho, corte_largo } = store.getState("selectedMachine")
+    if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
+    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.1) * (largeLeafDesign + 0.1))
+    store.setState("designPerChunk", designPerChunk)
+    const total = parseFloat(designPerChunk).toFixed(2)
     store.setState("totalDesignChunks", total)
     return total
   }
