@@ -39,13 +39,13 @@ function loadTutorial() {
     exitOnOverlayClick: false,
     exitOnEsc: false,
     scrollToElement: false,
+    scrollTo: 'tooltip',
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
     doneLabel: 'Finalizar',
     disableInteraction: true,
     showBullets: false,
     showProgress: true,
-    // Put tooltip in the center of the screen
     tooltipPosition: 'auto',
     steps: [
       {
