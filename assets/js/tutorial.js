@@ -45,6 +45,8 @@ function loadTutorial() {
     disableInteraction: true,
     showBullets: false,
     showProgress: true,
+    // Put tooltip in the center of the screen
+    tooltipPosition: 'auto',
     steps: [
       {
         intro: "¡Hola emprendedor! 👋 Vamos a dar un pequeño viaje a esta herramienta que esperamos te sea de mucha utilidad. Veremos cada uno de los módulos con un ejemplo guiado con la finalidad de que te familiarices con la herramienta y puedas usarla en cualquier momento."
