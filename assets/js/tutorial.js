@@ -231,6 +231,9 @@ function loadTutorial() {
       {
         element: ".introjs-btn-pdf",
         intro: "Por último puedes generar un pdf con el resumen de los gastos, esto te puede ser de utilidad para mantener un registro interno de tus cálculos."
+      },
+      {
+        intro: "Hemos terminado el tutorial. ¡Felicidades! Ahora te toca a ti realizar tus propios cálculos según tus propios parámetros."
       }
     ]
   }).oncomplete(function () {
