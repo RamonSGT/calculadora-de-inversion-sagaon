@@ -242,5 +242,55 @@ function getBase64(file) {
   })
 }
 
+// Convert local image in assets/images/demon.svg to base64
+function getBase64FromSVG() {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "assets/images/demon.svg", true);
+    xhr.responseType = "blob";
+    xhr.onload = function (e) {
+      if (this.status == 200) {
+        const blob = this.response;
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          resolve(reader.result)
+        }
+      }
+    };
+    xhr.send();
+  })
+}
+
+// Upload base64 to input type file with id #customFile
+function uploadBase64ToInputFile(base64) {
+  const inputFile = document.querySelector("#customFile")
+  const file = base64ToFile(base64, "customFile")
+  inputFile.files = [file]
+}
+
+base64ToFile = (base64, filename) => {
+  let arr = base64.split(','), mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, { type: mime });
+}
+
+function FileListItems (files) {
+  var b = new ClipboardEvent("").clipboardData || new DataTransfer()
+  for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i])
+  return b.files
+}
+
+function setBase64ToInputFile() {
+  getBase64FromSVG().then(svg => {
+    const file = base64ToFile(svg, "caratulas.svg")
+    const inputFile = document.querySelector("#customFile")
+    inputFile.files = new FileListItems([file])
+  })
+}
+
 new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))

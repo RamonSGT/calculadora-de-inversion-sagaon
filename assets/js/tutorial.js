@@ -287,6 +287,9 @@ function loadTutorial() {
       targetElement.value = selectedValue
       averageConsumption()
     }
+    if (targetElement.id === "customFile") {
+      setBase64ToInputFile()
+    }
     if (targetElement.id === "listaMaquinasSelect") {
       changedSelectedMachine(targetElement)
         .then(_ => console.log(store.getState("selectedMachine")))
