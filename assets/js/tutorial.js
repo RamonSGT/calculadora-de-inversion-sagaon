@@ -39,7 +39,7 @@ function loadTutorial() {
     exitOnOverlayClick: false,
     exitOnEsc: false,
     scrollToElement: false,
-    scrollTo: 'tooltip',
+    scrollTo: 'element',
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
     doneLabel: 'Finalizar',
