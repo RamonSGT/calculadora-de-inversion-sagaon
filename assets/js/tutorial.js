@@ -41,6 +41,7 @@ function loadTutorial() {
     scrollToElement: false,
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
+    doneLabel: 'Finalizar',
     disableInteraction: true,
     showBullets: false,
     showProgress: true,
