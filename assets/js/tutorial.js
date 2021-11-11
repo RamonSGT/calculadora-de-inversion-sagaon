@@ -36,9 +36,10 @@ function showPopoverElements(popoverElements) {
 
 function loadTutorial() {
   introJs().setOptions({
+    nextLabel: 'Siguiente',
+    prevLabel: 'Anterior',
     disableInteraction: true,
     showBullets: false,
-    // Show progress bar
     showProgress: true,
     steps: [
       {
