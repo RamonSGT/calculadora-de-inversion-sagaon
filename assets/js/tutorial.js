@@ -84,7 +84,7 @@ function loadTutorial() {
         element: ".introjs-section-raw-body",
         intro: "A continuación se ingresarán los datos relacionados con la materia prima que usarás para crear tu diseño. Para un cálculo más preciso del retorno de la inversión, es importante poner los datos correctamente.",
         // Put the element in the middle of the screen
-        position: 'middle-middle'
+        position: 'bottom'
       },
       {
         element: ".introjs-section-raw-body-material",
@@ -116,11 +116,12 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-design",
-        intro: "En esta sección ingresarás los datos relacionados con tú diseño que grabaras o cortaras."
+        intro: "En esta sección ingresarás los datos relacionados con tú diseño que grabaras o cortaras.",
       },
       {
         element: ".introjs-section-design-body",
-        intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar. En base a este diseño, se hará una proyección del retorno de tu inversión."
+        intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar. En base a este diseño, se hará una proyección del retorno de tu inversión.",
+        position: 'bottom'
       },
       {
         element: ".introjs-section-design-body-width",
