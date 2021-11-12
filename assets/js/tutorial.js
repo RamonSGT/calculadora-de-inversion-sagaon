@@ -268,6 +268,7 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-advanced-body")
     ) {
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
+      console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
       sendScrollIntoViewParent(customScrollY + 100)
     }
     if (targetElement.classList.contains("introjs-section-product")) {
