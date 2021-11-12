@@ -381,6 +381,7 @@ function loadTutorial() {
       targetElement.click()
       customScrollY = targetElement.getBoundingClientRect().top
       if(targetElement.className.indexOf("introjs") >= 0 && targetElement.className.indexOf("-body") === -1) {
+        console.log("El custom scroll es: ", customScrollY)
         sendScrollIntoViewParent(customScrollY)
       }
     }
