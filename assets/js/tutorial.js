@@ -251,13 +251,13 @@ function loadTutorial() {
     console.log("Ha salido")
     // window.location.href = "https://www.w3schools.com/bootstrap/bootstrap_tutorial.asp"
   }).onchange(function (targetElement) {
-    if(targetElement.classList.contains("introjs-section-machine") ||
-    targetElement.classList.contains("introjs-section-raw") ||
-    targetElement.classList.contains("introjs-section-design") ||
-    targetElement.classList.contains("introjs-section-electricity") ||
-    targetElement.classList.contains("introjs-section-operator") ||
-    targetElement.classList.contains("introjs-section-product") ||
-    targetElement.classList.contains("introjs-section-advanced")) {
+    if (targetElement.classList.contains("introjs-section-machine") ||
+      targetElement.classList.contains("introjs-section-raw") ||
+      targetElement.classList.contains("introjs-section-design") ||
+      targetElement.classList.contains("introjs-section-electricity") ||
+      targetElement.classList.contains("introjs-section-operator") ||
+      targetElement.classList.contains("introjs-section-product") ||
+      targetElement.classList.contains("introjs-section-advanced")) {
       customScrollY = targetElement.offsetTop
       // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
       // console.log("Custm scroll cont", customScrollY)
@@ -279,7 +279,7 @@ function loadTutorial() {
       // sendScrollIntoViewParent(customScrollY)
     }
 
-    if(targetElement.classList.contains("introjs-section-design-body-options")) {
+    if (targetElement.classList.contains("introjs-section-design-body-options")) {
       // customScrollY += 150
       // sendScrollIntoViewParent(customScrollY)
     }
@@ -380,27 +380,23 @@ function loadTutorial() {
       }
       targetElement.click()
     }
-    const tooltipElement = document.querySelector(".introjs-tooltip-header")
-    if(tooltipElement) {
-      customScrollY = tooltipElement.getBoundingClientRect().top
-    }
-    console.log("Sending", customScrollY)
-    // console.log("Clases", targetElement.className)
-    if(targetElement.className.indexOf("introjs") >= 0) {
+    customScrollY = targetElement.getBoundingClientRect().top
+    console.log("Clases", targetElement.className)
+    if (targetElement.className.indexOf("introjs") >= 0 && targetElement.className.indexOf("-body") === -1) {
+      console.log("El custom scroll es: ", customScrollY)
       sendScrollIntoViewParent(customScrollY)
-      // console.log("El custom scroll es: ", customScrollY)
     }
   })
-  .oncomplete(() => {
-    console.log("IntroJS completed <----------")
-  })
-  .onafterchange(e => {
-    if(customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
-      sendScrollToMiddle()
-    }
-    // console.log("--->", e)
-    sendScrollIntoViewParent(customScrollY)
-  })
-  .start()
+    .oncomplete(() => {
+      console.log("IntroJS completed <----------")
+    })
+    .onafterchange(e => {
+      if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
+        sendScrollToMiddle()
+      }
+      // console.log("--->", e)
+      // sendScrollIntoViewParent(customScrollY)
+    })
+    .start()
 
 }
