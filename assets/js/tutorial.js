@@ -376,6 +376,10 @@ function loadTutorial() {
       targetElement.click()
     }
   })
+  // Function to execute in the last step
+  .oncomplete(() => {
+    console.log("IntroJS completed <----------")
+  })
   .onafterchange(() => sendScrollIntoViewParent(customScrollY))
   .start()
 
