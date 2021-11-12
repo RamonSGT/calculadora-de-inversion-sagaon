@@ -268,7 +268,9 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-operator-body") ||
       targetElement.classList.contains("introjs-section-advanced-body")
     ) {
-      console.log(targetElement.parentElement.parentElement.querySelector("h2 > button").click())
+      customScrollY = targetElement.offsetTop
+      sendScrollIntoViewParent(customScrollY)
+      targetElement.parentElement.parentElement.querySelector("h2 > button").click()
     }
     if (targetElement.classList.contains("introjs-section-product")) {
       console.log(document.querySelector(".introjs-section-product-body"))
