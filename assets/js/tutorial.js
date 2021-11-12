@@ -273,7 +273,6 @@ function loadTutorial() {
       sendScrollIntoViewParent(customScrollY + 100)
     }
     if (targetElement.classList.contains("introjs-section-product")) {
-      console.log(document.querySelector(".introjs-section-product-body"))
       document.querySelector(".introjs-section-product-body").parentElement.parentElement.querySelector("h2 > button").click()
     }
     if (targetElement.classList.contains("introjs-section-machine-popover-1")) {
@@ -369,7 +368,6 @@ function loadTutorial() {
       }
       targetElement.click()
     }
-    console.log("El elemento actual es: ", targetElement)
   })
   .onafterchange(() => sendScrollIntoViewParent(customScrollY))
   .start()
