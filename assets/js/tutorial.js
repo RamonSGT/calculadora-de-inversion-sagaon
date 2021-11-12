@@ -256,6 +256,7 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
       customScrollY = targetElement.offsetTop
+      console.log("Custm scroll cont", customScrollY)
       sendScrollIntoViewParent(customScrollY)
     }
     // SETTINGS FOR ELEMENTS BODY
