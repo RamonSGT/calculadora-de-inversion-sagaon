@@ -379,8 +379,9 @@ function loadTutorial() {
         changedOptionsMachineContainer(targetElement)
       }
       targetElement.click()
+      customScrollY = targetElement.getBoundingClientRect().top
       if(targetElement.className.indexOf("introjs-section") >= 0 && targetElement.className.indexOf("-body") === -1) {
-        sendScrollIntoViewParent(targetElement.getBoundingClientRect().top)
+        sendScrollIntoViewParent(customScrollY)
       }
     }
   })
