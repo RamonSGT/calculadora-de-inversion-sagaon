@@ -221,6 +221,13 @@ function sendElapsedTimeToParent(data) {
   window.parent.postMessage(message, "*")
 }
 
+function sendScrollIntoViewParent() {
+  const message = JSON.stringify({
+    scrollIntoView: true,
+  })
+  window.parent.postMessage(message, "*")
+}
+
 async function getBufferFromImage() {
   const customFileNode = document.querySelector("#customFile")
   if (!customFileNode || !customFileNode.files[0]) return null

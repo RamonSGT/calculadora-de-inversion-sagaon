@@ -36,14 +36,15 @@ function showPopoverElements(popoverElements) {
 
 function loadTutorial() {
   introJs().setOptions({
+    // 
+    scrollToElement: false,
     exitOnOverlayClick: false,
     exitOnEsc: false,
-    scrollToElement: false,
     scrollTo: 'element',
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
     doneLabel: 'Finalizar',
-    disableInteraction: true,
+    disableInteraction: false,
     showBullets: false,
     showProgress: true,
     tooltipPosition: 'auto',
@@ -353,5 +354,8 @@ function loadTutorial() {
       targetElement.click()
     }
     console.log("El elemento actual es: ", targetElement)
-  }).start()
+  })
+  .onafterchange(sendScrollIntoViewParent())
+  .start()
+
 }
