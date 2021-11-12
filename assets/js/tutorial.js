@@ -37,7 +37,6 @@ function showPopoverElements(popoverElements) {
 function loadTutorial() {
   let customScrollY = 0
   introJs().setOptions({
-    // 
     scrollToElement: false,
     exitOnOverlayClick: false,
     exitOnEsc: false,
@@ -83,7 +82,9 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-raw-body",
-        intro: "A continuación se ingresarán los datos relacionados con la materia prima que usarás para crear tu diseño. Para un cálculo más preciso del retorno de la inversión, es importante poner los datos correctamente."
+        intro: "A continuación se ingresarán los datos relacionados con la materia prima que usarás para crear tu diseño. Para un cálculo más preciso del retorno de la inversión, es importante poner los datos correctamente.",
+        // Put the element in the middle of the screen
+        position: 'middle-middle'
       },
       {
         element: ".introjs-section-raw-body-material",
@@ -256,6 +257,7 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
       customScrollY = targetElement.offsetTop
+      // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
       console.log("Custm scroll cont", customScrollY)
       sendScrollIntoViewParent(customScrollY)
     }
@@ -270,6 +272,7 @@ function loadTutorial() {
     ) {
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
       console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
+      console.log("data---->", );
       customScrollY += 150
       sendScrollIntoViewParent(customScrollY)
     }
@@ -381,8 +384,7 @@ function loadTutorial() {
   })
   .onafterchange(e => {
     if(customScrollY >= 1000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
-      customScrollY -= 100
-
+      sendScrollToMiddle()
     }
     console.log("--->", e)
     sendScrollIntoViewParent(customScrollY)
