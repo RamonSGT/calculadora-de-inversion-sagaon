@@ -251,7 +251,6 @@ function loadTutorial() {
     console.log("Ha salido")
     // window.location.href = "https://www.w3schools.com/bootstrap/bootstrap_tutorial.asp"
   }).onchange(function (targetElement) {
-    console.log("Top: ", targetElement.getBoundingClientRect().top)
     if(targetElement.classList.contains("introjs-section-machine") ||
     targetElement.classList.contains("introjs-section-raw") ||
     targetElement.classList.contains("introjs-section-design") ||
@@ -262,7 +261,7 @@ function loadTutorial() {
       customScrollY = targetElement.offsetTop
       // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
       // console.log("Custm scroll cont", customScrollY)
-      sendScrollIntoViewParent(customScrollY)
+      // sendScrollIntoViewParent(customScrollY)
     }
     // SETTINGS FOR ELEMENTS BODY
 
@@ -276,13 +275,13 @@ function loadTutorial() {
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
       // console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
       // console.log("data---->", );
-      customScrollY += 150
-      sendScrollIntoViewParent(customScrollY)
+      // customScrollY += 150
+      // sendScrollIntoViewParent(customScrollY)
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-options")) {
-      customScrollY += 150
-      sendScrollIntoViewParent(customScrollY)
+      // customScrollY += 150
+      // sendScrollIntoViewParent(customScrollY)
     }
 
     if (targetElement.classList.contains("introjs-section-product")) {
@@ -380,6 +379,9 @@ function loadTutorial() {
         changedOptionsMachineContainer(targetElement)
       }
       targetElement.click()
+      if(targetElement.className.indexOf("introjs-section") >= 0 && targetElement.className.indexOf("-body") === -1) {
+        sendScrollIntoViewParent(targetElement.getBoundingClientRect().top)
+      }
     }
   })
   .oncomplete(() => {
