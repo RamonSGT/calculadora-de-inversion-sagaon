@@ -229,6 +229,13 @@ function sendScrollIntoViewParent(customScrollY) {
   window.parent.postMessage(message, "*")
 }
 
+function sendScrollToMiddle() {
+  const message = JSON.stringify({
+    scrollToMiddle: true
+  })
+  window.parent.postMessage(message, "*")
+}
+
 async function getBufferFromImage() {
   const customFileNode = document.querySelector("#customFile")
   if (!customFileNode || !customFileNode.files[0]) return null
@@ -303,15 +310,8 @@ function setBase64ToInputFile() {
 new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
 
-function scrollTop(customScrollY) {
-  setTimeout(() => {
-  const element = document.getElementById("calculator")
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    })
-
-    // Add 20px to scroll to the top of the page to element
-    window.scrollTo(0, customScrollY)
-  }, 3000)
+// Calculate the size of total scroll
+function getScrollSize() {
+  const scrollSize = document.querySelector(".row.form-container").offsetHeight
+  return scrollSize
 }

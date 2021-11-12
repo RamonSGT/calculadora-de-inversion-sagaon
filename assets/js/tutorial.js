@@ -54,7 +54,8 @@ function loadTutorial() {
       },
       {
         element: ".introjs-container",
-        intro: "La calculadora de costos se divide en varias secciones que te pedirán una serie de datos para poder realizar el cálculo correspondiente."
+        intro: "La calculadora de costos se divide en varias secciones que te pedirán una serie de datos para poder realizar el cálculo correspondiente.",
+        position: 'left'
       },
       {
         element: ".introjs-section-machine",
@@ -121,7 +122,7 @@ function loadTutorial() {
       {
         element: ".introjs-section-design-body",
         intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar. En base a este diseño, se hará una proyección del retorno de tu inversión.",
-        position: 'bottom'
+        position: "middle-middle"
       },
       {
         element: ".introjs-section-design-body-width",
@@ -384,7 +385,7 @@ function loadTutorial() {
     console.log("IntroJS completed <----------")
   })
   .onafterchange(e => {
-    if(customScrollY >= 1000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
+    if(customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
       sendScrollToMiddle()
     }
     console.log("--->", e)
