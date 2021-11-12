@@ -251,6 +251,7 @@ function loadTutorial() {
     console.log("Ha salido")
     // window.location.href = "https://www.w3schools.com/bootstrap/bootstrap_tutorial.asp"
   }).onchange(function (targetElement) {
+    console.log("Top: ", targetElement.getBoundingClientRect().top)
     if(targetElement.classList.contains("introjs-section-machine") ||
     targetElement.classList.contains("introjs-section-raw") ||
     targetElement.classList.contains("introjs-section-design") ||
@@ -258,7 +259,6 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
-      console.log("Top: ", targetElement.getBoundingClientRect().top)
       customScrollY = targetElement.offsetTop
       // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
       // console.log("Custm scroll cont", customScrollY)
