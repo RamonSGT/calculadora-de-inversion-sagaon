@@ -35,6 +35,7 @@ function showPopoverElements(popoverElements) {
 }
 
 function loadTutorial() {
+  let customScrollY = 20
   introJs().setOptions({
     // 
     scrollToElement: false,
@@ -247,6 +248,18 @@ function loadTutorial() {
     console.log("Ha salido")
     // window.location.href = "https://www.w3schools.com/bootstrap/bootstrap_tutorial.asp"
   }).onchange(function (targetElement) {
+    console.log("Targeted element: ", )
+    if(targetElement.classList.contains("introjs-section-machine") ||
+    targetElement.classList.contains("introjs-section-raw") ||
+    targetElement.classList.contains("introjs-section-design") ||
+    targetElement.classList.contains("introjs-section-electricity") ||
+    targetElement.classList.contains("introjs-section-operator") ||
+    targetElement.classList.contains("introjs-section-product") ||
+    targetElement.classList.contains("introjs-section-advanced")) {
+      customScrollY += 30
+    }
+    // SETTINGS FOR ELEMENTS BODY
+
     if (targetElement.classList.contains("introjs-section-machine-body") ||
       targetElement.classList.contains("introjs-section-raw-body") ||
       targetElement.classList.contains("introjs-section-design-body") ||
@@ -355,7 +368,7 @@ function loadTutorial() {
     }
     console.log("El elemento actual es: ", targetElement)
   })
-  .onafterchange(sendScrollIntoViewParent)
+  .onafterchange(() => sendScrollIntoViewParent(customScrollY))
   .start()
 
 }
