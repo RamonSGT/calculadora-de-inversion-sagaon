@@ -394,7 +394,7 @@ function loadTutorial() {
         sendScrollToMiddle()
       }
       // console.log("--->", e)
-      // sendScrollIntoViewParent(customScrollY)
+      sendScrollIntoViewParent(customScrollY)
     })
     .start()
 
