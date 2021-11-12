@@ -270,7 +270,7 @@ function loadTutorial() {
     ) {
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
       console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
-      customScrollY = customScrollY + 100
+      customScrollY = customScrollY + 200
       sendScrollIntoViewParent(customScrollY)
     }
     if (targetElement.classList.contains("introjs-section-product")) {
