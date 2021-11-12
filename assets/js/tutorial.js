@@ -380,7 +380,7 @@ function loadTutorial() {
       }
       targetElement.click()
     }
-    const tooltipElement = document.querySelector(".introjs-tooltip")
+    const tooltipElement = document.querySelector(".introjs-tooltip-header")
     if(tooltipElement) {
       customScrollY = tooltipElement.getBoundingClientRect().top
     }
