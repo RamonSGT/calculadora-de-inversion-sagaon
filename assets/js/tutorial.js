@@ -258,7 +258,7 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
-      console.log(targetElement.getBoundingClientRect().top)
+      console.log("Top: ", targetElement.getBoundingClientRect().top)
       customScrollY = targetElement.offsetTop
       // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
       // console.log("Custm scroll cont", customScrollY)
