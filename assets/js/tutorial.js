@@ -369,6 +369,7 @@ function loadTutorial() {
     }
     console.log("El elemento actual es: ", targetElement)
   })
+  .onafterchange(() => sendScrollIntoViewParent(customScrollY))
   .start()
 
 }
