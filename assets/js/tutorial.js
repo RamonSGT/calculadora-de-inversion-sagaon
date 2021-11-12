@@ -109,7 +109,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-raw-body-pedazos",
-        intro: "Es la cantidad de de pedazos que obtienes según el área de trabajo de tu máquina. Esto es especialmente útil si compras una lamina de material más grande que el área de trabajo de tu máquina, pues te cálcula la cantidad de piezas aproximadas que puedes obtener según el área de corte de tu máquina. En nuestro ejemplo es de 30cm x 20cm"
+        intro: "Es la cantidad de pedazos que obtienes según el área de trabajo de tu máquina. Esto es especialmente útil si compras una lamina de material más grande que el área de trabajo de tu máquina, pues te cálcula la cantidad de piezas aproximadas que puedes obtener según el área de corte de tu máquina. En nuestro ejemplo es de 30cm x 20cm"
       },
       {
         element: ".introjs-section-raw-body-cost-pedazos",
