@@ -380,6 +380,10 @@ function loadTutorial() {
     console.log("IntroJS completed <----------")
   })
   .onafterchange(e => {
+    if(customScrollY >= 1000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
+      customScrollY -= 100
+
+    }
     console.log("--->", e)
     sendScrollIntoViewParent(customScrollY)
   })
