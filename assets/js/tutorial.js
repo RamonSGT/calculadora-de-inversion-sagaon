@@ -248,7 +248,7 @@ function loadTutorial() {
     console.log("Ha salido")
     // window.location.href = "https://www.w3schools.com/bootstrap/bootstrap_tutorial.asp"
   }).onchange(function (targetElement) {
-    console.log("Targeted element: ", )
+    customScrollY = targetElement.offsetTop
     if(targetElement.classList.contains("introjs-section-machine") ||
     targetElement.classList.contains("introjs-section-raw") ||
     targetElement.classList.contains("introjs-section-design") ||
@@ -256,7 +256,6 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
-      customScrollY = targetElement.offsetTop
       sendScrollIntoViewParent(customScrollY)
     }
     // SETTINGS FOR ELEMENTS BODY
@@ -268,7 +267,6 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-operator-body") ||
       targetElement.classList.contains("introjs-section-advanced-body")
     ) {
-      customScrollY = targetElement.offsetTop
       sendScrollIntoViewParent(customScrollY)
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
     }
