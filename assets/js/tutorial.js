@@ -258,9 +258,10 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
+      console.log(targetElement.getBoundingClientRect().top)
       customScrollY = targetElement.offsetTop
       // console.log(targetElement.getBoundingClientRect().top, "ªºªªªªª", targetElement.offsetTop)
-      console.log("Custm scroll cont", customScrollY)
+      // console.log("Custm scroll cont", customScrollY)
       sendScrollIntoViewParent(customScrollY)
     }
     // SETTINGS FOR ELEMENTS BODY
@@ -273,8 +274,8 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-advanced-body")
     ) {
       targetElement.parentElement.parentElement.querySelector("h2 > button").click()
-      console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
-      console.log("data---->", );
+      // console.log("EL SCROLL EN BODY --->", customScrollY, "---->", customScrollY + 100)
+      // console.log("data---->", );
       customScrollY += 150
       sendScrollIntoViewParent(customScrollY)
     }
@@ -388,7 +389,7 @@ function loadTutorial() {
     if(customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
       sendScrollToMiddle()
     }
-    console.log("--->", e)
+    // console.log("--->", e)
     sendScrollIntoViewParent(customScrollY)
   })
   .start()
