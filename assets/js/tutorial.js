@@ -35,7 +35,7 @@ function showPopoverElements(popoverElements) {
 }
 
 function loadTutorial() {
-  let customScrollY = 20
+  let customScrollY = -20
   introJs().setOptions({
     // 
     scrollToElement: false,
@@ -256,7 +256,7 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
-      customScrollY += 30
+      customScrollY -= 50
     }
     // SETTINGS FOR ELEMENTS BODY
 
