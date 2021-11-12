@@ -35,7 +35,7 @@ function showPopoverElements(popoverElements) {
 }
 
 function loadTutorial() {
-  let customScrollY = -20
+  let customScrollY = 0
   introJs().setOptions({
     // 
     scrollToElement: false,
@@ -45,7 +45,7 @@ function loadTutorial() {
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
     doneLabel: 'Finalizar',
-    disableInteraction: false,
+    disableInteraction: true,
     showBullets: false,
     showProgress: true,
     tooltipPosition: 'auto',
@@ -256,7 +256,8 @@ function loadTutorial() {
     targetElement.classList.contains("introjs-section-operator") ||
     targetElement.classList.contains("introjs-section-product") ||
     targetElement.classList.contains("introjs-section-advanced")) {
-      customScrollY -= 50
+      customScrollY = targetElement.offsetTop
+      sendScrollIntoViewParent(customScrollY)
     }
     // SETTINGS FOR ELEMENTS BODY
 
