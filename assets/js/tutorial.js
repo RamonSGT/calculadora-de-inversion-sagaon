@@ -275,7 +275,7 @@ function loadTutorial() {
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-options")) {
-      customScrollY += 75
+      customScrollY += 150
       sendScrollIntoViewParent(customScrollY)
     }
 
