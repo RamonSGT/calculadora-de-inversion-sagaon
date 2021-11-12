@@ -384,12 +384,12 @@ function loadTutorial() {
     if(tooltipElement) {
       customScrollY = tooltipElement.getBoundingClientRect().top
     }
-    console.log("Custm scroll cont", customScrollY)
+    console.log("Sending", customScrollY)
     // console.log("Clases", targetElement.className)
     sendScrollIntoViewParent(customScrollY)
-    if(targetElement.className.indexOf("introjs") >= 0 && targetElement.className.indexOf("-body") === -1) {
-      console.log("El custom scroll es: ", customScrollY)
-    }
+    // if(targetElement.className.indexOf("introjs") >= 0 && targetElement.className.indexOf("-body") === -1) {
+    //   console.log("El custom scroll es: ", customScrollY)
+    // }
   })
   .oncomplete(() => {
     console.log("IntroJS completed <----------")
