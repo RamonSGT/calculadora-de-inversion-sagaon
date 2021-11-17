@@ -50,11 +50,11 @@ function loadTutorial() {
     tooltipPosition: 'auto',
     steps: [
       {
-        intro: "¡Hola emprendedor! 👋 Vamos a ver un pequeño ejemplo práctico que te ayudará a familiarizarte con la herramienta."
+        intro: "¡Hola emprendedor! 👋 Vamos a ver un pequeño ejemplo práctico que te ayudará a familiarizarte con la herramienta. <br><p><strong><small>&#9675; Te tomará aproximadamente 5 minutos</small></strong></p>"
       },
       {
         element: ".introjs-section-machine",
-        intro: "Cada sección se divide por título, puedes abrir o cerrarlo dandole clic al finalizar el tutorial."
+        intro: "Cada sección se divide por título, puedes abrir o cerrarlo dandole clic. Esto se habilitará al finalizar el tutorial."
       },
       {
         element: ".introjs-section-machine-popover-1",
@@ -66,7 +66,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-machine-body-required",
-        intro: "Los campos que cuentan con el asterisco (<strong>*</strong>) significa que son campos requeridos."
+        intro: "Los campos que cuentan con el asterisco (<strong>*</strong>) significa que son campos obligatorios."
       },
       {
         element: ".introjs-section-raw-body",
@@ -106,10 +106,10 @@ function loadTutorial() {
         intro: "Es el costo por lámina según el área de trabajo de la máquina seleccionada anteriormente. En nuestro caso hemos ingresado una máquina con un tamaño de 30 x 20 cm.",
         // intro: "Es el costo por lámina área de trabajo de la máquina seleccionada anteriormente. En nuestro caso hemos ingresado una máquina con un tamaño de 30cm x 20cm y hemos puesto la lámina del mismo tamaño, por lo tanto el resultado es el mismo. Esto cambia según si ingresas medidas diferentes en el tamaño del material."
       },
-      {
-        element: ".introjs-section-design",
-        intro: "En esta sección ingresarás los datos relacionados con tú diseño que grabaras o cortaras.",
-      },
+      // {
+      //   element: ".introjs-section-design",
+      //   intro: "En esta sección ingresarás los datos relacionados con tú diseño que grabaras o cortaras.",
+      // },
       {
         element: ".introjs-section-design-body",
         intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar. En base a este diseño, se hará una proyección del retorno de tu inversión.",
@@ -141,11 +141,14 @@ function loadTutorial() {
       // },
       {
         element: ".introjs-section-design-body-options",
-        intro: "A continuación se muestran dos botones. Esto nos servirán para indicar si vamos a grabar o cortar únicamente o la otra opción que es grabar y cortar para el mismo diseño."
+        intro: `En esta parte se encuentran dos opciones que nos permitirán elegir bajo que modalidad usaremos la máquina para el diseño que haremos.
+        <p><strong>Cortar o grabar: </strong>Hace referencia a solo una acción en especifico.</p>
+        <p><strong>Cortar y grabar: </strong>Hace referencia a ambas acciones y se tendrá que especificar el porcentaje de trabajo paara cada una.</p>`,
+        // intro: "A continuación se muestran dos botones. Esto nos servirán para indicar si vamos a grabar o cortar únicamente o la otra opción que es grabar y cortar para el mismo diseño."
       },
       {
         element: ".introjs-section-design-body-option",
-        intro: "En este ejemplo guiado, vamos a elegir la opción de cortar y grabar para nuestra caratula de celular."
+        intro: "En este ejemplo guiado, vamos a elegir la opción de cortar y grabar."
       },
       {
         element: ".introjs-section-design-body-engrave",
@@ -157,7 +160,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-design-body-design",
-        intro: "Aquí podrás subir tú diseño. Esto será de utilidad para poder darle un mejor formato a la hoja de resultados y también para poder ofrecerte un mejor servicio en el futuro."
+        intro: "Aquí podrás subir tú diseño. Esto será de utilidad para poder darle un mejor formato a la hoja de resultados y también nos ayudará a ofrecerte un mejor servicio en el futuro."
       },
       // {
       //   element: ".introjs-section-electricity",
@@ -173,7 +176,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-electricity-body-options",
-        intro: `En estas opciones se elige el tipo de tarifa que marca el recibo de pago de la CFE. Dicha opción la puedes encontrar en la parte señalada anteriormente en la imágen vista. En este ejemplo vamos a dejar la opción "Hogar" como seleccionada.`
+        intro: `En estas opciones se elige el tipo de tarifa que marca el recibo de pago de la CFE. No te preocupes para saber esto puedes encontrarlo en tu recibo. Más adelante al finalizar el tutorial podrás consultar el icono de ayuda para saber donde buscarlo.`
       },
       {
         element: ".introjs-section-electricity-body-rate",
@@ -207,28 +210,28 @@ function loadTutorial() {
         element: ".introjs-section-product-body",
         intro: "En esta sección se establecerá el precio de venta de tu producto a tus clientes"
       },
-      {
-        element: ".introjs-section-product-body-price",
-        intro: "Aquí se ingresará el precio al cual venderas el producto a tus clientes. En este ejemplo en particular vamos a poner un precio de venta de $ 100 pesos mexicanos."
-      },
+      // {
+      //   element: ".introjs-section-product-body-price",
+      //   intro: "Aquí se ingresará el precio al cual venderas el producto a tus clientes. En este ejemplo en particular vamos a poner un precio de venta de $ 100 pesos mexicanos."
+      // },
       {
         element: ".introjs-section-advanced-body",
-        intro: "Aquí ingresaremos los datos de nuestro consumo actual que aparece en el medidor, así como de el consumo anterior que podemos obtenerlo en nuestro recibo de pago de la CFE. Esto nos será de utilidad pues la CFE cuenta con una serie de tarifas que varian según la cantidad de consumo eléctrico que usemos por periodo. En este caso lo dejaremos vacio."
+        intro: "En esta sección podemos ingresar tanto la lectura actual como la anterior que viene en nuestro recibo de pago de la CFE. Esto nos ayudará a tener un cálculo más preciso de los costos de la luz."
       },
       {
         element: ".introjs-btn-calculate",
-        intro: "Una vez llenado todos los datos vamos a proceder a calcular el resultado, para eso nos sirve el botón de calcular."
+        intro: "Una vez introducido los datos de forma correcta, procedemos a calcular el resultado."
       },
       {
         element: ".introjs-section-result",
-        intro: "A continuación se desglosa una tabla con los cálculos de los costos así como el retorno de la inversión para recuperar el dinero de la máquina."
+        intro: "A continuación se muestra una tabla detallando los costos, así como el cálculo correspondientes para recuperar la inversión de la máquina."
       },
       {
         element: ".introjs-btn-pdf",
         intro: "Por último puedes generar un pdf con el resumen de los gastos, esto te puede ser de utilidad para mantener un registro interno de tus cálculos."
       },
       {
-        intro: "Hemos terminado el tutorial. ¡Felicidades! Ahora te toca a ti realizar tus propios cálculos según tus propios parámetros."
+        intro: "Hemos terminado el tutorial. ¡Felicidades! Ya eres capaz de realizar tus propios cálculos."
       }
     ]
   }).oncomplete(function () {
@@ -296,6 +299,10 @@ function loadTutorial() {
         hoursElement.value = 80
         calculateCostOperator(salaryElement, hoursElement)
       }, 1000)
+    }
+
+    if(".intro-section-product-body") {
+      document.querySelector("#valuePerPiece").value = 100
     }
 
     if (targetElement.classList.contains("introjs-section-machine-body") ||
