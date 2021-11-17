@@ -57,6 +57,14 @@ $(async function () {
 });
 
 // ========================== Handlers ========================== //
+function calculatorCalls() {
+  calculateCostInput(document.getElementById(INPUT_ID_COST_TOTAL_LEAF))
+  calculateRawMaterialData(document.getElementById(INPUT_ID_WIDTH_LEAF), "widthLeaf")
+  calculateRawMaterialData(document.getElementById(INPUT_ID_LARGE_LEAF), "largeLeaf")
+  calculatePieces(document.getElementById(INPUT_ID_MONTHLY_PAYMENT), "monthlyPayment")
+  calculatePieces(document.getElementById(INPUT_ID_MONTHLY_HOURS), "monthlyHours")
+}
+
 $("#costoInput").on("input", function (e) {
   calculateCostInput(e.target)
 });
@@ -333,6 +341,8 @@ $(".form-input").on("keyup", function () {
     $(this).removeClass("is-invalid")
     $(this).addClass("is-valid")
   }
+
+  calculatorCalls()
 });
 
 $(".form-select").on("change", function () {
@@ -371,6 +381,8 @@ $(".form-select").on("change", function () {
     $(this).removeClass("is-invalid");
     $(this).addClass("is-valid");
   }
+
+  calculatorCalls()
 });
 
 // Prevent -, + and e fields and allowed only positive numbers included decimals
