@@ -303,6 +303,7 @@ function loadTutorial() {
 
     if(".intro-section-product-body") {
       document.querySelector("#valuePerPiece").value = 100
+      store.setState("valuePerPiece", 100)
     }
 
     if (targetElement.classList.contains("introjs-section-machine-body") ||
@@ -324,11 +325,6 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-product") ||
       targetElement.classList.contains("introjs-section-advanced")) {
       customScrollY = targetElement.offsetTop      
-    }
-
-    if (targetElement.classList.contains("introjs-section-design-body-options")) {
-      // customScrollY += 150
-      // sendScrollIntoViewParent(customScrollY)
     }
 
     if (targetElement.classList.contains("introjs-section-machine-popover-1")) {
