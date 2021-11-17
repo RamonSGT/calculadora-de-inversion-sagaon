@@ -429,6 +429,9 @@ function loadTutorial() {
       console.log("El custom scroll es: ", customScrollY)
       sendScrollIntoViewParent(customScrollY)
     }
+    // On click on the close button
+  }).onexit(() => {
+    showPopoverElements(getPopoverElements())
   })
     .oncomplete(() => {
       console.log("IntroJS completed <----------")
