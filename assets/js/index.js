@@ -76,7 +76,6 @@ $("#widthLeaf").on("input", function (e) {
 function calculateRawMaterialData(target, type = "") {
   if (type) store.setState(type, target.value);
   const totalChunks = store.calculateChunks();
-  console.log("TOTAL CHUNKS: ", totalChunks)
   $("#numeroPedazos").val(totalChunks).trigger("change");
   const costPerChunk = store.calculateCostPerChunkLeaf();
   $("#costoPedazo").val(costPerChunk?.toString()).trigger("change");
