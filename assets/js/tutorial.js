@@ -351,7 +351,7 @@ function loadTutorial() {
 
 async function messageHandlerParent(e) {
   console.log("La data es: ", e.data)
-  if (!receivedResponse && typeof e.data === "string") 
+  if (!receivedResponse && typeof e.data === "string") {
     receivedResponse = true
     const activeTutorial = await existUser(e.data)
     console.log("lA RESPONSE ES: ", activeTutorial)
