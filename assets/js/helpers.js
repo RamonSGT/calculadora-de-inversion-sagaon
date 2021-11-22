@@ -371,6 +371,7 @@ function createPopOver() {
 }
 
 function messageHandlerParent(e) {
+  alert(e.data && receivedResponse)
   if(e.data && !receivedResponse) {
     receivedResponse = true
     startTutorial()
