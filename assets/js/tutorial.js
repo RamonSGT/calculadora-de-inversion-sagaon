@@ -329,7 +329,6 @@ function loadTutorial() {
       if (targetElement.id === "cut-and-engrave") {
         changedOptionsMachineContainer(targetElement)
       }
-      console.log("PASS HERE TO CLICK CALCULATE BTN")
       targetElement.click()
     }
     customScrollY = targetElement.getBoundingClientRect().top
@@ -351,6 +350,7 @@ function loadTutorial() {
 }
 
 function messageHandlerParent(e) {
+  console.log("La dat es: ", e.data)
   if(typeof e.data === "boolean" && e.data === true && !receivedResponse) {
     receivedResponse = true
     startTutorial()
