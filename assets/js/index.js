@@ -286,9 +286,7 @@ $("#calcular").on("click", function () {
 
 function clickedCalculate() {
   const invalidFields = areInvalidFields();
-  console.log(invalidFields)
   if (invalidFields) return sendMessageToastToParent("error", "Ha ingresado datos erroneos!")
-  console.log("Entro pa aca jejee")
   handleCalculator()
 }
 
