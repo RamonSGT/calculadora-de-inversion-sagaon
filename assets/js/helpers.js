@@ -1,3 +1,5 @@
+let receivedResponse = false
+
 function displaySelects({ tagId, options, value = "", text, decorator = "" }) {
   $(`#${tagId}`).append(
     `<option 
@@ -367,6 +369,16 @@ function createPopOver() {
     })
   }
 }
+
+function messageHandlerParent(e) {
+  if(e.data && !receivedResponse) {
+    receivedResponse = true
+    startTutorial()
+  }
+}
+// Create a function that 
+
+window.addEventListener('message', messageHandlerParent, false);
 
 createPopOver()
 

@@ -667,13 +667,4 @@ function changedOptionsMachineContainer(target) {
   }
 }
 
-function messageHandlerParent(e) {
-  console.log("El mensaje es: ", e.data)
-  if(e.data) {
-    startTutorial()
-  }
-}
-// Create a function that 
-
 document.querySelector("#generate-pdf").addEventListener("click", generatePdf)
-window.addEventListener('message', messageHandlerParent, false);
