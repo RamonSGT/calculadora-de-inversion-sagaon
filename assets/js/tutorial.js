@@ -326,9 +326,6 @@ function loadTutorial() {
       targetElement.id === "calcular" ||
       targetElement.id === "generate-pdf"
     ) {
-      if (targetElement.id === "calcular") {
-        clickedCalculate()
-      }
       if (targetElement.id === "cut-and-engrave") {
         changedOptionsMachineContainer(targetElement)
       }
