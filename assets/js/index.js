@@ -63,6 +63,7 @@ function calculatorCalls() {
   calculateRawMaterialData(document.getElementById(INPUT_ID_LARGE_LEAF), "largeLeaf")
   calculatePieces(document.getElementById(INPUT_ID_MONTHLY_PAYMENT), "monthlyPayment")
   calculatePieces(document.getElementById(INPUT_ID_MONTHLY_HOURS), "monthlyHours")
+  averageConsumption()
 }
 
 $("#costoInput").on("input", function (e) {
@@ -131,7 +132,6 @@ $("#currentValueKWh").on('focusout', function () {
   const lastValueKWh = parseFloat(document.querySelector("#lastValueKWh").value)
   if (!Number.isInteger(parseInt(currentValueKWh)) || !Number.isInteger(parseInt(lastValueKWh))) return
   document.querySelector("#currentUserConsumption").value = currentValueKWh - lastValueKWh
-
 })
 
 $("#lastValueKWh").on('focusout', function () {
@@ -185,6 +185,8 @@ $("#listaMaquinasSelect").on("change", e => changedSelectedMachine(e.target));
 async function changedSelectedMachine(target) {
   // console.log("El e es: ", e.target)
   $("#listaConsumosSelect").empty();
+  $("#listaConsumosSelect-2").empty();
+  $("#listaConsumosSelect-3").empty();
   console.log("El valor es: ", target.value)
   const consumos = await getConsumptionsByProduct(target.value);
   console.log("Los consumos son: ", consumos)
@@ -198,6 +200,20 @@ async function changedSelectedMachine(target) {
       text: "porcentaje_trabajo",
       decorator: "%",
     });
+    displaySelects({
+      tagId: "listaConsumosSelect-2",
+      options: consumos,
+      value: "id_consumo",
+      text: "porcentaje_trabajo",
+      decorator: "%",
+    });
+    displaySelects({
+      tagId: "listaConsumosSelect-3",
+      options: consumos,
+      value: "id_consumo",
+      text: "porcentaje_trabajo",
+      decorator: "%",
+    });
   }
 
   const totalChunks = store.calculateChunks();
@@ -206,11 +222,8 @@ async function changedSelectedMachine(target) {
   $("#costoPorHojaInput").val(costPerChunk).trigger("change");
   $("#costoPedazo").val(costPerChunk).trigger("change");
   const selectedMach = store.getState("selectedMachine")
-  // const imgContainer = document.querySelector("#img-container")
   if (selectedMach) {
     sendImgMachineToParent(selectedMach.imgurls)
-    // document.querySelector("#img-machine").setAttribute("src", selectedMach.imgurls)
-    // imgContainer.style.display = "block"
   }
 }
 
@@ -218,11 +231,16 @@ $("#listaConsumosSelect").on("change", function () {
   store.selectConsumption(this.value);
 });
 
-$("#listaConsumosSelect-2").on("change", averageConsumption);
+$("#listaConsumosSelect-2").on("change", averageConsumption)
+$("#listaConsumosSelect-3").on("change", averageConsumption)
 
 function averageConsumption() {
-  const lista2 = store.selectConsumption($("#listaConsumosSelect-2").val())
-  const lista3 = store.selectConsumption($("#listaConsumosSelect-3").val())
+  const currentConsumption2 = $("#listaConsumosSelect-2").val()
+  const currentConsumption3 = $("#listaConsumosSelect-3").val()
+  if(!currentConsumption2 || !currentConsumption3) return
+  const lista2 = store.selectConsumption(currentConsumption2)
+  const lista3 = store.selectConsumption(currentConsumption3)
+  if(!lista2 || !lista3) return
   store.setState("selectedConsumption", {
     id_consumo: lista2.id_consumo + " - " + lista3.id_consumo,
     corriente_maxima: (lista2.corriente_maxima + lista3.corriente_maxima) / 2,
@@ -234,7 +252,6 @@ function averageConsumption() {
 }
 
 $("#valuePerPiece").on("input", function () {
-  // store.setState(this.value);
   const valueNumber = this.value;
   if (Number.isNaN(valueNumber)) return;
   store.setState("valuePerPiece", parseFloat(this.value).toFixed(2));
@@ -254,7 +271,6 @@ function calculateCostOperator(target) {
   const horasTrabajoOperador = parseFloat(document.querySelector("#horasTrabajoOperador").value);
   // Calculate the cost per hour of operator with the monthly paymenth and worker hours
   const costPerHourOperator = pagoMensuOperador / horasTrabajoOperador;
-  console.log(pagoMensuOperador, horasTrabajoOperador, costPerHourOperator)
   // Detect if costPerHourOperator is a number
   if (!Number.isNaN(costPerHourOperator)) {
     // Set the value of the input with the id "costoHoraOperador"
@@ -270,6 +286,7 @@ $("#calcular").on("click", function () {
 
 function clickedCalculate() {
   const invalidFields = areInvalidFields();
+  console.log(invalidFields)
   if (invalidFields) return sendMessageToastToParent("error", "Ha ingresado datos erroneos!")
   console.log("Entro pa aca jejee")
   handleCalculator()
@@ -385,7 +402,6 @@ $(".form-select").on("change", function () {
   calculatorCalls()
 });
 
-// Prevent -, + and e fields and allowed only positive numbers included decimals
 $("input[type=number]").keypress(function (e) {
   var txt = String.fromCharCode(e.which);
   if (!txt.match(/[0-9.]/)) {
@@ -460,8 +476,6 @@ function calculateUtility(totalHoursMachinePerDesign) {
     store.setState("costDACPerDesign", 0)
   }
 
-  console.log("totalUtility", totalUtility)
-  console.log("utilityPerPiece", utilityPerDesign)
   $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
   $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
   $("#roiPieces").val(roiPieces >= 0 ? roiPieces.toFixed(2) : 0).trigger("change");
@@ -581,7 +595,6 @@ function handleCalculator() {
   $("#gastosContainer").css("display", "block");
   $("#results-table").css("display", "block");
   document.querySelector("#results-table").classList.add("show")
-  console.log("HOLA JAJAJAJJA")
   sendMessageToastToParent("success", "Se ha calculado el retorno de inversión exitosamente!")
   // toastr["success"]("Se ha calculado el retorno de inversión exitosamente!");
   $("html").animate(
@@ -631,6 +644,8 @@ function changedOptionsMachineContainer(target) {
     document.querySelector("#row-cut-or-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-and-engrave").removeAttribute("style")
     console.log("Hay data de consumo electrico?", store.getState("consumptions"))
+    $("#listaConsumosSelect-2").empty()
+    $("#listaConsumosSelect-3").empty()
     displaySelects({
       tagId: "listaConsumosSelect-2",
       options: store.getState("consumptions"),

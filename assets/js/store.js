@@ -102,10 +102,6 @@ class Store {
   }
 }
 
-
-
-// 120 * 198 = 12
-
 const store = new Store({
   selectedMachine: null,
   machines: null,
