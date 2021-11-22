@@ -668,6 +668,15 @@ function changedOptionsMachineContainer(target) {
   }
 }
 
+function messageHandlerParent(e) {
+  console.log("El mensaje es: ", e.data)
+  // if (e.data && (e.data.type === 'parentResponse')) {
+  //   // Do some stuff with the sent data
+  //   const obj = document.getElementById("status")
+  //   obj.value = e.data.responseData;
+  // }
+}
 // Create a function that 
 
 document.querySelector("#generate-pdf").addEventListener("click", generatePdf)
+window.addEventListener('message', messageHandlerParent, false);
