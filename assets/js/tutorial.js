@@ -323,7 +323,6 @@ function loadTutorial() {
       store.setState("valuePerPiece", targetElement.value)
     }
     if (targetElement.id === "cut-and-engrave" ||
-      targetElement.id === "calcular" ||
       targetElement.id === "generate-pdf"
     ) {
       if (targetElement.id === "calcular") {
