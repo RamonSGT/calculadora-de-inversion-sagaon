@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", main)
-
-function main() {
+function startTutorial() {
   const popoverElements = getPopoverElements()
   hidePopoverElements(popoverElements)
   loadTutorial()

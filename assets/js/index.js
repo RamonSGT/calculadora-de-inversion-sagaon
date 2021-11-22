@@ -643,7 +643,6 @@ function changedOptionsMachineContainer(target) {
     target.setAttribute("style", "margin-top: 20px; background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-or-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-and-engrave").removeAttribute("style")
-    console.log("Hay data de consumo electrico?", store.getState("consumptions"))
     $("#listaConsumosSelect-2").empty()
     $("#listaConsumosSelect-3").empty()
     displaySelects({
@@ -670,11 +669,9 @@ function changedOptionsMachineContainer(target) {
 
 function messageHandlerParent(e) {
   console.log("El mensaje es: ", e.data)
-  // if (e.data && (e.data.type === 'parentResponse')) {
-  //   // Do some stuff with the sent data
-  //   const obj = document.getElementById("status")
-  //   obj.value = e.data.responseData;
-  // }
+  if(e.data) {
+    startTutorial()
+  }
 }
 // Create a function that 
 
