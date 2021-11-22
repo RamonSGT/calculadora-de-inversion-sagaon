@@ -129,6 +129,7 @@ async function getDataCalculator() {
     cost_material: document.querySelector("#costoInput").value.toString(),
     width_material: document.querySelector("#widthLeaf").value.toString(),
     height_material: document.querySelector("#largeLeaf").value.toString(),
+    thickness_material: document.querySelector("#thicknessLeaf").value.toString(),
     number_pieces_material: document.querySelector("#numeroPedazos").value.toString(),
     cost_per_piece_material: document.querySelector("#costoPedazo").value.toString(),
     width_design: document.querySelector("#widthLeafDesign").value.toString(),

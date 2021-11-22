@@ -90,7 +90,7 @@ function loadTutorial() {
         element: ".introjs-section-design-body-options",
         intro: `En esta parte se encuentran dos opciones que nos permitirán elegir bajo que modalidad usaremos la máquina para el diseño que haremos.
         <p><strong>Cortar o grabar: </strong>Hace referencia a solo una acción en especifico.</p>
-        <p><strong>Cortar y grabar: </strong>Hace referencia a ambas acciones y se tendrá que especificar el porcentaje de trabajo paara cada una.</p>`,
+        <p><strong>Cortar y grabar: </strong>Hace referencia a ambas acciones y se tendrá que especificar el porcentaje de trabajo para cada una.</p>`,
       },
       {
         element: ".introjs-section-design-body-option",
@@ -98,7 +98,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-design-body-engrave",
-        intro: "Aquí seleccionaremos el porcentaje de trabajado para el grabado del diseño."
+        intro: "Aquí seleccionaremos el porcentaje de trabajo para el grabado del diseño."
       },
       {
         element: ".introjs-section-design-body-cut",
