@@ -349,7 +349,7 @@ function loadTutorial() {
     .start()
 }
 
-function messageHandlerParent(e) {
+async function messageHandlerParent(e) {
   console.log("La data es: ", e.data)
   if (!receivedResponse) {
     receivedResponse = true
