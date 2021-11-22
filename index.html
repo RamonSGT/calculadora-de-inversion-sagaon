@@ -246,7 +246,7 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect-2"
-                          class="form-field-select form-input form-select introjs-section-design-body-engrave" required>
+                          class="form-field-select form-input form-select introjs-section-design-body-engrave no-validate" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
@@ -254,7 +254,7 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect-3"
-                          class="form-field-select form-input form-select introjs-section-design-body-cut" required>
+                          class="form-field-select form-input form-select introjs-section-design-body-cut no-validate" required>
                         </select>
                       </div>
                     </div>
@@ -520,88 +520,11 @@
   <script type="text/javascript" src="./assets/vendor/dinero.js-1.8.1/package/build/umd/dinero.min.js"></script>
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>
-  <script type="text/javascript" src="./assets/js/devices.js"></script>
-  <script type="text/javascript" src="./assets/js/notifications.js"></script>
   <script type="text/javascript" src="./assets/js/api.js"></script>
   <script type="text/javascript" src="./assets/js/store.js"></script>
   <script type="text/javascript" src="./assets/js/helpers.js"></script>
   <script type="text/javascript" src="./assets/js/index.js"></script>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script>
-    function createPopOver() {
-      let contents = [
-        "Es la potencia promedio a lo que trabajará tú máquina para realizar el diseño ingresado.",
-        "Es la cantidad de pedazos que se obtienen según el tamaño de corte de tu máquina y la medida de la hoja.",
-        "En esta sección se elegirá el tipo de tarifa y la categoría que aparece en nuestro recibo de pago de la CFE.<img src='./assets/images/tarifa_CFE.jpg' height=400px width=100%>",
-        "Es el mes en el que deseas realizar el cálculo, es importante recordar que cada mes tiene un costo de tarifa diferente.",
-        "Es la región a la cual corresponde tu localidad. Por cada región existe un costo fijo que se aplica a los hogares o pequeños negocios con un elevado consumo eléctrico. Aplica solo si en tu recibo te marca el tipo de tarifa <strong>DAC</strong> <img src='./assets/images/tarifa_dac.webp' height=200px width=100%>",
-        "Esta sección va dirigida a tí como vendedor, es decir, se asignara el precio de tu producto.",
-        "Es el precio que le asignas a tu diseño para tus clientes.",
-        "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
-        "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
-        "Es la cantidad de piezas que necesitas vender para poder empezar a obtener beneficios, es decir, además de los costos asociados se contempla el precio de la máquina.",
-        "En esta sección ingresarás los datos de tu diseños que plasmarás en el material. Para poder realizar el cálculo, es necesario ingresar los datos en la sección de <i>Materia prima</i>.<br>Tenga en cuenta que solo se esta calculando el costo del material, sin contemplar gastos de electricidad y operador.",
-        "En esta sección vienen campos complementarios que te ayudarán a realizar un cálculo más preciso de los costos de electricidad.",
-        "Es la lectura actual que se muestra en tu medidor.",
-        "Es el consumo anterior que tuviste en tu recibo de pago de la CFE. <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
-        "Es la diferencia entre la lectura actual y el consumo anterior.",
-        `Por defecto la CFE aplica un costo fijo a la tarifa DAC. Según la selcción de tú región el costo que se te aplica es de: <strong>$ ${store.getState("DACFixedPrice")}</strong>. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo para cada pieza.`,
-        "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
-        "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
-        "En esta sección se ingresan los datos relacionados con tu máquina, es decir, el módelo que usarás para hacer el cálculo.",
-        "Es el modelo de la máquina que usarás para el cálculo.",
-        "En esta sección se ingresarán los datos relacionados con la materia prima que estarás utilizando para realizar tu diseño.",
-        "Es el tipo de material a utilizar en la máquina. En caso de que el material no se muestre en la lista, seleccionar la opción <strong>otro</strong>",
-        "Es el precio al cual adquiriste la hoja de material.",
-        "Es la medida (ancho) de la hoja.",
-        "Es la medida (largo) de la hoja.",
-        "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja. <strong>(Esto no contempla ningún otro valor como el costo del consumo eléctrico o del operador.)</strong>",
-        "Es la medida (ancho) del diseño.",
-        "Es la medida (largo) del diseño.",
-        "Es la cantidad de minutos que tardará tu máquina de forma aproximada para plasmar el diseño.",
-        "Es la cantidad de diseños que se pueden obtener. Esto se calcula en base a las medidas ingresadas en la sección de <i>Materia prima</i> y el tamaño del diseño.",
-        "Es el precio calculado de tu diseño según la medida y el costo de material.",
-        "Es el diseño que se plasmará en la máquina CNC, el mismo aparecerá en el resumen de los gastos que usted podrá imprimir posteriormente.",
-        "En esta sección se detallarán los costos asociados con el salario del operador. Es importante resaltar que a pesar de que el dueño de la máquina sea el operador tome en cuenta asignarse un salario, esto con la finalidad de que el resultado sea más exacto.",
-        "Es el salario mensual que recibe el que se encarga de utilizar la máquina.",
-        "Es la cantidad de horas trabajadas por el operador de la máquina.",
-        "Es el resultado del pago mensual del operador entre la cantidad de horas que trabaja.",
-        "Es el tipo de tarifa que aparece en tu recibo de la CFE."
-      ]
-      for (let i = 1; i <= contents.length; i++) {
-        tippy(`#popover-${i}`, {
-          content: contents[(i - 1)],
-          allowHTML: true,
-          animation: "scale",
-          trigger: "mouseenter focus",
-          placement: (i === 3 || i === 14 || i === 5) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
-        })
-      }
-    }
-
-    createPopOver()
-
-    // Create a toast
-    toastr.options = {
-      closeButton: false,
-      debug: false,
-      newestOnTop: false,
-      rogressBar: false,
-      positionClass: "toast-top-full-width",
-      preventDuplicates: false,
-      onclick: true,
-      showDuration: "300",
-      hideDuration: "3000",
-      timeOut: "3000",
-      extendedTimeOut: "1000",
-      showEasing: "swing",
-      hideEasing: "linear",
-      showMethod: "fadeIn",
-      hideMethod: "fadeOut",
-    }
-
-    // Put overlay class to all childrens of tag main including the childrens of childrens
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/intro.js@4.3.0/intro.js"></script>
   <script type="text/javascript" src="./assets/js/tutorial.js" defer></script>
 </body>
