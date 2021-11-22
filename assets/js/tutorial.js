@@ -354,6 +354,7 @@ async function messageHandlerParent(e) {
   if (!receivedResponse) {
     receivedResponse = true
     const activeTutorial = await existUser(e.data)
+    console.log("lA RESPONSE ES: ", activeTutorial)
     if(!activeTutorial) return
     startTutorial()
   }
