@@ -373,6 +373,7 @@ function createPopOver() {
 function messageHandlerParent(e) {
   alert("La date es: " + " " + JSON.stringify(e.data) + " " + receivedResponse)
   alert("La date es: " + " " + JSON.stringify(e) + " " + receivedResponse)
+  alert(typeof e.data)
   if(e.data && !receivedResponse) {
     receivedResponse = true
     startTutorial()
