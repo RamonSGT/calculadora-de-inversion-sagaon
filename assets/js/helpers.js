@@ -370,16 +370,6 @@ function createPopOver() {
   }
 }
 
-function messageHandlerParent(e) {
-  if(typeof e.data === "boolean" && e.data === true && !receivedResponse) {
-    receivedResponse = true
-    startTutorial()
-  }
-}
-// Create a function that 
-
-window.addEventListener('message', messageHandlerParent, false);
-
 createPopOver()
 
 // Create a toast

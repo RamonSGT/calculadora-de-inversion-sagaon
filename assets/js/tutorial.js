@@ -351,3 +351,12 @@ function loadTutorial() {
   })
   .start()
 }
+
+function messageHandlerParent(e) {
+  if(typeof e.data === "boolean" && e.data === true && !receivedResponse) {
+    receivedResponse = true
+    startTutorial()
+  }
+}
+
+window.addEventListener('message', messageHandlerParent, false);
