@@ -162,10 +162,10 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-operator") ||
       targetElement.classList.contains("introjs-section-product") ||
       targetElement.classList.contains("introjs-section-advanced")) {
-      customScrollY = targetElement.offsetTop      
+      customScrollY = targetElement.offsetTop
     }
 
-    if(targetElement.classList.contains("introjs-section-machine-body")) {
+    if (targetElement.classList.contains("introjs-section-machine-body")) {
       setTimeout(() => {
         const machinesList = document.querySelector("#listaMaquinasSelect")
         const selectedIndex = 1
@@ -175,7 +175,7 @@ function loadTutorial() {
       }, 1000)
     }
 
-    if(targetElement.classList.contains("introjs-section-raw-body")) {
+    if (targetElement.classList.contains("introjs-section-raw-body")) {
       const materialsList = document.querySelector("#type-material")
       const selectedIndex = 1
       const selectedValue = materialsList.options[selectedIndex].value
@@ -192,7 +192,7 @@ function loadTutorial() {
       calculateCostInput(costInputElement)
     }
 
-    if(".introjs-section-design-body") {
+    if (".introjs-section-design-body") {
       setTimeout(() => {
         const widthLeafElement = document.querySelector("#widthLeafDesign")
         widthLeafElement.value = 12
@@ -205,7 +205,7 @@ function loadTutorial() {
       }, 1000)
     }
 
-    if(".intro-section-operator-body") {
+    if (".intro-section-operator-body") {
       setTimeout(() => {
         const salaryElement = document.querySelector("#pagoMensuOperador")
         salaryElement.value = 6000
@@ -215,7 +215,7 @@ function loadTutorial() {
       }, 1000)
     }
 
-    if(".intro-section-product-body") {
+    if (".intro-section-product-body") {
       document.querySelector("#valuePerPiece").value = 100
       store.setState("valuePerPiece", 100)
     }
@@ -238,7 +238,7 @@ function loadTutorial() {
       targetElement.classList.contains("introjs-section-operator") ||
       targetElement.classList.contains("introjs-section-product") ||
       targetElement.classList.contains("introjs-section-advanced")) {
-      customScrollY = targetElement.offsetTop      
+      customScrollY = targetElement.offsetTop
     }
 
     if (targetElement.classList.contains("introjs-section-machine-popover-1")) {
@@ -340,20 +340,40 @@ function loadTutorial() {
   }).onexit(() => {
     showPopoverElements(getPopoverElements())
   })
-  .onafterchange(e => {
-    if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
-      sendScrollToMiddle()
-    }
-    sendScrollIntoViewParent(customScrollY)
-  })
-  .start()
+    .onafterchange(e => {
+      if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
+        sendScrollToMiddle()
+      }
+      sendScrollIntoViewParent(customScrollY)
+    })
+    .start()
 }
 
 function messageHandlerParent(e) {
-  console.log("La dat es: ", e.data)
-  if(typeof e.data === "boolean" && e.data === true && !receivedResponse) {
+  console.log("La data es: ", e.data)
+  if (!receivedResponse) {
     receivedResponse = true
+    const activeTutorial = await existUser(e.data)
     startTutorial()
+  }
+}
+
+async function existUser(email) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+  };
+
+  try {
+    let response = await fetch(`https://jsfn-stech.azurewebsites.net/api/shopify/exist-user?email=${email}`, requestOptions)
+    response = await response.json()
+    return JSON.parse(response.json).exist
+  } catch (error) {
+    return false
   }
 }
 
