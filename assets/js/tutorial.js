@@ -401,4 +401,7 @@ function addValueToExistingCookies(value) {
   }
 }
 
-window.addEventListener('message', messageHandlerParent, false);
+document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener('message', messageHandlerParent, false)
+})
+  
