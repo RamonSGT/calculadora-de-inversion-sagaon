@@ -1,7 +1,12 @@
 function startTutorial() {
-  const popoverElements = getPopoverElements()
-  hidePopoverElements(popoverElements)
-  loadTutorial()
+  try {
+    console.log("START TUTORIAL")
+    const popoverElements = getPopoverElements()
+    hidePopoverElements(popoverElements)
+    loadTutorial()
+  } catch(error) {
+    console.log("EL ERRORORORORORORORORO --->>>>>><", error)
+  }
 }
 
 // Get all img tags and then get only the ones with tag id popover-${i} and return them in array
@@ -353,12 +358,12 @@ async function messageHandlerParent(e) {
   console.log("La data es: ", e.data)
   if (!receivedResponse && typeof e.data === "string") {
     receivedResponse = true
-    const activeTutorial = await existUser(e.data)
+    const existUserInDb = await existUser(e.data)
     console.log("lA RESPONSE ES: ", activeTutorial)
-    if(!activeTutorial) return
-    setTimeout(() => {
-      startTutorial()
-    }, 3000)
+    if(existUserInDb) return
+    startTutorial()
+    // setTimeout(() => {
+    // }, 3000)
   }
 }
 
