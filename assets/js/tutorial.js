@@ -387,21 +387,7 @@ async function existUser(email) {
   }
 }
 
-// Add value to existing cookies
-function addValueToExistingCookies(value) {
-  const cookies = document.cookie.split(";")
-  const cookiesArray = cookies.map(cookie => cookie.split("="))
-  const cookiesArrayFiltered = cookiesArray.filter(cookie => cookie[0].trim() === "introjs-user")
-  if (cookiesArrayFiltered.length > 0) {
-    const cookieValue = cookiesArrayFiltered[0][1]
-    const newCookieValue = cookieValue + "," + value
-    document.cookie = `introjs-user=${newCookieValue}`
-  } else {
-    document.cookie = `introjs-user=${value}`
-  }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  window.addEventListener('message', messageHandlerParent, false)
+  window.addEventListener('message', messageHandlerParent)
 })
   
