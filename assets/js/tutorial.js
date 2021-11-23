@@ -1,12 +1,7 @@
 function startTutorial() {
-  try {
-    console.log("START TUTORIAL")
-    const popoverElements = getPopoverElements()
-    hidePopoverElements(popoverElements)
-    loadTutorial()
-  } catch(error) {
-    console.log("EL ERRORORORORORORORORO --->>>>>><", error)
-  }
+  const popoverElements = getPopoverElements()
+  hidePopoverElements(popoverElements)
+  loadTutorial()
 }
 
 // Get all img tags and then get only the ones with tag id popover-${i} and return them in array
@@ -355,11 +350,9 @@ function loadTutorial() {
 }
 
 async function messageHandlerParent(e) {
-  console.log("La data es: ", e.data)
   if (!receivedResponse && typeof e.data === "string") {
     receivedResponse = true
     const existUserInDb = await existUser(e.data)
-    console.log("lA RESPONSE ES: ", existUserInDb)
     if(existUserInDb && typeof existUserInDb === "boolean") return
     startTutorial()
     // setTimeout(() => {
@@ -380,7 +373,6 @@ async function existUser(email) {
   try {
     let response = await fetch(`https://jsfn-stech.azurewebsites.net/api/shopify/exist-user?email=${email}`, requestOptions)
     response = await response.json()
-    console.log("Response is ------->", response)
     return JSON.parse(response.json).exist
   } catch (error) {
     return false
