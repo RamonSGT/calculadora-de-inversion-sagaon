@@ -360,7 +360,7 @@ async function messageHandlerParent(e) {
     receivedResponse = true
     const existUserInDb = await existUser(e.data)
     console.log("lA RESPONSE ES: ", existUserInDb)
-    if(existUserInDb) return
+    if(existUserInDb && typeof existUserInDb === "boolean") return
     startTutorial()
     // setTimeout(() => {
     // }, 3000)
@@ -380,6 +380,7 @@ async function existUser(email) {
   try {
     let response = await fetch(`https://jsfn-stech.azurewebsites.net/api/shopify/exist-user?email=${email}`, requestOptions)
     response = await response.json()
+    console.log("Response is ------->", response)
     return JSON.parse(response.json).exist
   } catch (error) {
     return false
