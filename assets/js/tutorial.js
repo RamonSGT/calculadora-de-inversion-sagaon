@@ -359,7 +359,7 @@ async function messageHandlerParent(e) {
   if (!receivedResponse && typeof e.data === "string") {
     receivedResponse = true
     const existUserInDb = await existUser(e.data)
-    console.log("lA RESPONSE ES: ", activeTutorial)
+    console.log("lA RESPONSE ES: ", existUserInDb)
     if(existUserInDb) return
     startTutorial()
     // setTimeout(() => {
