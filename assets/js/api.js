@@ -74,8 +74,6 @@ async function getConsumptionsByProduct(id) {
 }
 
 async function storeHistoryCalculator() {
-  // Data is sended to shopify store as a json because we need the user email.
-  // console.log("La data de la calculadora es: ", await getDataCalculator())
   sendDataCalculatorToParent(await getDataCalculator())
 }
 

@@ -153,7 +153,6 @@ function loadTutorial() {
       }
     ]
   }).oncomplete(() => {
-    console.log("Tutorial completado")
   }).onchange(function (targetElement) {
     if (targetElement.classList.contains("introjs-section-machine") ||
       targetElement.classList.contains("introjs-section-raw") ||

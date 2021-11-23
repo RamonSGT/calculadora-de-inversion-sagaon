@@ -520,7 +520,6 @@ function handleCalculator() {
     workHours
   ).toFixed(2);
   if (parseFloat(totalKWh) > parseFloat(selectedRate.uso_dac) && rateFlag === 0) {
-    console.log("Errorr jejeje")
     sendMessageToastToParent("warning", "La cuota de electricidad excede la categoría hogar, seleccione una región")
     // toastr["warning"]("La cuota de electricidad excede la categoría hogar, seleccione una región");
     document.querySelector("#collapseThree").classList.add("show")
