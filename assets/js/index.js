@@ -664,5 +664,3 @@ function changedOptionsMachineContainer(target) {
     $("#listaConsumosSelect-3").removeClass("no-validate")
   }
 }
-
-document.querySelector("#generate-pdf").addEventListener("click", generatePdf)
