@@ -391,5 +391,3 @@ toastr.options = {
   showMethod: "fadeIn",
   hideMethod: "fadeOut",
 }
-
-document.querySelector("#generate-pdf").addEventListener("click", generatePdf)

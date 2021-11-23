@@ -161,3 +161,4 @@ async function countCalculatorView(method = "GET", body = null) {
 }
 
 countCalculatorView()
+document.querySelector("#generate-pdf").addEventListener("click", generatePdf)
