@@ -356,7 +356,9 @@ async function messageHandlerParent(e) {
     const activeTutorial = await existUser(e.data)
     console.log("lA RESPONSE ES: ", activeTutorial)
     if(!activeTutorial) return
-    startTutorial()
+    setTimeout(() => {
+      startTutorial()
+    }, 3000)
   }
 }
 
