@@ -183,13 +183,10 @@ async function listDacSelect() {
 $("#listaMaquinasSelect").on("change", e => changedSelectedMachine(e.target));
 
 async function changedSelectedMachine(target) {
-  // console.log("El e es: ", e.target)
   $("#listaConsumosSelect").empty();
   $("#listaConsumosSelect-2").empty();
   $("#listaConsumosSelect-3").empty();
-  console.log("El valor es: ", target.value)
   const consumos = await getConsumptionsByProduct(target.value);
-  console.log("Los consumos son: ", consumos)
   store.setState("consumptions", consumos);
   store.selectMachine(target.value);
   if (!consumos.error) {
@@ -446,21 +443,14 @@ function calculateUtility(totalHoursMachinePerDesign) {
   const materialCost = parseFloat($("#costoInput").val())
   const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
   const totalConsumptionKWh = store.getState("totalConsumptionKWh")
-  console.log("Total consumption", totalConsumptionKWh)
   const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
   const costPerPiece = parseFloat($("#costoPedazoDesign").val())
   const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
   const priceMachine = store.getState("selectedMachine").precio_shopify
-  console.log("Price machine", priceMachine)
   const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
   store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
-  console.log("Cost per worker", costPerWorkerPiece)
   const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
-  console.log("Value per piece", valuePerPiece)
-  console.log("Total cost per design", totalCostPerDesign)
   const utilityPerDesign = valuePerPiece - totalCostPerDesign
-  console.log("Utility per design", utilityPerDesign)
-  console.log("Numero pedazos design", numeroPedazosDesign)
   const totalUtility = utilityPerDesign * numeroPedazosDesign
   const roiPieces = priceMachine / utilityPerDesign
   const fixedDacPricePerDesign = store.getState("DACFixedPrice")
@@ -507,7 +497,6 @@ function handleCalculator() {
     rateFlag,
   });
 
-  console.log("Work hours: ", workHours)
   calculateUtility(workHours);
 
   let header = `
@@ -609,9 +598,7 @@ function handleCalculator() {
 document.querySelector("#btn-options-machine-container").addEventListener("click", e => changedOptionsMachineContainer(e.target));
 
 function changedOptionsMachineContainer(target) {
-  console.log("Entro pa aca jeje", target)
   let selectedOption = target.id;
-  console.log("Opción seleccionada es: ", selectedOption)
   if (selectedOption === "cut-or-engrave") {
     document.querySelector("#cut-and-engrave").classList.remove("active");
     document.querySelector("#cut-and-engrave").removeAttribute("style");
@@ -633,8 +620,7 @@ function changedOptionsMachineContainer(target) {
       decorator: "%",
     })
   } else if (selectedOption === "cut-and-engrave") {
-    console.log("Mostrando datos de consumo electrico ejejje"),
-      document.querySelector("#cut-or-engrave").classList.remove("active")
+    document.querySelector("#cut-or-engrave").classList.remove("active")
     document.querySelector("#cut-or-engrave").removeAttribute("style")
     target.classList.add("active")
     target.setAttribute("style", "margin-top: 20px; background-color: rgb(117, 117, 117);")

@@ -32,7 +32,6 @@ function calculateExpenses({
   rateFlag,
   workHours,
 }) {
-  console.log("El consumo es: ", consumption)
   let cargosHogarList = [
     "basico",
     "intermedio",
