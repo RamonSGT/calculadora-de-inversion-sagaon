@@ -3,6 +3,7 @@ class Store {
     this.state = initialState;
   }
 
+  // Esto nos permitirá guardar el estado de una variable en la aplicación.
   setState(key, value) {
     this.state = {
       ...this.state,
@@ -10,6 +11,7 @@ class Store {
     };
   }
 
+  // Esto nos devolverá el valor de la variable a la cual queremos acceder.
   getState(key) {
     if (key) {
       return this.state[key];
@@ -17,6 +19,7 @@ class Store {
     return this.state;
   }
 
+  // Función auxiliar para seleccionar una máquian especifica en el estado de máquinas.
   selectMachine(id_producto) {
     this.state.selectedMachine = this.state.machines.find(
       (m) => m.id_producto === id_producto
