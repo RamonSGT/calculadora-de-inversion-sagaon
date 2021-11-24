@@ -50,6 +50,7 @@ class Store {
     );
   }
 
+  // Función para calcular el costo por pedazo de hoja.
   calculateCostPerChunkLeaf() {
     if(!this.state.selectedMachine || !this.state.totalCost || !this.state.widthLeaf || !this.state.largeLeaf) return null
     const totalChunks = this.calculateChunks()
