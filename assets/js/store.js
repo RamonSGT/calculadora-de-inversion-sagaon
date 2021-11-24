@@ -98,7 +98,6 @@ class Store {
     const costPerDesign =  costPerChunk / designPerChunk
     if(!costPerDesign) return null
     return costPerDesign.toFixed(2)
-    // return costPerDesign
   }
 }
 

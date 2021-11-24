@@ -314,9 +314,6 @@ function setBase64ToInputFile() {
   })
 }
 
-new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
-document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
-
 // Calculate the size of total scroll
 function getScrollSize() {
   const scrollSize = document.querySelector(".row.form-container").offsetHeight
@@ -403,3 +400,6 @@ toastr.options = {
   showMethod: "fadeIn",
   hideMethod: "fadeOut",
 }
+
+new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
+document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))
