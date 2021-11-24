@@ -262,15 +262,10 @@ $("#horasTrabajoOperador").on("input", function (e) {
 });
 
 function calculateCostOperator(target) {
-  // Obtener el valor del input con el id "pagoMensuOperador"
   const pagoMensuOperador = parseFloat(document.querySelector("#pagoMensuOperador").value);
-  // Obtener el valor del input con el id "horasTrabajoOperador"
   const horasTrabajoOperador = parseFloat(document.querySelector("#horasTrabajoOperador").value);
-  // Calculate the cost per hour of operator with the monthly paymenth and worker hours
   const costPerHourOperator = pagoMensuOperador / horasTrabajoOperador;
-  // Detect if costPerHourOperator is a number
   if (!Number.isNaN(costPerHourOperator)) {
-    // Set the value of the input with the id "costoHoraOperador"
     $("#costoHoraOperador").val(costPerHourOperator.toFixed(2)).trigger("change");
   } else {
     $("#costoHoraOperador").val(null).trigger("change");
@@ -440,15 +435,18 @@ function getParentAccordion(element) {
 }
 
 function calculateUtility(totalHoursMachinePerDesign) {
-  const materialCost = parseFloat($("#costoInput").val())
+  // Primero obtenemos todos los datos necesarios para realizar el cálculo
   const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
   const totalConsumptionKWh = store.getState("totalConsumptionKWh")
   const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
   const costPerPiece = parseFloat($("#costoPedazoDesign").val())
   const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
   const priceMachine = store.getState("selectedMachine").precio_shopify
+
+  // Si no valor en el campo del trabajador, entonces ponemos por default el 0. Hay redundancia en el valor por si el resultabo obtenido es NaN.
   const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
   store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
+  // Se suma el costo del pedazo, además del consumo electrico y el costo del trabajador
   const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
   const utilityPerDesign = valuePerPiece - totalCostPerDesign
   const totalUtility = utilityPerDesign * numeroPedazosDesign

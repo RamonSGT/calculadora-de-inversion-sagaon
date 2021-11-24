@@ -341,7 +341,7 @@ function createPopOver() {
     "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
     "En esta sección se ingresan los datos relacionados con tu máquina, es decir, el módelo que usarás para hacer el cálculo.",
     "Es el modelo de la máquina que usarás para el cálculo.",
-    "En esta sección se ingresarán los datos relacionados con la materia prima que estarás utilizando para realizar tu diseño.",
+    "En esta sección se ingresarán los datos relacionados con tu materia prima.",
     "Es el tipo de material a utilizar en la máquina. En caso de que el material no se muestre en la lista, seleccionar la opción <strong>otro</strong>",
     "Es el precio al cual adquiriste la hoja de material.",
     "Es la medida (ancho) de la hoja.",
@@ -357,7 +357,7 @@ function createPopOver() {
     "Es el salario mensual que recibe el que se encarga de utilizar la máquina.",
     "Es la cantidad de horas trabajadas por el operador de la máquina.",
     "Es el resultado del pago mensual del operador entre la cantidad de horas que trabaja.",
-    "Es el tipo de tarifa que aparece en tu recibo de la CFE."
+    "Es el tipo de tarifa que aparece en tu recibo de la CFE.",
   ]
   for (let i = 1; i <= contents.length; i++) {
     tippy(`#popover-${i}`, {
@@ -368,6 +368,14 @@ function createPopOver() {
       placement: (i === 3 || i === 14 || i === 5) ? "right" : "top", // Si es la imágen entonces se pone a la derecha.
     })
   }
+
+  tippy("#icon-tutorial", {
+    content: "Ver tutorial",
+    allowHTML: true,
+    animation: "scale",
+    trigger: "mouseenter focus",
+    placement: "right",
+  })
 }
 
 createPopOver()

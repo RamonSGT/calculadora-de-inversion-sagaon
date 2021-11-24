@@ -35,8 +35,12 @@
 <body>
   <main class="h-10">
     <!-- <a href='http://example.com/' ></a> -->
-    <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son
-      requeridos</p>
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+      <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son requeridos</p>
+    </div>
+    
+    <!-- Put img with default logo -->
+    <!-- Put default icon in image -->
     <section class="tutorial row form-container">
       <!-- style="display: flex; justify-content: center; align-content: center; width: 30%; display: none; padding-top: 2.5%;" -->
       <div id="img-container" class="col-sm-12" style="display: none;">
@@ -49,6 +53,7 @@
       </div>
 
       <div class="col-sm-12" id="form-parent-container">
+        <img src="assets/images/video-tutorial.png" style="width: 25px !important; height: 25px !important; position: absolute !important; top: 20px !important; z-index: 99 !important; right: 5rem !important; cursor: pointer !important;" id="icon-tutorial">
         <div>
           <div class="accordion" id="accordionExample">
             <div class="accordion-item px-5 introjs-section-machine">

@@ -67,11 +67,11 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-raw-body",
-        intro: "A continuación se ingresarán los datos relacionados con la materia prima que usarás para crear tu diseño. Para un cálculo más preciso del retorno de la inversión, es importante poner los datos correctamente.",
+        intro: "A continuación se ingresarán los datos relacionados con tu materia prima. Para un cálculo más preciso del retorno de la inversión, es importante poner los datos correctamente.",
       },
       {
         element: ".introjs-section-raw-body-result",
-        intro: "Como podrás observar en los siguientes campos, tienen un fondo gris. Eso significa que no puedes editar dichos campos y el valor obtenido es en base a los datos ingresados en la sección."
+        intro: "Como podrás observar en los siguientes campos, tienen un fondo gris. Eso significa que no puedes editar dichos campos y el valor obtenido es en base a los datos ingresados."
       },
       {
         element: ".introjs-section-raw-body-pedazos",
@@ -83,7 +83,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-design-body",
-        intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar. En base a este diseño, se hará una proyección del retorno de tu inversión.",
+        intro: "A continuación se ingresarán los datos relacionados con el diseño a grabar o cortar, en base a las medidas, se hará una proyección del retorno de tu inversión.",
         position: "middle-middle"
       },
       {
@@ -106,7 +106,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-design-body-design",
-        intro: "Aquí podrás subir tú diseño. Esto será de utilidad para poder darle un mejor formato a la hoja de resultados y también nos ayudará a ofrecerte un mejor servicio en el futuro."
+        intro: "Aquí podrás subir tú diseño. Esto será de utilidad para poder darle un mejor formato a la hoja de resultados."
       },
       {
         element: ".introjs-section-electricity-body",
@@ -126,7 +126,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-operator-body",
-        intro: "Aquí se ingresarán los datos del operador de la máquina. Ingresaremos datos como las horas trabajas por mes asi como el salario."
+        intro: "Aquí se ingresarán los datos del operador de la máquina. Ingresaremos datos como las horas trabajadas por mes asi como el salario"
       },
       {
         element: ".introjs-section-product-body",
@@ -134,7 +134,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-advanced-body",
-        intro: "En esta sección podemos ingresar tanto la lectura actual como la anterior que viene en nuestro recibo de pago de la CFE. Esto nos ayudará a tener un cálculo más preciso de los costos de la luz."
+        intro: "En esta sección opcional podemos ingresar tanto la lectura actual como la anterior que viene en nuestro recibo de pago de la CFE. Esto nos ayudará a tener un cálculo más preciso de los costos de la luz."
       },
       {
         element: ".introjs-btn-calculate",
@@ -353,8 +353,6 @@ async function messageHandlerParent(e) {
     const existUserInDb = await existUser(e.data)
     if(existUserInDb && typeof existUserInDb === "boolean") return
     startTutorial()
-    // setTimeout(() => {
-    // }, 3000)
   }
 }
 
@@ -379,5 +377,9 @@ async function existUser(email) {
 
 document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('message', messageHandlerParent)
+})
+
+document.querySelector("#icon-tutorial").addEventListener("click", e => {
+  startTutorial()
 })
   
