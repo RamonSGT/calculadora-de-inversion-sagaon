@@ -48,7 +48,7 @@ function loadTutorial() {
     tooltipPosition: 'auto',
     steps: [
       {
-        intro: "¡Hola emprendedor! 👋 Vamos a ver un pequeño ejemplo práctico que te ayudará a familiarizarte con la herramienta. <br><p><strong><small>&#9675; Te tomará aproximadamente 5 minutos</small></strong></p>"
+        intro: "¡Hola emprendedor! 👋 Vamos a ver un pequeño ejemplo práctico que te ayudará a familiarizarte con la herramienta. <br><br><p><strong><small>Te tomará aproximadamente 5 minutos</small></strong></p>"
       },
       {
         element: ".introjs-section-machine",
