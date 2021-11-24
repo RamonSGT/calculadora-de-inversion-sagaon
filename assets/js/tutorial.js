@@ -1,4 +1,5 @@
 function startTutorial() {
+  sendTutotrialStatus(true)
   const popoverElements = getPopoverElements()
   hidePopoverElements(popoverElements)
   loadTutorial()
@@ -153,6 +154,7 @@ function loadTutorial() {
       }
     ]
   }).oncomplete(() => {
+    sendTutotrialStatus(false)
   }).onchange(function (targetElement) {
     if (targetElement.classList.contains("introjs-section-machine") ||
       targetElement.classList.contains("introjs-section-raw") ||
@@ -336,6 +338,7 @@ function loadTutorial() {
     }
     // On click on the close button
   }).onexit(() => {
+    sendTutotrialStatus(false)
     showPopoverElements(getPopoverElements())
   })
     .onafterchange(e => {

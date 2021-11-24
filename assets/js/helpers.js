@@ -238,6 +238,13 @@ function sendScrollToMiddle() {
   window.parent.postMessage(message, "*")
 }
 
+function sendTutotrialStatus(status = false) {
+  const message = JSON.stringify({
+    isActiveTutorial: status,
+  })
+  window.parent.postMessage(message, "*")
+}
+
 async function getBufferFromImage() {
   const customFileNode = document.querySelector("#customFile")
   if (!customFileNode || !customFileNode.files[0]) return null
