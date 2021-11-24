@@ -25,9 +25,7 @@ const options = { style: "currency", currency: "MXN" };
 const numberFormat = new Intl.NumberFormat("es-MX", options);
 
 function calculateExpenses({
-  machine,
   consumption,
-  rate,
   charge,
   rateFlag,
   workHours,
