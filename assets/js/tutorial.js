@@ -118,7 +118,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-electricity-body-rate",
-        intro: "Aquí se ingresará la tarifa que se muestra en el recibo de pago de la CFE. En nuestro caso elegiremos la tarifa 1D."
+        intro: "Aquí se ingresará la tarifa que se muestra en el recibo de pago de la CFE. En nuestro caso elegiremos la tarifa 1."
       },
       {
         element: ".introjs-section-electricity-body-month",
