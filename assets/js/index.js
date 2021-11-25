@@ -11,6 +11,7 @@ const INPUT_ID_LARGE_LEAF = "largeLeaf";
 const INPUT_ID_MONTHLY_PAYMENT = "pagoMensuOperador";
 const INPUT_ID_MONTHLY_HOURS = "horasTrabajoOperador";
 
+let selectedOption = "";
 let calculatedROI = false
 $(async function () {
 
@@ -598,7 +599,6 @@ function handleCalculator() {
 }
 
 // Detect if #btn-options-machine-container is clicked and then get id of clicked element and validate if element clicked is cut or engrave or cut-and-engrave
-let selectedOption = target.id;
 function changedOptionsMachineContainer(target) {
   selectedOption = target.id;
   if (selectedOption === "cut-or-engrave") {
