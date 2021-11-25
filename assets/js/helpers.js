@@ -77,8 +77,6 @@ function calculateExpenses({
   }
 
   store.setState("totalConsumptionKWh", 0)
-  const totalHours = parseInt(document.querySelector("#horasTrabajoMaquina").value) / 60 // Convert minutes to hours
-  console.log("The data is the following", totalKWh, totalHours)
   const consumos = cargosDACList.map((c) => {
     console.log("Charge of c is: ", charge[c])
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
@@ -100,7 +98,7 @@ function calculateExpenses({
 function sortByMonth(arr) {
   if (arr && arr.length === 0) return arr
   if (!arr) return []
-  var months = [
+  const months = [
     "enero",
     "febrero",
     "marzo",
@@ -114,6 +112,26 @@ function sortByMonth(arr) {
     "noviembre",
     "diciembre"
   ]
+  return arr.sort((a, b) => {
+    return (
+      months.indexOf(a.mes.toLowerCase()) - months.indexOf(b.mes.toLowerCase())
+    );
+  });
+}
+
+function sortByRate(arr) {
+  if(arr && arr.length === 0) return arr
+  if(!arr) return []
+  const rate = [
+    "1",
+    "1a",
+    "1b",
+    "1c",
+    "1d",
+    "1e",
+    "1f"
+  ]
+
   return arr.sort((a, b) => {
     return (
       months.indexOf(a.mes.toLowerCase()) - months.indexOf(b.mes.toLowerCase())

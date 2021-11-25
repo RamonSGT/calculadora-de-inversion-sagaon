@@ -328,7 +328,6 @@ $(".form-input").on("keyup", function () {
     $(this).removeClass("is-invalid");
     $(this).addClass("is-valid");
   }
-
   if (
     inputId === "widthLeafDesign" &&
     Number.isInteger(inputValueNumber) && inputValueNumber <= store.getState("selectedMachine").corte_ancho
@@ -346,6 +345,14 @@ $(".form-input").on("keyup", function () {
     $(this).addClass("is-valid");
   }
   if (inputId === "valuePerPiece" && Number.isInteger(inputValueNumber)) {
+    $(this).removeClass("is-invalid")
+    $(this).addClass("is-valid")
+  }
+  if(inputId === "horasTrabajoMaquina-2" && Number.isInteger(inputValueNumber)) {
+    $(this).removeClass("is-invalid")
+    $(this).addClass("is-valid")
+  }
+  if(inputId === "horasTrabajoMaquina-3" && Number.isInteger(inputValueNumber)) {
     $(this).removeClass("is-invalid")
     $(this).addClass("is-valid")
   }
@@ -651,18 +658,6 @@ function changedOptionsMachineContainer(target) {
     // Remove "no-validate" class to listaConsumosSelect-2 and listaConsumosSelect-3
   }
 }
-
-
-// function fieldsDesignDuration() {
-//   if(selectedOption === "cut-or-engrave") {
-//     const machineTime = parseInt(document.querySelector("#horasTrabajoMaquina").value)
-//     const machineTimeInMinutes = ()
-//   }
-//   if(selectedOption === "cut-and-engrave") {
-//     const machineTime2 = parseInt(document.querySelector("#horasTrabajoMaquina-2").value)
-//     const machineTime3 = parseInt(document.querySelector("#horasTrabajoMaquina-3").value)
-//   }
-// }
 
 document.querySelector("#btn-options-machine-container").addEventListener("click", e => {
   changedOptionsMachineContainer(e.target)
