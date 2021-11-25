@@ -620,7 +620,7 @@ function changedOptionsMachineContainer(target) {
     document.querySelector("#cut-or-engrave").classList.remove("active")
     document.querySelector("#cut-or-engrave").removeAttribute("style")
     target.classList.add("active")
-    target.setAttribute("style", "margin-top: 20px; background-color: rgb(117, 117, 117);")
+    target.setAttribute("style", "background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-or-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-and-engrave").removeAttribute("style")
     $("#listaConsumosSelect-2").empty()
