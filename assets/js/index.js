@@ -603,12 +603,12 @@ function changedOptionsMachineContainer(target) {
     target.setAttribute("style", "margin-bottom: 20px; background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-and-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-or-engrave").removeAttribute("style")
+    $("#listaConsumosSelect").empty()
     $("#listaConsumosSelect-2").empty()
     $("#listaConsumosSelect-3").empty()
-    // Add "no-validate" class to listaConsumosSelect-2 and listaConsumosSelect-3
+    $("#listaConsumosSelect").removeClass("no-validate")
     $("#listaConsumosSelect-2").addClass("no-validate")
     $("#listaConsumosSelect-3").addClass("no-validate")
-    $("#listaConsumosSelect").removeClass("no-validate")
     displaySelects({
       tagId: "listaConsumosSelect",
       options: store.getState("consumptions"),
@@ -623,8 +623,12 @@ function changedOptionsMachineContainer(target) {
     target.setAttribute("style", "background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-or-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-and-engrave").removeAttribute("style")
+    $("#listaConsumosSelect").empty()
     $("#listaConsumosSelect-2").empty()
     $("#listaConsumosSelect-3").empty()
+    $("#listaConsumosSelect").addClass("no-validate")
+    $("#listaConsumosSelect-2").removeClass("no-validate")
+    $("#listaConsumosSelect-3").removeClass("no-validate")
     displaySelects({
       tagId: "listaConsumosSelect-2",
       options: store.getState("consumptions"),
@@ -639,10 +643,6 @@ function changedOptionsMachineContainer(target) {
       text: "porcentaje_trabajo",
       decorator: "%",
     })
-    $("#listaConsumosSelect").empty()
-    $("#listaConsumosSelect").addClass("no-validate")
     // Remove "no-validate" class to listaConsumosSelect-2 and listaConsumosSelect-3
-    $("#listaConsumosSelect-2").removeClass("no-validate")
-    $("#listaConsumosSelect-3").removeClass("no-validate")
   }
 }
