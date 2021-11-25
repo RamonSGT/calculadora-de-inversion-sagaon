@@ -6,10 +6,10 @@
 //     }
 // })
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net/api" // Produccion - Funciones de Azure
-// const BASE_URL = "http://127.0.0.1:7071/api" // Entorno local - Funciones de Azure
-const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api" // Producción - Servidor de amplify
-// const BASE_PDF_URL = "http://127.0.0.1:3030/api" // Entorno local - Servidor de amplify
+// const BASE_URL = "https://jsfn-stech.azurewebsites.net/api" // Produccion - Funciones de Azure
+const BASE_URL = "http://127.0.0.1:7071/api" // Entorno local - Funciones de Azure
+// const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api" // Producción - Servidor de amplify
+const BASE_PDF_URL = "http://127.0.0.1:3030/api" // Entorno local - Servidor de amplify
 
 async function getRates(type) {
   return await $.ajax({

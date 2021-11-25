@@ -229,11 +229,11 @@ $("#listaConsumosSelect").on("change", function () {
 });
 
 $("#listaConsumosSelect-2").on("change", () => {
-  store.setState("selectedConsumption-2") = $("#listaConsumosSelect-2").val()
+  store.setState("selectedConsumption-2", $("#listaConsumosSelect-2").val())
 })
 
 $("#listaConsumosSelect-3").on("change", () => {
-  store.setState("selectedConsumption-3") = $("#listaConsumosSelect-3").val()
+  store.setState("selectedConsumption-3", $("#listaConsumosSelect-3").val())
 })
 
 function saveConsumption(stateKey, valueConsumption) {
