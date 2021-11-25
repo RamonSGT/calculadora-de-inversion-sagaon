@@ -181,26 +181,19 @@
                 <div class="accordion-body introjs-section-design-body">
                   <div class="inputs-container">
                     <div class="row">
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6 col-md-6">
                         <label for="widthLeafDesign" class="form-label">Ancho del diseño (cm) <span
                             class="required-icon-field">*</span> <img id="popover-27"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-design-body-width" id="widthLeafDesign"
                           placeholder="20" required>
                       </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4">
+                      <div class="col-sm-12 col-md-6 col-md-6">
                         <label for="largeLeafDesign" class="form-label">Largo del diseño (cm) <span
                             class="required-icon-field">*</span> <img id="popover-28"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-design-body-large" id="largeLeafDesign"
                           placeholder="10" required>
-                      </div>
-                      <div class="col-sm-12 col-lg-4">
-                        <label for="horasTrabajoMaquina" class="form-label">Duración por diseño (minutos) <span
-                            class="required-icon-field">*</span> <img id="popover-29"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <input type="number" class="form-field-input form-input form-control introjs-section-design-body-minutes" id="horasTrabajoMaquina"
-                          placeholder="25" required>
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -235,13 +228,20 @@
                       </div>
                     </div>
                     <div class="row" id="row-cut-or-engrave">
-                      <div class="col-sm-12 col-md-12">
+                      <div class="col-sm-12 col-md-6">
                         <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo para el grabado<span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect"
                           class="form-field-select form-input form-select" required>
                         </select>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <label for="horasTrabajoMaquina" class="form-label">Duración de grabado (minutos) <span
+                            class="required-icon-field">*</span> <img id="popover-29"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-input form-control introjs-section-design-body-minutes" id="horasTrabajoMaquina"
+                          placeholder="25" required>
                       </div>
                     </div>
                     <div class="row" id="row-cut-and-engrave" style="display: none;">
@@ -260,6 +260,20 @@
                         <select name="maquinas-select" id="listaConsumosSelect-3"
                           class="form-field-select form-input form-select introjs-section-design-body-cut no-validate" required>
                         </select>
+                      </div>
+                      <div class="col-sm-12 col-md-6 mt-4">
+                        <label for="horasTrabajoMaquina-2" class="form-label">Duración grabado (minutos) <span
+                            class="required-icon-field">*</span> <img id="popover-29"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-input form-control introjs-section-design-body-minutes" id="horasTrabajoMaquina-2"
+                          placeholder="25" required>
+                      </div>
+                      <div class="col-sm-12 col-md-6 mt-4">
+                        <label for="horasTrabajoMaquina-3" class="form-label">Duración de corte (minutos) <span
+                            class="required-icon-field">*</span> <img id="popover-29"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-input form-control introjs-section-design-body-minutes" id="horasTrabajoMaquina-3"
+                          placeholder="25" required>
                       </div>
                     </div>
                     <div class="row pt-4">

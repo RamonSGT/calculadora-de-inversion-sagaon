@@ -494,6 +494,12 @@ function handleCalculator() {
     workHours,
     rateFlag,
   });
+  calculateExpenses({
+    consumption: selectedConsumption,
+    charge: selectedCharge,
+    workHours,
+    rateFlag,
+  })
 
   calculateUtility(workHours);
 
@@ -592,10 +598,8 @@ function handleCalculator() {
 }
 
 // Detect if #btn-options-machine-container is clicked and then get id of clicked element and validate if element clicked is cut or engrave or cut-and-engrave
-document.querySelector("#btn-options-machine-container").addEventListener("click", e => changedOptionsMachineContainer(e.target));
-
+let selectedOption = target.id;
 function changedOptionsMachineContainer(target) {
-  let selectedOption = target.id;
   if (selectedOption === "cut-or-engrave") {
     document.querySelector("#cut-and-engrave").classList.remove("active");
     document.querySelector("#cut-and-engrave").removeAttribute("style");
@@ -646,3 +650,19 @@ function changedOptionsMachineContainer(target) {
     // Remove "no-validate" class to listaConsumosSelect-2 and listaConsumosSelect-3
   }
 }
+
+
+function fieldsDesignDuration() {
+  if(selectedOption === "cut-or-engrave") {
+    const machineTime = parseInt(document.querySelector("#horasTrabajoMaquina").value)
+    const machineTimeInMinutes = ()
+  }
+  if(selectedOption === "cut-and-engrave") {
+    const machineTime2 = parseInt(document.querySelector("#horasTrabajoMaquina-2").value)
+    const machineTime3 = parseInt(document.querySelector("#horasTrabajoMaquina-3").value)
+  }
+}
+
+document.querySelector("#btn-options-machine-container").addEventListener("click", e => {
+  changedOptionsMachineContainer(e.target)
+})
