@@ -600,6 +600,7 @@ function handleCalculator() {
 // Detect if #btn-options-machine-container is clicked and then get id of clicked element and validate if element clicked is cut or engrave or cut-and-engrave
 let selectedOption = target.id;
 function changedOptionsMachineContainer(target) {
+  selectedOption = target.id;
   if (selectedOption === "cut-or-engrave") {
     document.querySelector("#cut-and-engrave").classList.remove("active");
     document.querySelector("#cut-and-engrave").removeAttribute("style");
