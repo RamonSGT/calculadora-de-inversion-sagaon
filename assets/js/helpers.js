@@ -78,8 +78,9 @@ function calculateExpenses({
 
   store.setState("totalConsumptionKWh", 0)
   const totalHours = parseInt(document.querySelector("#horasTrabajoMaquina").value) / 60 // Convert minutes to hours
-  console.log("The data is the following", totalKWh, totalH)
+  console.log("The data is the following", totalKWh, totalHours)
   const consumos = cargosDACList.map((c) => {
+    console.log("Charge of c is: ", charge[c])
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
     store.setState("totalConsumptionKWh", parseFloat(subtotal))
