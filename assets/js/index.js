@@ -225,7 +225,7 @@ async function changedSelectedMachine(target) {
 }
 
 $("#listaConsumosSelect").on("change", function () {
-  store.selectConsumption(this.value);
+  store.setState("selectedConsumption", $("#listaConsumosSelect").val());
 });
 
 $("#listaConsumosSelect-2").on("change", () => {
@@ -489,7 +489,7 @@ function handleCalculator() {
 
   if(selectedOption === "cut-or-engrave") {
     calculateExpenses({
-      consumption: selectedConsumption,
+      consumption: store.getState("selectedConsumption"),
       charge: selectedCharge,
       workHours,
       rateFlag,
@@ -498,7 +498,7 @@ function handleCalculator() {
   }
   if(selectedOption === "cut-and-engrave") {
     calculateExpenses({
-      consumption: selectedConsumption,
+      consumption: store.getState("selectedConsumption-2"),
       charge: selectedCharge,
       workHours,
       rateFlag,
@@ -506,7 +506,7 @@ function handleCalculator() {
     })
 
     calculateExpenses({
-      consumption: selectedConsumption,
+      consumption: store.getState("selectedConsumption-3"),
       charge: selectedCharge,
       workHours,
       rateFlag,

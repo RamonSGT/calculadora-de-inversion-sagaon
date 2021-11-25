@@ -268,7 +268,7 @@ function loadTutorial() {
       targetElement.selectedIndex = 4
       const selectedValue = targetElement.options[targetElement.selectedIndex].value;
       targetElement.value = selectedValue
-      saveConsumption()
+      saveConsumption("")
     }
     if (targetElement.id === "customFile") {
       setBase64ToInputFile()
