@@ -652,16 +652,16 @@ function changedOptionsMachineContainer(target) {
 }
 
 
-function fieldsDesignDuration() {
-  if(selectedOption === "cut-or-engrave") {
-    const machineTime = parseInt(document.querySelector("#horasTrabajoMaquina").value)
-    const machineTimeInMinutes = ()
-  }
-  if(selectedOption === "cut-and-engrave") {
-    const machineTime2 = parseInt(document.querySelector("#horasTrabajoMaquina-2").value)
-    const machineTime3 = parseInt(document.querySelector("#horasTrabajoMaquina-3").value)
-  }
-}
+// function fieldsDesignDuration() {
+//   if(selectedOption === "cut-or-engrave") {
+//     const machineTime = parseInt(document.querySelector("#horasTrabajoMaquina").value)
+//     const machineTimeInMinutes = ()
+//   }
+//   if(selectedOption === "cut-and-engrave") {
+//     const machineTime2 = parseInt(document.querySelector("#horasTrabajoMaquina-2").value)
+//     const machineTime3 = parseInt(document.querySelector("#horasTrabajoMaquina-3").value)
+//   }
+// }
 
 document.querySelector("#btn-options-machine-container").addEventListener("click", e => {
   changedOptionsMachineContainer(e.target)
