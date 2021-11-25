@@ -472,13 +472,14 @@ function calculateUtility(totalHoursMachinePerDesign) {
 function handleCalculator() {
   const {
     selectedMachine,
-    selectedConsumption,
     selectedRate,
     selectedCharge,
     rateFlag,
   } = store.getState();
 
-  if (selectedMachine && selectedConsumption) {
+  const selectedConsumption = store.getState("selectedConsumption")
+
+  if (selectedMachine && store.getState("selectedConsumption") || (store.getState("selectedConsumption-2") && store.getState("selectedConsumption-3"))) {
     $("#corrienteMax").text(Number(selectedConsumption.corriente_maxima).toFixed(2) + "A");
     $("#voltaje").text(selectedConsumption.voltaje + "V");
     $("#potencia").text(Number(selectedConsumption.potencia_kwh).toFixed(2) + "KWh");
