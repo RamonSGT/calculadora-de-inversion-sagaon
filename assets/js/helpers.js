@@ -29,6 +29,7 @@ function calculateExpenses({
   charge,
   rateFlag,
   workHours,
+  stateKey,
 }) {
   let cargosHogarList = [
     "basico",
@@ -37,14 +38,11 @@ function calculateExpenses({
     "excedente",
   ];
   let cargosDACList = ["fijo", "basico"];
-
   store.setState("DACFixedPrice", charge["fijo"])
-
   const consumptionClientKWh = parseFloat(document.querySelector("#currentUserConsumption").value)
-
   let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
 
-  store.setState("totalConsumptionKWh", 0)
+  store.setState(stateKey, 0)
   if (!rateFlag) {
     const consumos = cargosHogarList.map((c) => {
       if (charge[c]) {
@@ -62,36 +60,35 @@ function calculateExpenses({
             ? (kwh_temp * charge[c]).toFixed(2)
             : 0 * charge[c])
 
-        store.setState("totalConsumptionKWh", (store.getState("totalConsumptionKWh") + parseFloat(subtotal)))
+        store.setState(stateKey, (store.getState(stateKey) + parseFloat(subtotal)))
         return `<tr>
                     <th scope="col" colspan="2">Consumo ${c}</th>
                     <td>${charge[c].toFixed(2)}</td>
                     <td>${totalPeriod ? parseFloat(totalPeriod).toFixed(2) : totalPeriod}</td>
                     <td>${subtotal ? parseFloat(subtotal).toFixed(2) : subtotal}</td>
                 </tr>
-                <p>Total: ${store.getState("totalConsumptionKWh")}</p>`;
+                <p>Total: ${store.getState(stateKey)}</p>`;
       }
       return null;
     });
     return consumos.join("");
   }
 
-  store.setState("totalConsumptionKWh", 0)
+  store.setState(stateKey, 0)
   const consumos = cargosDACList.map((c) => {
-    console.log("Charge of c is: ", charge[c])
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
-    store.setState("totalConsumptionKWh", parseFloat(subtotal))
+    store.setState(stateKey, parseFloat(subtotal))
     return `<tr>
             <th scope="col" colspan="2">Consumo ${c}</th>
             <td>${charge[c].toFixed(2)}</td>
             <td>${totalPeriod ? parseFloat(totalPeriod).toFixed(2) : totalPeriod}</td>
             <td>${subtotal ? parseFloat(subtotal).toFixed(2) : subtotal}</td>
         </tr>
-        <p>Total: ${store.getState("totalConsumptionKWh")}</p>`;
+        <p>Total: ${store.getState(stateKey)}</p>`;
   });
 
-  store.setState("totalConsumptionKWh", 0)
+  store.setState(stateKey, 0)
   return consumos.join("");
 }
 

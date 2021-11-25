@@ -64,7 +64,6 @@ function calculatorCalls() {
   calculateRawMaterialData(document.getElementById(INPUT_ID_LARGE_LEAF), "largeLeaf")
   calculatePieces(document.getElementById(INPUT_ID_MONTHLY_PAYMENT), "monthlyPayment")
   calculatePieces(document.getElementById(INPUT_ID_MONTHLY_HOURS), "monthlyHours")
-  averageConsumption()
 }
 
 $("#costoInput").on("input", function (e) {
@@ -229,24 +228,16 @@ $("#listaConsumosSelect").on("change", function () {
   store.selectConsumption(this.value);
 });
 
-$("#listaConsumosSelect-2").on("change", averageConsumption)
-$("#listaConsumosSelect-3").on("change", averageConsumption)
+$("#listaConsumosSelect-2").on("change", () => {
+  store.setState("selectedConsumption-2") = $("#listaConsumosSelect-2").val()
+})
 
-function averageConsumption() {
-  const currentConsumption2 = $("#listaConsumosSelect-2").val()
-  const currentConsumption3 = $("#listaConsumosSelect-3").val()
-  if(!currentConsumption2 || !currentConsumption3) return
-  const lista2 = store.selectConsumption(currentConsumption2)
-  const lista3 = store.selectConsumption(currentConsumption3)
-  if(!lista2 || !lista3) return
-  store.setState("selectedConsumption", {
-    id_consumo: lista2.id_consumo + " - " + lista3.id_consumo,
-    corriente_maxima: (lista2.corriente_maxima + lista3.corriente_maxima) / 2,
-    porcentaje_trabajo: (lista2.porcentaje_trabajo + lista3.porcentaje_trabajo) / 2,
-    potencia: (lista2.potencia + lista3.potencia) / 2,
-    potencia_kwh: (lista2.potencia_kwh + lista3.potencia_kwh) / 2,
-    voltaje: (lista2.voltaje + lista3.voltaje) / 2,
-  })
+$("#listaConsumosSelect-3").on("change", () => {
+  store.setState("selectedConsumption-3") = $("#listaConsumosSelect-3").val()
+})
+
+function saveConsumption(stateKey, valueConsumption) {
+  store.setState(stateKey) = valueConsumption
 }
 
 $("#valuePerPiece").on("input", function () {
@@ -496,18 +487,32 @@ function handleCalculator() {
   let workHours = $("#horasTrabajoMaquina").val();
   workHours = parseFloat(workHours) / 60 // De minutos a horas
 
-  const cargosData = calculateExpenses({
-    consumption: selectedConsumption,
-    charge: selectedCharge,
-    workHours,
-    rateFlag,
-  });
-  calculateExpenses({
-    consumption: selectedConsumption,
-    charge: selectedCharge,
-    workHours,
-    rateFlag,
-  })
+  if(selectedOption === "cut-or-engrave") {
+    calculateExpenses({
+      consumption: selectedConsumption,
+      charge: selectedCharge,
+      workHours,
+      rateFlag,
+      stateKey: "totalConsumptionKWh"
+    });
+  }
+  if(selectedOption === "cut-and-engrave") {
+    calculateExpenses({
+      consumption: selectedConsumption,
+      charge: selectedCharge,
+      workHours,
+      rateFlag,
+      stateKey: "totalConsumptionKWh-2"
+    })
+
+    calculateExpenses({
+      consumption: selectedConsumption,
+      charge: selectedCharge,
+      workHours,
+      rateFlag,
+      stateKey: "totalConsumptionKWh-3"
+    })
+  }
 
   calculateUtility(workHours);
 
