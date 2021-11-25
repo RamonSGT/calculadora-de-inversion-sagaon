@@ -249,7 +249,7 @@
                         <label for="listaConsumosSelect-2" class="form-label">Porcentaje de trabajo para el grabado<span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <select name="maquinas-select" id="listaConsumosSelect-2"
+                        <select name="listaSelect-2" id="listaConsumosSelect-2"
                           class="form-field-select form-input form-select introjs-section-design-body-engrave no-validate" required>
                         </select>
                       </div>
@@ -257,7 +257,7 @@
                         <label for="listaConsumosSelect-3" class="form-label">Porcentaje de trabajo para el corte<span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <select name="maquinas-select" id="listaConsumosSelect-3"
+                        <select name="listaSelect-3" id="listaConsumosSelect-3"
                           class="form-field-select form-input form-select introjs-section-design-body-cut no-validate" required>
                         </select>
                       </div>
@@ -492,22 +492,18 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="col">Corriente máxima para el corte</th>
+                          <th scope="col">Corriente máxima</th>
                           <td id="corrienteMax"></td>
                         </tr>
-                        <tr>
-                          <th scope="col">Corriente máxima para el corte</th>
-                          <td id="corrienteMax"></td>
+                        <tr style="display: none;" id="row-corriente-engrave">
+                          <th scope="col">Corriente máxima para el grabado</th>
+                          <td id="corrienteMax-engrave"></td>
                         </tr>
-                        <!-- <tr>
-                          <th scope="col">Voltaje</th>
-                          <td id="voltaje"></td>
-                        </tr> -->
                         <tr>
-                          <th scope="col">Potencia para el corteg</th>
+                          <th scope="col">Potencia</th>
                           <td id="potencia"></td>
                         </tr>
-                        <tr>
+                        <tr style="display: none;" id="row-potencia-engrave">
                           <th scope="col">Potencia para el grabado</th>
                           <td id="potencia-engrave"></td>
                         </tr>

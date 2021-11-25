@@ -31,7 +31,6 @@ function calculateExpenses({
   workHours,
   stateKey,
 }) {
-  console.log("El consumo es: ", consumption)
   let cargosHogarList = [
     "basico",
     "intermedio",

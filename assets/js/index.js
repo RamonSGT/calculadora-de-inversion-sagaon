@@ -225,19 +225,27 @@ async function changedSelectedMachine(target) {
 }
 
 $("#listaConsumosSelect").on("change", function () {
-  store.setState("selectedConsumption", $("#listaConsumosSelect").val());
+  const valueConsumption = store.selectConsumption(this.value);
+  console.log("El valor del consumo es: ", valueConsumption)
+  store.setState("selectedConsumption", valueConsumption);
 });
 
 $("#listaConsumosSelect-2").on("change", () => {
-  store.setState("selectedConsumption-2", $("#listaConsumosSelect-2").val())
+  console.log("El valor es select 2 es: ", document.querySelector("#listaConsumosSelect-2").value)
+  const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
+  console.log("El valor del consumo es 2: ", valueConsumption)
+  store.setState("selectedConsumption-2", valueConsumption)
 })
 
 $("#listaConsumosSelect-3").on("change", () => {
-  store.setState("selectedConsumption-3", $("#listaConsumosSelect-3").val())
+  console.log("El valor es select 3 es: ", document.querySelector("#listaConsumosSelect-3").value)
+  const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
+  console.log("El valor del consumo es 3: ", valueConsumption)
+  store.setState("selectedConsumption-3", valueConsumption)
 })
 
 function saveConsumption(stateKey, valueConsumption) {
-  store.setState(stateKey) = valueConsumption
+  store.setState(stateKey, valueConsumption)
 }
 
 $("#valuePerPiece").on("input", function () {
@@ -477,13 +485,17 @@ function handleCalculator() {
     rateFlag,
   } = store.getState();
 
-  const selectedConsumption = store.getState("selectedConsumption")
-
   if (selectedMachine && store.getState("selectedConsumption") || (store.getState("selectedConsumption-2") && store.getState("selectedConsumption-3"))) {
-    $("#corrienteMax").text(Number(selectedConsumption.corriente_maxima).toFixed(2) + "A");
-    $("#voltaje").text(selectedConsumption.voltaje + "V");
-    $("#potencia").text(Number(selectedConsumption.potencia_kwh).toFixed(2) + "KWh");
-    $("#precio").text(numberFormat.format(selectedMachine.precio_shopify) + " MXN");
+    if(selectedOption === "cut-or-engrave") {
+      $("#corrienteMax").text(Number(store.getState("selectedConsumption").corriente_maxima).toFixed(2) + "A")
+      $("#potencia").text(Number(store.getState("selectedConsumption").potencia_kwh).toFixed(2) + "KWh")
+    }
+    if(selectedOption === "cut-and-engrave") {
+      $("#corrienteMax").text(Number(store.getState("selectedConsumption-2").corriente_maxima).toFixed(2) + "A")
+      $("#corrienteMax-engrave").text(Number(store.getState("selectedConsumption-3").corriente_maxima).toFixed(2) + "A")
+      $("#potencia").text(Number(store.getState("selectedConsumption-2").potencia_kwh).toFixed(2) + "KWh")
+      $("#potencia-engrave").text(Number(store.getState("selectedConsumption-3").potencia_kwh).toFixed(2) + "KWh")
+    }
   }
   let workHours = $("#horasTrabajoMaquina").val();
   workHours = parseFloat(workHours) / 60 // De minutos a horas
@@ -496,6 +508,10 @@ function handleCalculator() {
       rateFlag,
       stateKey: "totalConsumptionKWh"
     });
+    document.querySelector("#row-corriente-engrave").style.display = "none"
+    document.querySelector("#row-potencia-engrave").style.display = "none"
+    document.querySelector("#corrienteMax").parentElement.firstElementChild.innerText = "Corriente máxima"
+    document.querySelector("#potencia").parentElement.firstElementChild.innerText = "Potencia"
   }
   if(selectedOption === "cut-and-engrave") {
     calculateExpenses({
@@ -505,7 +521,6 @@ function handleCalculator() {
       rateFlag,
       stateKey: "totalConsumptionKWh-2"
     })
-
     calculateExpenses({
       consumption: store.getState("selectedConsumption-3"),
       charge: selectedCharge,
@@ -513,9 +528,17 @@ function handleCalculator() {
       rateFlag,
       stateKey: "totalConsumptionKWh-3"
     })
+    document.querySelector("#row-corriente-engrave").removeAttribute("style")
+    document.querySelector("#row-potencia-engrave").removeAttribute("style")
+    document.querySelector("#corrienteMax").parentElement.firstElementChild.innerText = "Corriente máxima para el corte"
+    document.querySelector("#potencia").parentElement.firstElementChild.innerText = "Potencia para el corte"
   }
 
   calculateUtility(workHours);
+
+  const totalPowerKWh = selectedOption === "cut-or-engrave" ? parseFloat(store.getState("selectedConsumption").potencia_kwh) : parseFloat(store.getState("selectedConsumption-2").potencia_kwh) + parseFloat(store.getState("selectedConsumption-3").potencia_kwh)
+
+  console.log("La potencia total es de: ", totalPowerKWh)
 
   let header = `
         <tr>
@@ -523,7 +546,7 @@ function handleCalculator() {
           <th scope="col" colspan="50%"><strong>Costo (MXN)</strong></th>
         </tr>`;
   let totalKWh = (
-    selectedConsumption.potencia_kwh *
+    totalPowerKWh *
     workHours
   ).toFixed(2);
   if (parseFloat(totalKWh) > parseFloat(selectedRate.uso_dac) && rateFlag === 0) {
