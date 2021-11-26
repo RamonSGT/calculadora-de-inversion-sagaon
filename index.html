@@ -35,8 +35,22 @@
 <body>
   <main class="h-10">
     <!-- <a href='http://example.com/' ></a> -->
-    <div style="width: 100%; display: flex; justify-content: space-between;">
-      <p class="required-instructions">Los campos con el simbolo (<span class="required-icon-field">*</span>) son requeridos</p>
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div>
+          <p class="required-instructions" style="display: flex; align-items: end;">Los campos con el simbolo (<span class="required-icon-field" style="position: relative; top: 1.2rem;">*</span>) son requeridos</p>
+        </div>
+      </div>
+      <div class="col-md-6 d-none d-md-block">
+        <model-viewer class="container-img" id="img-machine" src=""
+        alt="A 3D model of an astronaut" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral"
+        auto-rotate camera-controls style="width: 5rem; height: 5rem;"></model-viewer>
+      </div>
+      <div class="d-sm-block d-md-none" style="display: flex; justify-content: center;">
+        <model-viewer class="container-img" id="img-machine" src=""
+        alt="A 3D model of an astronaut" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral"
+        auto-rotate camera-controls style="width: 5rem; height: 5rem;"></model-viewer>
+      </div>
     </div>
     
     <!-- Put img with default logo -->

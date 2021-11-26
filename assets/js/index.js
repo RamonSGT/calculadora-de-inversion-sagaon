@@ -219,8 +219,13 @@ async function changedSelectedMachine(target) {
   $("#costoPorHojaInput").val(costPerChunk).trigger("change");
   $("#costoPedazo").val(costPerChunk).trigger("change");
   const selectedMach = store.getState("selectedMachine")
+  console.log("La maquina seleccionada es: ", selectedMach)
   if (selectedMach) {
-    sendImgMachineToParent(selectedMach.imgurls)
+    document.querySelectorAll(".container-img").forEach(e => {
+      console.log("El elemento es: ", e)
+      e.src = selectedMach.imgurls
+    })
+    // sendImgMachineToParent(selectedMach.imgurls)
   }
 }
 
