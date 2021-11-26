@@ -6,11 +6,25 @@
 //     }
 // })
 
-const BASE_URL = "https://jsfn-stech.azurewebsites.net/api" // Produccion - Funciones de Azure
-// const BASE_URL = "http://127.0.0.1:7071/api" // Entorno local - Funciones de Azure
-const BASE_PDF_URL = "https://sagaon-tech-server.herokuapp.com/api" // Producción - Servidor de amplify
-// const BASE_PDF_URL = "http://127.0.0.1:3030/api" // Entorno local - Servidor de amplify
+const { BASE_URL, BASE_PDF_URL } = getCurrentEnvironment()
+console.log("Las URLS son: ", BASE_URL, BASE_PDF_URL)
 
+// Determine the environment with url, and return the base url
+function getCurrentEnvironment() {
+  const url = window.location.href
+  if (url.includes('localhost') || url.includes('127.0.0.1')) {
+    return {
+      BASE_URL: 'http://127.0.0.1:7071/api',
+      BASE_PDF_URL: 'http://127.0.0.1:3030/api'
+    }
+
+  } else {
+    return {
+      BASE_URL: 'https://jsfn-stech.azurewebsites.net/api',
+      BASE_PDF_URL: 'https://sagaon-tech-server.herokuapp.com/api'
+    }
+  }
+}
 async function getRates(type) {
   return await $.ajax({
     url: `${BASE_URL}/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`
