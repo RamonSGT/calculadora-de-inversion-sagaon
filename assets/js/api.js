@@ -7,7 +7,6 @@
 // })
 
 const { BASE_URL, BASE_PDF_URL } = getCurrentEnvironment()
-console.log("Las URLS son: ", BASE_URL, BASE_PDF_URL)
 
 // Determine the environment with url, and return the base url
 function getCurrentEnvironment() {
