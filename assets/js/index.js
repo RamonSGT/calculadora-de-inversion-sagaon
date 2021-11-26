@@ -11,7 +11,7 @@ const INPUT_ID_LARGE_LEAF = "largeLeaf";
 const INPUT_ID_MONTHLY_PAYMENT = "pagoMensuOperador";
 const INPUT_ID_MONTHLY_HOURS = "horasTrabajoOperador";
 
-let selectedOption = "";
+let selectedOption = "cut-or-engrave";
 let calculatedROI = false
 $(async function () {
 
@@ -530,7 +530,7 @@ function handleCalculator() {
     })
     document.querySelector("#row-corriente-engrave").removeAttribute("style")
     document.querySelector("#row-potencia-engrave").removeAttribute("style")
-    document.querySelector("#corrienteMax").parentElement.firstElementChild.innerText = "Corriente máxima para el corte"
+    document.querySelector("#corrienteMax").parentElement.firstElementChild.innerText = "Corriente eléctrica para el corte"
     document.querySelector("#potencia").parentElement.firstElementChild.innerText = "Potencia para el corte"
   }
 
