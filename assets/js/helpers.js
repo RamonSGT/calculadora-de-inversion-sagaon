@@ -119,7 +119,7 @@ function sortByMonth(arr) {
 function sortByRate(arr) {
   if(arr && arr.length === 0) return arr
   if(!arr) return []
-  const rate = [
+  const rates = [
     "1",
     "1a",
     "1b",
@@ -131,7 +131,7 @@ function sortByRate(arr) {
 
   return arr.sort((a, b) => {
     return (
-      months.indexOf(a.mes.toLowerCase()) - months.indexOf(b.mes.toLowerCase())
+      rates.indexOf(a.id_tarifa.toLowerCase()) - rates.indexOf(b.id_tarifa.toLowerCase())
     );
   });
 }

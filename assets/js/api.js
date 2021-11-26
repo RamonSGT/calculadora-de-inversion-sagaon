@@ -8,7 +8,7 @@
 
 const { BASE_URL, BASE_PDF_URL } = getCurrentEnvironment()
 
-// Determine the environment with url, and return the base url
+// Determinamos el entorno en el que se encuentra la aplicación según la url de la página
 function getCurrentEnvironment() {
   const url = window.location.href
   if (url.includes('localhost') || url.includes('127.0.0.1')) {
@@ -24,6 +24,7 @@ function getCurrentEnvironment() {
     }
   }
 }
+
 async function getRates(type) {
   return await $.ajax({
     url: `${BASE_URL}/cfe/rates/${type}?code=pppBiG10avvQGWropiQjBOagsQ0rokLIqsBhCdpgWsMwPZRadSlXUA==`

@@ -22,7 +22,7 @@ $(async function () {
   const tarifasHogar = await getRates("HOGAR");
 
   if (!tarifasHogar.error) {
-    store.setState("homeRates", tarifasHogar);
+    store.setState("homeRates", sortByRate(tarifasHogar))
     displaySelects({
       tagId: "listaTarifaHogarSelect",
       options: tarifasHogar,
