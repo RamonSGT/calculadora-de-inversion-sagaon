@@ -273,21 +273,16 @@ async function changedSelectedMachine(target) {
 
 $("#listaConsumosSelect").on("change", function () {
   const valueConsumption = store.selectConsumption(this.value);
-  console.log("El valor del consumo es: ", valueConsumption)
   store.setState("selectedConsumption", valueConsumption);
 });
 
 $("#listaConsumosSelect-2").on("change", () => {
-  console.log("El valor es select 2 es: ", document.querySelector("#listaConsumosSelect-2").value)
   const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
-  console.log("El valor del consumo es 2: ", valueConsumption)
   store.setState("selectedConsumption-2", valueConsumption)
 })
 
 $("#listaConsumosSelect-3").on("change", () => {
-  console.log("El valor es select 3 es: ", document.querySelector("#listaConsumosSelect-3").value)
   const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
-  console.log("El valor del consumo es 3: ", valueConsumption)
   store.setState("selectedConsumption-3", valueConsumption)
 })
 
@@ -491,7 +486,16 @@ function getParentAccordion(element) {
 function calculateUtility(totalHoursMachinePerDesign) {
   // Primero obtenemos todos los datos necesarios para realizar el cálculo
   const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
-  const totalConsumptionKWh = store.getState("totalConsumptionKWh")
+  let totalConsumptionKWh = null
+  console.log("La opcion selecc: ", selectedOption)
+  if(selectedOption === "cut-and-engrave") {
+    totalConsumptionKWh = store.getState("totalConsumptionKWh-2") + store.getState("totalConsumptionKWh-3")
+    console.log("El valor es:" , totalConsumptionKWh)
+  } else if(selectedOption === "cut-or-engrave") {
+    totalConsumptionKWh = store.getState("totalConsumptionKWh")
+    console.log("El valor es: ", totalConsumptionKWh)
+
+  }
   const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
   const costPerPiece = parseFloat($("#costoPedazoDesign").val())
   const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
@@ -529,6 +533,7 @@ function handleCalculator() {
     rateFlag,
   } = store.getState();
 
+  console.log(store.getState("selectedConsumption"), store.getState("selectedConsumption-2"), store.getState("selectedConsumption-3"))
   if (selectedMachine && store.getState("selectedConsumption") || (store.getState("selectedConsumption-2") && store.getState("selectedConsumption-3"))) {
     if(selectedOption === "cut-or-engrave") {
       $("#corrienteMax").text(Number(store.getState("selectedConsumption").corriente_maxima).toFixed(2) + "A")
@@ -541,9 +546,19 @@ function handleCalculator() {
       $("#potencia-engrave").text(Number(store.getState("selectedConsumption-3").potencia_kwh).toFixed(2) + "KWh")
     }
   }
-  let workHours = $("#horasTrabajoMaquina").val();
+  let workHours = null
+  if(selectedOption === "cut-and-engrave") {
+    workHours = $("#horasTrabajoMaquina").val();
+  } else if(selectedOption === "cut-or-engrave") {
+    workHours = $("#horasTrabajoMaquina-2").val();
+
+  }
+  if (selectedMachine && selectedRate && selectedCharge && workHours) {
+
+  }
   workHours = parseFloat(workHours) / 60 // De minutos a horas
 
+  console.log("La opción seleccionada es: ", selectedOption)
   if(selectedOption === "cut-or-engrave") {
     calculateExpenses({
       consumption: store.getState("selectedConsumption"),
@@ -603,7 +618,17 @@ function handleCalculator() {
     store.setState("rateFlag", 1);
     return;
   }
-  const totalCost = (parseFloat($("#costoPedazoDesign").val()) + store.getState("totalConsumptionKWh") + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("costDACPerDesign"))).toFixed(2);
+  // If selectedOption is cut-and-engrave, we need to add the cost of engrave
+  let totalConsumptionKWh = null
+  if(selectedOption === "cut-and-engrave") {
+    totalConsumptionKWh = (parseFloat(store.getState("totalConsumptionKWh-2")) + parseFloat(store.getState("totalConsumptionKWh-3"))).toFixed(2)
+  } else if(selectedOption === "cut-or-engrave") {
+    totalConsumptionKWh = parseFloat(store.getState("totalConsumptionKWh"))
+  }
+  console.log("El total consumption is: totalConsumptionKWh", totalConsumptionKWh)
+  const totalCost = (parseFloat($("#costoPedazoDesign").val()) + parseFloat(totalConsumptionKWh) + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("costDACPerDesign"))).toFixed(2);
+  console.log("El costo total es de: ", totalCost)
+
   let energy = `
         <tr>
           <th colspan="50%">Costo por pieza</th>
@@ -618,7 +643,7 @@ function handleCalculator() {
         `}
         <tr>
           <th colspan="50%">Costo de electricidad</th>
-          <td colspan="50%">$ ${store.getState("totalConsumptionKWh")}</td>
+          <td colspan="50%">$ ${totalConsumptionKWh}</td>
           </tr>
         <tr>
           <th colspan="50%">Costo del operador</th>

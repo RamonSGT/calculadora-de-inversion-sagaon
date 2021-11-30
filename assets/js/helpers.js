@@ -51,7 +51,7 @@ function calculateExpenses({
 
   store.setState(stateKey, 0)
   if (!rateFlag) {
-    const consumos = cargosHogarList.map((c) => {
+    let consumos = cargosHogarList.map((c) => {
       if (charge[c]) {
         let kwh_temp = totalKWh;
         totalKWh -= charge["kwh_" + c]
@@ -67,18 +67,13 @@ function calculateExpenses({
           : kwh_temp > 0
             ? (kwh_temp * charge[c]).toFixed(2)
             : 0 * charge[c])
-        store.setState(stateKey, (store.getState(stateKey) + parseFloat(subtotal)))
-        return `<tr>
-                    <th scope="col" colspan="2">Consumo ${c}</th>
-                    <td>${charge[c].toFixed(2)}</td>
-                    <td>${totalPeriod ? parseFloat(totalPeriod).toFixed(2) : totalPeriod}</td>
-                    <td>${subtotal ? parseFloat(subtotal).toFixed(2) : subtotal}</td>
-                </tr>
-                <p>Total: ${store.getState(stateKey)}</p>`;
+        store.setState(stateKey, (parseFloat(store.getState(stateKey)) + parseFloat(subtotal)))
+        return subtotal
       }
-      return null;
+      
     });
-    return consumos.join("");
+    const result = consumos.filter((c) => Number.isInteger(parseInt(c))).map(val => parseFloat(val)).reduce((a, b) => a + b, 0)
+    return result
   }
 
   store.setState(stateKey, 0)
