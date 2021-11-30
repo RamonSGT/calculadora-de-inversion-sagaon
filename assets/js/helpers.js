@@ -162,6 +162,7 @@ async function getDataCalculator() {
     powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
     powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
   }
+  console.log("El valor de power rate is: ", powerRate)
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
     power_rate: powerRate,
