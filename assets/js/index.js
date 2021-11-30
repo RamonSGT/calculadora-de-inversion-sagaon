@@ -694,6 +694,8 @@ function changedOptionsMachineContainer(target) {
     $("#listaConsumosSelect").removeClass("no-validate")
     $("#listaConsumosSelect-2").addClass("no-validate")
     $("#listaConsumosSelect-3").addClass("no-validate")
+    $("#horasTrabajoMaquina-2").addClass("no-validate")
+    $("#horasTrabajoMaquina-3").addClass("no-validate")
     displaySelects({
       tagId: "listaConsumosSelect",
       options: store.getState("consumptions"),
@@ -712,6 +714,7 @@ function changedOptionsMachineContainer(target) {
     $("#listaConsumosSelect-2").empty()
     $("#listaConsumosSelect-3").empty()
     $("#listaConsumosSelect").addClass("no-validate")
+    $("#horasTrabajoMaquina").addClass("no-validate")
     $("#listaConsumosSelect-2").removeClass("no-validate")
     $("#listaConsumosSelect-3").removeClass("no-validate")
     displaySelects({
