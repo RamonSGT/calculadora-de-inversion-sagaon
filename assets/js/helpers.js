@@ -1,4 +1,8 @@
-let receivedResponse = false
+
+/**
+ * En este archivo se encuentran funciones auxiliares que utilizaremos en otros archivos, estas funciones son relacionadas con mostrar cosas en el DOM o realizar cálculos y retornar el resultado.  
+ */
+
 
 function displaySelects({ tagId, options, value = "", text, decorator = "" }) {
   $(`#${tagId}`).append(
@@ -24,6 +28,9 @@ function displaySelects({ tagId, options, value = "", text, decorator = "" }) {
 const options = { style: "currency", currency: "MXN" };
 const numberFormat = new Intl.NumberFormat("es-MX", options);
 
+/**
+ * Esta función nos permite realizar el cálculo de la energía consumida por una máquina según el tiempo especificado.
+ */
 function calculateExpenses({
   consumption,
   charge,
@@ -54,12 +61,12 @@ function calculateExpenses({
           : kwh_temp > 0
             ? kwh_temp
             : 0)
+
         const subtotal = (totalKWh >= 0
           ? (charge["kwh_" + c] * charge[c]).toFixed(2)
           : kwh_temp > 0
             ? (kwh_temp * charge[c]).toFixed(2)
             : 0 * charge[c])
-
         store.setState(stateKey, (store.getState(stateKey) + parseFloat(subtotal)))
         return `<tr>
                     <th scope="col" colspan="2">Consumo ${c}</th>
@@ -92,6 +99,9 @@ function calculateExpenses({
   return consumos.join("");
 }
 
+/**
+ * En esta función se ordenan los meses de Enero a Diciembre.
+ */
 function sortByMonth(arr) {
   if (arr && arr.length === 0) return arr
   if (!arr) return []
@@ -116,6 +126,9 @@ function sortByMonth(arr) {
   });
 }
 
+/**
+ * En esta función se ordenan los meses de 1 a 1f que son los primeros que se muestran.
+ */
 function sortByRate(arr) {
   if(arr && arr.length === 0) return arr
   if(!arr) return []
@@ -136,6 +149,9 @@ function sortByRate(arr) {
   });
 }
 
+/**
+ * En esta función se obtienen los datos de la cálculadora para retornar sus datos. 
+ */
 async function getDataCalculator() {
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
@@ -167,6 +183,9 @@ async function getDataCalculator() {
   }
 }
 
+/**
+ * En este input se obtiene el archivo de la imágen del diseño y además se convierte en base64.
+ */
 async function getImgDesignData() {
   const files = document.querySelector("#customFile").files
   if(!files || !files.length) return
@@ -185,6 +204,10 @@ async function getImgDesignData() {
   }
 }
 
+/**
+ * Actualiza el tiempo que el usuario pasa en la calculadora y lo manda al padre (Página de Sagaon y posteriormente envia el tiempo actualizado a la base de datos.).
+ * Envia el tiempo primero al dominio "sagaon.tech". 
+ */
 function recordTimeTool() {
   setInterval(() => {
     store.setState("timeElapsed", store.getState("timeElapsed") + 60)
@@ -195,11 +218,17 @@ function recordTimeTool() {
   }, 60000)
 }
 
+/**
+ * En esta función obtenemos el size del iframe que se está cargando. 
+ */
 function getSizeIframe(e, firstTime = false) {
   const size = document.querySelector(".row.form-container").offsetHeight
   sendSizeToParent(size, firstTime)
 }
 
+/**
+ * Envia el tamaño de la calculadora al padre. 
+ */
 function sendSizeToParent(size, firstTime) {
   const message = JSON.stringify({
     size,
@@ -282,7 +311,7 @@ function getBase64(file) {
   })
 }
 
-// Convert local image in assets/images/demon.svg to base64 this is used for tutorial
+// Convierte una imagen local en base64 para usarla en el tutorial.
 function getBase64FromSVG() {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -302,13 +331,14 @@ function getBase64FromSVG() {
   })
 }
 
-// Upload base64 to input type file with id #customFile
+// Pone el archivo de base64 en el input de tipo file con id #customFile.
 function uploadBase64ToInputFile(base64) {
   const inputFile = document.querySelector("#customFile")
   const file = base64ToFile(base64, "customFile")
   inputFile.files = [file]
 }
 
+// Convierte el base64 en un archivo para poder usarlo en el input de tipo file.
  function base64ToFile(base64, filename) {
   let arr = base64.split(','), mime = arr[0].match(/:(.*?);/)[1],
     bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -318,12 +348,14 @@ function uploadBase64ToInputFile(base64) {
   return new File([u8arr], filename, { type: mime });
 }
 
+// Esta función es la que se encarga de subir la imagen en el input de tipo archivo #customFile.
 function FileListItems (files) {
   var b = new ClipboardEvent("").clipboardData || new DataTransfer()
   for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i])
   return b.files
 }
 
+// Esta función es la que se encarga de subir la imagen en el input de tipo archivo #customFile.
 function setBase64ToInputFile() {
   getBase64FromSVG().then(svg => {
     const file = base64ToFile(svg, "caratulas.svg")
@@ -332,13 +364,13 @@ function setBase64ToInputFile() {
   })
 }
 
-// Calculate the size of total scroll
+// Obtiene el tamaño del scroll de la calculadora.
 function getScrollSize() {
   const scrollSize = document.querySelector(".row.form-container").offsetHeight
   return scrollSize
 }
 
-// Pop over files
+// Esta función contiene la configuración inicial de los popovers (Iconos de ayuda) que se encuentran en la calculadora.
 function createPopOver() {
   let contents = [
     "Es la potencia promedio a lo que trabajará tú máquina para realizar el diseño ingresado.",
@@ -366,7 +398,7 @@ function createPopOver() {
     "Es el precio al cual adquiriste la hoja de material.",
     "Es la medida (ancho) de la hoja.",
     "Es la medida (largo) de la hoja.",
-    "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja. <strong>(Esto no contempla ningún otro valor como el costo del consumo eléctrico o del operador.)</strong>",
+    "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja. Se hace una proyección de ",
     "Es la medida (ancho) del diseño.",
     "Es la medida (largo) del diseño.",
     "Es la cantidad de minutos que tardará tu máquina de forma aproximada para plasmar el diseño.",
@@ -419,5 +451,6 @@ toastr.options = {
   hideMethod: "fadeOut",
 }
 
+// El Resize llama a una función observadora que detecta siempre que el iframe cambie de tamaño.
 new ResizeObserver(getSizeIframe).observe(document.querySelector(".row.form-container"))
 document.addEventListener("DOMContentLoaded", e => getSizeIframe(e, true))

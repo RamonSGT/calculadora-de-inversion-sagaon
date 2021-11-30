@@ -16,7 +16,6 @@ function getCurrentEnvironment() {
       BASE_URL: 'http://127.0.0.1:7071/api',
       BASE_PDF_URL: 'http://127.0.0.1:3030/api'
     }
-
   } else {
     return {
       BASE_URL: 'https://jsfn-stech.azurewebsites.net/api',
@@ -24,6 +23,10 @@ function getCurrentEnvironment() {
     }
   }
 }
+
+/**
+ * A partir de las siguientes funciones obtenemos los datos de la calculadora.
+ */
 
 async function getRates(type) {
   return await $.ajax({
@@ -92,9 +95,9 @@ async function storeHistoryCalculator() {
 }
 
 /**
- * 
- * 
+ * Con esta función se genera el pdf que nos devuelve la calculadora, si se modifica el orden de las tablas puede afectar la obtención de los datos por lo tanto el pdf podría salir un poco diferente a los resultados reales.
  */
+
 async function generatePdf() {
   const rateElectricity = (document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong")) ? document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong")
 
@@ -148,6 +151,10 @@ async function generatePdf() {
       return { error: { message: error.responseJSON?.message } }
     })
 }
+
+/**
+ * Obtiene una key unica para cada usuario que será su identificador, esta key se guardará en la sessionStorage del navegador. Eso pasa por el método GET de la api. En el mismo endpoint se manda el tiempo transcurrido cada 60 segundos y se actualiza en la base de datos para la sesión actual.
+ */
 
 async function countCalculatorView(method = "GET", body = null) {
   if (method !== "GET") return

@@ -1,3 +1,5 @@
+let receivedResponse = false
+
 function startTutorial() {
   sendTutotrialStatus(true)
   const popoverElements = getPopoverElements()
@@ -5,7 +7,7 @@ function startTutorial() {
   loadTutorial()
 }
 
-// Get all img tags and then get only the ones with tag id popover-${i} and return them in array
+// Obtiene todas las etiquetas img y luego obtiene solo las que tienen el atributo id popover-${i} y retorna un arreglo
 function getPopoverElements() {
   const popoverElements = document.getElementsByTagName('img')
   const popoverElementsArray = []
@@ -17,14 +19,14 @@ function getPopoverElements() {
   return popoverElementsArray
 }
 
-// Add style display none to all popover elements
+// Añade display none para todos los popover elements y los oculta
 function hidePopoverElements(popoverElements) {
   popoverElements.forEach(element => {
     element.style.display = 'none'
   })
 }
 
-// Remove style display none to all popover elements
+// Remueve el atributo style de todos los popover elements para que se muestren
 function showPopoverElements(popoverElements) {
   popoverElements.forEach(element => {
     element.removeAttribute("style")
@@ -32,6 +34,8 @@ function showPopoverElements(popoverElements) {
   })
 }
 
+
+// Es la configuración completa del flujo del tutorial
 function loadTutorial() {
   let customScrollY = 0
   introJs().setOptions({

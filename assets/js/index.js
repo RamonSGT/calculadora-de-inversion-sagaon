@@ -1,3 +1,10 @@
+/**
+ * En este archivo se encuentran las funciones que se encargan de manejar los eventos de algunos elementos del DOM, asi como la obtención de datos de los mismos.
+ */
+
+/**
+ * Estas son las constantes de los selectores de los campos del DOM (Algunos selectores no estan puestas en constantes por lo que estan directamente en las funciones.)
+ */
 const SELECT_ID_LIST_MACHINES = "listaMaquinasSelect";
 const SELECT_ID_CONSUMPTION_RATE = "listaConsumosSelect";
 const SELECT_ID_RATE_CFE = "listaTarifaHogarSelect";
@@ -11,16 +18,26 @@ const INPUT_ID_LARGE_LEAF = "largeLeaf";
 const INPUT_ID_MONTHLY_PAYMENT = "pagoMensuOperador";
 const INPUT_ID_MONTHLY_HOURS = "horasTrabajoOperador";
 
+/**
+ * Estas son variables globales que se utilizan como variables bandera dentro del código.
+ */
 let selectedOption = "cut-or-engrave";
 let calculatedROI = false
-$(async function () {
 
+$(async function () {
   $("#hogar").css("background-color", "#757575");
   $("#cargosContainer").css("display", "none");
 
   // ========================== Calling APIs ========================== //
+  /**
+   * Obtiene las tarifas del tipo de servicio HOGAR que es el que se pone por defecto en el select.
+   */
   const tarifasHogar = await getRates("HOGAR");
 
+  /**
+   * Se valida si no hay un error en la llamada a la api, si todo sale bien, entonces se guardan las tarifas en el store y se ponen los valores en el select.
+   * 
+   */
   if (!tarifasHogar.error) {
     store.setState("homeRates", sortByRate(tarifasHogar))
     displaySelects({
@@ -31,8 +48,14 @@ $(async function () {
     });
   }
 
+  /**
+   * Se obtiene todas las tarifas DAC de la api y se almacenan en el store, por si son requeridas por el usuario.
+   */
   const tarifasDAC = await getRates("DAC");
 
+  /**
+   * Lo mismo que arriba, pero con las tarifas DAC.
+   */
   if (!tarifasDAC.error) {
     store.setState("DACRates", tarifasDAC);
     displaySelects({
@@ -43,9 +66,19 @@ $(async function () {
     });
   }
 
+  /**
+   * Se obtienen todos los productos de la api y se almacenan en el store. Cuando se habla de productos se hace referencia a las máquinas que se encuentran en la base de datos IoT.
+   */
   const productos = await getProducts();
+
+  /**
+   * Se valida si no hay un error en la llamada a la api, si todo sale bien, entonces se guardan los productos en el store y se ponen los valores en el select.
+   */
   if (!productos.error) {
     store.setState("machines", productos);
+    /**
+     * Se agrega un nuevo atributo de área total para cada máquina que se encuentra en el store con la finalidad de poder ordenarlos según el área de trabajo de la máquina.
+     */
     productos.forEach(val => val.size = val.corte_ancho * val.corte_largo)
     displaySelects({
       tagId: "listaMaquinasSelect",
@@ -58,6 +91,9 @@ $(async function () {
 });
 
 // ========================== Handlers ========================== //
+/**
+ * En esta función se centralizan las llamadas a otras funciones que realizan las operaciones de calculo de los costos de la máquina.
+ */
 function calculatorCalls() {
   calculateCostInput(document.getElementById(INPUT_ID_COST_TOTAL_LEAF))
   calculateRawMaterialData(document.getElementById(INPUT_ID_WIDTH_LEAF), "widthLeaf")
@@ -70,6 +106,9 @@ $("#costoInput").on("input", function (e) {
   calculateCostInput(e.target)
 });
 
+/**
+  En esta función se cálcula el costo de de un pedoazo de material, es el input que se encuentra en la sección de "Materia Prima"
+ */
 function calculateCostInput(target) {
   store.setState("totalCost", parseFloat(target.value));
   if (!store.getState("selectedMachine") || !store.getState("widthLeaf") || !store.getState("largeLeaf"))
@@ -98,6 +137,9 @@ $("#widthLeafDesign").on("input", function (e) {
   calculatePieces(e.target, "widthLeafDesign")
 })
 
+/**
+ * Es una función que centraliza la llamada a otras funciones, que calculan el número de pedazos que se necesitan para la máquina. 
+ */
 function calculatePieces(target, type = "") {
   if (type) store.setState(type, parseFloat(target.value));
   $("#numeroPedazosDesign").val(store.calculateDesignChunks())

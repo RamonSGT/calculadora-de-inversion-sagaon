@@ -26,18 +26,21 @@ class Store {
     );
   }
 
+  // Esta función selecciona el tipo de consumo según el id que recibe (10%, 20%, 30%...).
   selectConsumption(id_consumo) {
     return this.state.selectedConsumption = this.state.consumptions.find(
       (c) => c.id_consumo === id_consumo
     );
   }
 
+  // Selecciona el tipo de tarifa según el id que recibe (1, 1A, 1B...).
   selectHomeRate(id_tarifa) {
     this.state.selectedRate = this.state.homeRates.find(
       (c) => c.id_tarifa === id_tarifa
     );
   }
 
+  // Selecciona el tipo de tarifa DAC según el id que recibe (Noroeste, Baja California, etc...).
   selectDACRate(id_tarifa) {
     this.state.selectedRate = this.state.DACRates.find(
       (dr) => dr.id_tarifa === id_tarifa
@@ -74,7 +77,7 @@ class Store {
     const largeLeafDesign = store.getState("largeLeafDesign")
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
-    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.1) * (largeLeafDesign + 0.1))
+    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))
     store.setState("designPerChunk", designPerChunk)
     const total = parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)
     store.setState("totalDesignChunks", total)
@@ -87,7 +90,7 @@ class Store {
     const largeLeafDesign = store.getState("largeLeafDesign")
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
-    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.1) * (largeLeafDesign + 0.1))
+    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))
     store.setState("designPerChunk", designPerChunk)
     const total = parseFloat(designPerChunk).toFixed(2)
     store.setState("totalDesignChunks", total)
