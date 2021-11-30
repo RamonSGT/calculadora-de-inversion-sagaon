@@ -153,9 +153,18 @@ function sortByRate(arr) {
  * En esta función se obtienen los datos de la cálculadora para retornar sus datos. 
  */
 async function getDataCalculator() {
+  const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
+  let powerRate = ""
+  if(cutOrEngraveActived) {
+    powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
+  }
+  if(!cutOrEngraveActived) {
+    powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
+    powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
+  }
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
-    power_rate: document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim(),
+    power_rate: powerRate,
     material: document.querySelector("#type-material").value.toString(),
     cost_material: document.querySelector("#costoInput").value.toString(),
     width_material: document.querySelector("#widthLeaf").value.toString(),

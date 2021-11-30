@@ -500,10 +500,7 @@ function calculateUtility(totalHoursMachinePerDesign) {
   // Si no valor en el campo del trabajador, entonces ponemos por default el 0. Hay redundancia en el valor por si el resultabo obtenido es NaN.
   const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
   store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
-  // Se suma el costo del pedazo, además del consumo electrico y el costo del trabajador
-  console.log("El costo de una pieza por el salario es", costPerWorkerPiece)
   const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
-  // Se resta el valor de una
   const utilityPerDesign = valuePerPiece - totalCostPerDesign
   const totalUtility = utilityPerDesign * numeroPedazosDesign
   const roiPieces = priceMachine / utilityPerDesign
