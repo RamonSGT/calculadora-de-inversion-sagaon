@@ -120,10 +120,10 @@ async function generatePdf() {
     powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
-    currentRate += "de corte " + document.querySelector("#corrienteMax").innerText
-    currentRate += " de grabado " + document.querySelector("#corrienteMax-engrave").innerText
-    power += "de corte " + document.querySelector("#potencia").innerText
-    power += " de Grabado " + document.querySelector("#potencia-engrave").innerText
+    currentRate += "Corte | " + document.querySelector("#corrienteMax").innerText
+    currentRate += " Grabado " + document.querySelector("#corrienteMax-engrave").innerText
+    power += "Corte | " + document.querySelector("#potencia").innerText
+    power += " Grabado " + document.querySelector("#potencia-engrave").innerText
   }
   console.log("El valor de power rate is: ", powerRate)
   console.log("El valor del time per design is: ", timePerDesign)
@@ -132,7 +132,7 @@ async function generatePdf() {
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
     data: JSON.stringify({
-      currentRate: currentRate,
+      maxCurrent: currentRate,
       power: power,
       costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
       costElectricity: costElectricity.innerText,
