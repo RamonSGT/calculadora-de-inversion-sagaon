@@ -114,7 +114,7 @@ async function generatePdf() {
     powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
     timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
     currentRate = "Corriente eléctrica " + document.querySelector("#corrienteMax").innerText
-    power = "Potencia " + document.querySelector("#power").innerText
+    power = "Potencia " + document.querySelector("#potencia").innerText
   } else if(!cutOrEngraveActived) {
     powerRate += "Corte " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
     powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
