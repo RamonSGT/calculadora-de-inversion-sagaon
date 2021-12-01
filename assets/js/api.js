@@ -118,7 +118,8 @@ async function generatePdf() {
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
   }
-
+  console.log("El valor de power rate is: ", powerRate)
+  console.log("El valor del time per design is: ", timePerDesign)
   return await $.ajax({
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
