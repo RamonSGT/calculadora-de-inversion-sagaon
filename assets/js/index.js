@@ -487,7 +487,6 @@ function calculateUtility(totalHoursMachinePerDesign) {
   // Primero obtenemos todos los datos necesarios para realizar el cálculo
   const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
   let totalConsumptionKWh = null
-  console.log("La opcion selecc: ", selectedOption)
   if(selectedOption === "cut-and-engrave") {
     totalConsumptionKWh = store.getState("totalConsumptionKWh-2") + store.getState("totalConsumptionKWh-3")
     // Se divide entre 2 por que es es el tiempo que se utilizará para calcular el costo del operador por pieza.

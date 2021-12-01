@@ -150,12 +150,16 @@ function sortByRate(arr) {
 async function getDataCalculator() {
   const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
   let powerRate = ""
+  let timePerDesign = ""
   if(cutOrEngraveActived) {
     powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
+    timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
   }
   if(!cutOrEngraveActived) {
     powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
     powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
+    timePerDesign += "C " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
+    timePerDesign += " G " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
   }
   console.log("El valor de power rate is: ", powerRate)
   return {
@@ -170,7 +174,7 @@ async function getDataCalculator() {
     cost_per_piece_material: document.querySelector("#costoPedazo").value.toString(),
     width_design: document.querySelector("#widthLeafDesign").value.toString(),
     height_design: document.querySelector("#largeLeafDesign").value.toString(),
-    time_per_design: document.querySelector("#horasTrabajoMaquina").value.toString(),
+    time_per_design: ,
     number_pieces_design: document.querySelector("#numeroPedazosDesign").value.toString(),
     cost_per_piece_design: document.querySelector("#costoPedazoDesign").value.toString(),
     electricity_rate: document.querySelector("#listaTarifaHogarSelect").value.toString(),
