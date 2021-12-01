@@ -131,8 +131,8 @@ async function generatePdf() {
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
     data: JSON.stringify({
-      currentRate: document.querySelector("#corrienteMax").innerText,
-      power: powerRate,
+      currentRate: currentRate,
+      power: power,
       costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
       costElectricity: costElectricity.innerText,
       costOperator: costOperator.innerText,
