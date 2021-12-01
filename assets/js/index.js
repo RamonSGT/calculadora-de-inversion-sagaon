@@ -490,11 +490,10 @@ function calculateUtility(totalHoursMachinePerDesign) {
   console.log("La opcion selecc: ", selectedOption)
   if(selectedOption === "cut-and-engrave") {
     totalConsumptionKWh = store.getState("totalConsumptionKWh-2") + store.getState("totalConsumptionKWh-3")
-    console.log("El valor es:" , totalConsumptionKWh)
+    // Se divide entre 2 por que es es el tiempo que se utilizará para calcular el costo del operador por pieza.
+    totalHoursMachinePerDesign = totalHoursMachinePerDesign / 2
   } else if(selectedOption === "cut-or-engrave") {
     totalConsumptionKWh = store.getState("totalConsumptionKWh")
-    console.log("El valor es: ", totalConsumptionKWh)
-
   }
   const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
   const costPerPiece = parseFloat($("#costoPedazoDesign").val())
@@ -546,24 +545,15 @@ function handleCalculator() {
       $("#potencia-engrave").text(Number(store.getState("selectedConsumption-3").potencia_kwh).toFixed(2) + "KWh")
     }
   }
-  let workHours = null
-  if(selectedOption === "cut-and-engrave") {
-    workHours = $("#horasTrabajoMaquina").val();
-  } else if(selectedOption === "cut-or-engrave") {
-    workHours = $("#horasTrabajoMaquina-2").val();
 
-  }
-  if (selectedMachine && selectedRate && selectedCharge && workHours) {
-
-  }
-  workHours = parseFloat(workHours) / 60 // De minutos a horas
-
-  console.log("La opción seleccionada es: ", selectedOption)
+  let totalHours = 0
   if(selectedOption === "cut-or-engrave") {
+    const horasTrabajoMaquina = parseFloat($("#horasTrabajoMaquina").val())
+    totalHours = horasTrabajoMaquina
     calculateExpenses({
       consumption: store.getState("selectedConsumption"),
       charge: selectedCharge,
-      workHours,
+      workHours: horasTrabajoMaquina / 60,
       rateFlag,
       stateKey: "totalConsumptionKWh"
     });
@@ -573,17 +563,20 @@ function handleCalculator() {
     document.querySelector("#potencia").parentElement.firstElementChild.innerText = "Potencia"
   }
   if(selectedOption === "cut-and-engrave") {
+    const horasTrabajoMaquina2 = parseFloat($("#horasTrabajoMaquina-2").val())
+    const horasTrabajoMaquina3 = parseFloat($("#horasTrabajoMaquina-3").val())
+    totalHours = horasTrabajoMaquina2 + horasTrabajoMaquina3
     calculateExpenses({
       consumption: store.getState("selectedConsumption-2"),
       charge: selectedCharge,
-      workHours,
+      workHours: horasTrabajoMaquina2 / 60,
       rateFlag,
       stateKey: "totalConsumptionKWh-2"
     })
     calculateExpenses({
       consumption: store.getState("selectedConsumption-3"),
       charge: selectedCharge,
-      workHours,
+      workHours: horasTrabajoMaquina3 / 60,
       rateFlag,
       stateKey: "totalConsumptionKWh-3"
     })
@@ -593,7 +586,7 @@ function handleCalculator() {
     document.querySelector("#potencia").parentElement.firstElementChild.innerText = "Potencia para el corte"
   }
 
-  calculateUtility(workHours);
+  calculateUtility(totalHours);
 
   const totalPowerKWh = selectedOption === "cut-or-engrave" ? parseFloat(store.getState("selectedConsumption").potencia_kwh) : parseFloat(store.getState("selectedConsumption-2").potencia_kwh) + parseFloat(store.getState("selectedConsumption-3").potencia_kwh)
 
@@ -604,9 +597,11 @@ function handleCalculator() {
           <th scope="col" colspan="50%"><strong>Concepto</strong></th>
           <th scope="col" colspan="50%"><strong>Costo (MXN)</strong></th>
         </tr>`;
+
+        
   let totalKWh = (
     totalPowerKWh *
-    workHours
+    totalHours
   ).toFixed(2);
   if (parseFloat(totalKWh) > parseFloat(selectedRate.uso_dac) && rateFlag === 0) {
     sendMessageToastToParent("warning", "La cuota de electricidad excede la categoría hogar, seleccione una región")
