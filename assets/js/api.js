@@ -113,20 +113,21 @@ async function generatePdf() {
   if(cutOrEngraveActived) {
     powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
     timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
-    currentRate = "Corriente eléctrica " + document.querySelector("#corrienteMax").innerText
-    power = "Potencia " + document.querySelector("#potencia").innerText
+    currentRate = document.querySelector("#corrienteMax").innerText
+    power = document.querySelector("#potencia").innerText
   } else if(!cutOrEngraveActived) {
     powerRate += "Corte " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
     powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
-    currentRate += "Corriente eléctrica corte " + document.querySelector("#corrienteMax").innerText
-    currentRate += " Corriente eléctrica grabado " + document.querySelector("#corrienteMax-engrave").innerText
-    power += "Potencia corte " + document.querySelector("#potencia").innerText
-    power += " Potencia grabado " + document.querySelector("#potencia-engrave").innerText
+    currentRate += "de corte " + document.querySelector("#corrienteMax").innerText
+    currentRate += " de grabado " + document.querySelector("#corrienteMax-engrave").innerText
+    power += "De corte " + document.querySelector("#potencia").innerText
+    power += " Grabado " + document.querySelector("#potencia-engrave").innerText
   }
   console.log("El valor de power rate is: ", powerRate)
   console.log("El valor del time per design is: ", timePerDesign)
+  console.log("Curr rate: ", currentRate)
   return await $.ajax({
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
