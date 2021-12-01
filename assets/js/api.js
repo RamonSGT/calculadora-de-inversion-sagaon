@@ -111,12 +111,26 @@ async function generatePdf() {
 
   const costOperator = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(5) > td") : document.querySelector("#listaConsumos > tr:nth-child(4) > td")
 
+  const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
+  let powerRate = ""
+  let timePerDesign = ""
+  if(cutOrEngraveActived) {
+    powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
+    timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
+  }
+  if(!cutOrEngraveActived) {
+    powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
+    powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
+    timePerDesign += "C " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
+    timePerDesign += " G " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
+  }
+
   return await $.ajax({
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
     data: JSON.stringify({
       maxCurrent: document.querySelector("#corrienteMax").innerText,
-      power: document.querySelector("#potencia").innerText,
+      power: powerRate,
       costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
       costElectricity: costElectricity.innerText,
       costOperator: costOperator.innerText,
@@ -131,7 +145,7 @@ async function generatePdf() {
       largeMaterial: document.querySelector("#largeLeaf").value,
       designWidth: document.querySelector("#widthLeafDesign").value,
       designLarge: document.querySelector("#largeLeafDesign").value,
-      timePerDesign: document.querySelector("#horasTrabajoMaquina").value,
+      timePerDesign,
       pricePerDesign: document.querySelector("#valuePerPiece").value,
       rateElectricity: store.getState("selectedRate").id_tarifa,
       typeRateElectricity: store.getState("selectedRate").tipo,
