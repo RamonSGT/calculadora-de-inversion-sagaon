@@ -156,10 +156,10 @@ async function getDataCalculator() {
     timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
   }
   if(!cutOrEngraveActived) {
-    powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
-    powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
-    timePerDesign += "C " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
-    timePerDesign += " G " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
+    powerRate += "Corte " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
+    powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
+    timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
+    timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
   }
   console.log("El valor de power rate is: ", powerRate)
   return {
