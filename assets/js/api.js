@@ -120,14 +120,11 @@ async function generatePdf() {
     powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
-    currentRate += "Corte | " + document.querySelector("#corrienteMax").innerText
-    currentRate += " Grabado " + document.querySelector("#corrienteMax-engrave").innerText
-    power += "Corte | " + document.querySelector("#potencia").innerText
-    power += " Grabado " + document.querySelector("#potencia-engrave").innerText
+    currentRate += "Corte " + document.querySelector("#corrienteMax").innerText
+    currentRate += " | Grabado " + document.querySelector("#corrienteMax-engrave").innerText
+    power += "Corte " + document.querySelector("#potencia").innerText
+    power += " | Grabado " + document.querySelector("#potencia-engrave").innerText
   }
-  console.log("El valor de power rate is: ", powerRate)
-  console.log("El valor del time per design is: ", timePerDesign)
-  console.log("Curr rate: ", currentRate)
   return await $.ajax({
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
