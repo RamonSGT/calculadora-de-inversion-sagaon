@@ -108,15 +108,21 @@ async function generatePdf() {
   const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
   let powerRate = ""
   let timePerDesign = ""
-
+  let currentRate = ""
+  let power = ""
   if(cutOrEngraveActived) {
     powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
     timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
+    power += "Corriente eléctrica" + document.querySelector("#corrienteMax").value.toString()
   } else if(!cutOrEngraveActived) {
     powerRate += "Corte " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
     powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
+    currentRate += "Corriente eléctrica corte " + document.querySelector("#corrienteMax").value.toString()
+    currentRate += " Corriente eléctrica grabado " + document.querySelector("#corrienteMax-engrave").value.toString()
+    power += "Potencia corte " + document.querySelector("#potencia").value.toString()
+    power += " Potencia grabado " + document.querySelector("#potencia-engrave").value.toString()
   }
   console.log("El valor de power rate is: ", powerRate)
   console.log("El valor del time per design is: ", timePerDesign)
@@ -124,7 +130,7 @@ async function generatePdf() {
     url: `${BASE_PDF_URL}/calculator/generate-pdf`,
     method: 'POST',
     data: JSON.stringify({
-      maxCurrent: document.querySelector("#corrienteMax").innerText,
+      currentRate: document.querySelector("#corrienteMax").innerText,
       power: powerRate,
       costPerPiece: document.querySelector("#listaConsumos > tr:nth-child(2) > td").innerText,
       costElectricity: costElectricity.innerText,
@@ -134,7 +140,7 @@ async function generatePdf() {
       piecesToSell: piecesToSell.innerText,
       imgDesign: await getBufferFromImage(),
       machine: document.querySelector("#listaMaquinasSelect").value,
-      powerMachine: document.querySelector("#listaConsumosSelect").value.split(" - ").shift(),
+      powerMachine: powerRate,
       typeMaterial: document.querySelector("#type-material").value,
       widthMaterial: document.querySelector("#widthLeaf").value,
       largeMaterial: document.querySelector("#largeLeaf").value,
