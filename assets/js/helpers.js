@@ -82,7 +82,7 @@ function calculateExpenses({
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
     console.log("El consumo aactual es: ", subtotal)
-    store.setState(stateKey, parseFloat(subtotal))
+    store.setState(stateKey, (parseFloat(store.getState(stateKey)) + parseFloat(subtotal)))
     return `<tr>
             <th scope="col" colspan="2">Consumo ${c}</th>
             <td>${charge[c].toFixed(2)}</td>
@@ -92,7 +92,6 @@ function calculateExpenses({
         <p>Total: ${store.getState(stateKey)}</p>`;
   });
 
-  store.setState(stateKey, 0)
   return consumos.join("");
 }
 
