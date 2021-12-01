@@ -174,7 +174,7 @@ async function getDataCalculator() {
     cost_per_piece_material: document.querySelector("#costoPedazo").value.toString(),
     width_design: document.querySelector("#widthLeafDesign").value.toString(),
     height_design: document.querySelector("#largeLeafDesign").value.toString(),
-    time_per_design: ,
+    time_per_design: timePerDesign,
     number_pieces_design: document.querySelector("#numeroPedazosDesign").value.toString(),
     cost_per_piece_design: document.querySelector("#costoPedazoDesign").value.toString(),
     electricity_rate: document.querySelector("#listaTarifaHogarSelect").value.toString(),
