@@ -614,9 +614,12 @@ function handleCalculator() {
   }
   // If selectedOption is cut-and-engrave, we need to add the cost of engrave
   let totalConsumptionKWh = null
+  console.log("El consumo total es: ", totalConsumptionKWh)
   if(selectedOption === "cut-and-engrave") {
+    console.log("El consumo total de electricidad es 1: ", store.getState("totalConsumptionKWh"))
     totalConsumptionKWh = (parseFloat(store.getState("totalConsumptionKWh-2")) + parseFloat(store.getState("totalConsumptionKWh-3"))).toFixed(2)
   } else if(selectedOption === "cut-or-engrave") {
+    console.log("El consumo total de electricidad es 2: ", store.getState("totalConsumptionKWh"))
     totalConsumptionKWh = parseFloat(store.getState("totalConsumptionKWh"))
   }
   console.log("El total consumption is: totalConsumptionKWh", totalConsumptionKWh)
