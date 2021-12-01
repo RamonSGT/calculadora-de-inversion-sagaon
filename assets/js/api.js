@@ -100,29 +100,23 @@ async function storeHistoryCalculator() {
 
 async function generatePdf() {
   const rateElectricity = (document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong")) ? document.querySelector("#listaConsumos > tr:nth-child(6) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(5) > th:nth-child(2) > strong")
-
   const utilityPerPiece = document.querySelector("#listaConsumos > tr:nth-child(8) > td") ? document.querySelector("#listaConsumos > tr:nth-child(8) > td") : (store.getState("selectedRate").tipo !== "DAC") ? document.querySelector(`#listaConsumos > tr:nth-child(10) > td`) : document.querySelector(`#listaConsumos > tr:nth-child(9) > td`)
-
   const piecesToSell = document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") ? document.querySelector("#listaConsumos > tr:nth-child(10) > th:nth-child(2) > strong") : document.querySelector("#listaConsumos > tr:nth-child(11) > th:nth-child(2) > strong")
-
   const fixedCostElectricity = document.querySelector("#listaConsumos > tr:nth-child(3) > td") ? document.querySelector("#listaConsumos > tr:nth-child(3) > td") : ""
-
   const costElectricity = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(4) > td") : document.querySelector("#listaConsumos > tr:nth-child(3) > td")
-
   const costOperator = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(5) > td") : document.querySelector("#listaConsumos > tr:nth-child(4) > td")
-
   const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
   let powerRate = ""
   let timePerDesign = ""
+
   if(cutOrEngraveActived) {
     powerRate = document.querySelector("#listaConsumosSelect").value.toString().split("-").shift().trim()
     timePerDesign = document.querySelector("#horasTrabajoMaquina").value.toString()
-  }
-  if(!cutOrEngraveActived) {
-    powerRate += "C " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
-    powerRate += " G " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
-    timePerDesign += "C " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
-    timePerDesign += " G " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
+  } else if(!cutOrEngraveActived) {
+    powerRate += "Corte " + document.querySelector("#listaConsumosSelect-2").value.toString().split("-").shift().trim()
+    powerRate += " Grabado " + document.querySelector("#listaConsumosSelect-3").value.toString().split("-").shift().trim()
+    timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
+    timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
   }
 
   return await $.ajax({
