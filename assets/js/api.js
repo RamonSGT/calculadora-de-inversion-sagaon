@@ -122,8 +122,8 @@ async function generatePdf() {
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
     currentRate += "de corte " + document.querySelector("#corrienteMax").innerText
     currentRate += " de grabado " + document.querySelector("#corrienteMax-engrave").innerText
-    power += "De corte " + document.querySelector("#potencia").innerText
-    power += " Grabado " + document.querySelector("#potencia-engrave").innerText
+    power += "de corte " + document.querySelector("#potencia").innerText
+    power += " de Grabado " + document.querySelector("#potencia-engrave").innerText
   }
   console.log("El valor de power rate is: ", powerRate)
   console.log("El valor del time per design is: ", timePerDesign)
