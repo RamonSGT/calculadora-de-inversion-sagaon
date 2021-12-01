@@ -44,7 +44,7 @@ function calculateExpenses({
     "intermedio_alto",
     "excedente",
   ];
-  let cargosDACList = ["fijo", "basico"];
+  let cargosDACList = ["basico"];
   store.setState("DACFixedPrice", charge["fijo"])
   const consumptionClientKWh = parseFloat(document.querySelector("#currentUserConsumption").value)
   let totalKWh = ((consumption.potencia_kwh * workHours) + (consumptionClientKWh || 0)).toFixed(2);
@@ -77,7 +77,6 @@ function calculateExpenses({
   }
 
   store.setState(stateKey, 0)
-  console.log("List of charges are", cargosDACList)
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
