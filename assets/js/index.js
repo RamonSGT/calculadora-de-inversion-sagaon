@@ -549,6 +549,7 @@ function handleCalculator() {
   if(selectedOption === "cut-or-engrave") {
     const horasTrabajoMaquina = parseFloat($("#horasTrabajoMaquina").val())
     totalHours = horasTrabajoMaquina
+    console.log("El consumo seleccionado es: ", store.getState("selectedConsumption"))
     calculateExpenses({
       consumption: store.getState("selectedConsumption"),
       charge: selectedCharge,

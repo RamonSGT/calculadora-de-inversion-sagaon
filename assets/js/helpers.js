@@ -77,9 +77,11 @@ function calculateExpenses({
   }
 
   store.setState(stateKey, 0)
+  console.log("List of charges are", cargosDACList)
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
+    console.log("El consumo aactual es: ", subtotal)
     store.setState(stateKey, parseFloat(subtotal))
     return `<tr>
             <th scope="col" colspan="2">Consumo ${c}</th>
