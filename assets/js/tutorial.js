@@ -159,7 +159,9 @@ function loadTutorial() {
     ]
   }).oncomplete(() => {
     sendTutotrialStatus(false)
-  }).onchange(function (targetElement) {
+  }).onchange(function (targetElement, e) {
+    console.log("El valo de target element es: ", targetElement)
+    console.log("El valor de e es: ", e)
     if (targetElement.classList.contains("introjs-section-machine") ||
       targetElement.classList.contains("introjs-section-raw") ||
       targetElement.classList.contains("introjs-section-design") ||
@@ -390,3 +392,6 @@ document.querySelector("#icon-tutorial").addEventListener("click", e => {
   startTutorial()
 })
   
+function handleCalculations() {
+
+}
