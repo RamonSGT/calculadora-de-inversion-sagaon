@@ -167,9 +167,8 @@ function loadTutorial() {
     ]
   }).oncomplete(() => {
     sendTutotrialStatus(false)
-  }).onchange(function (targetElement, e) {
+  }).onchange(function (targetElement) {
     console.log("El valo de target element es: ", targetElement)
-    console.log("El valor de e es: ", e)
     if (targetElement.classList.contains("introjs-section-machine") ||
       targetElement.classList.contains("introjs-section-raw") ||
       targetElement.classList.contains("introjs-section-design") ||
@@ -236,6 +235,7 @@ function loadTutorial() {
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-engrave")) {
+      selectedOption = "cut-and-engrave"
       console.log("Entro al consumo aquí jajjaja x1")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
       store.setState("selectedConsumption-2", valueConsumption)
