@@ -267,10 +267,10 @@ function loadTutorial() {
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-time-engrave")) {
-      document.querySelector("#horasTrabajoMaquin-2").value = 25
+      document.querySelector("#horasTrabajoMaquina-2").value = 25
     }
     if(targetElement.classList.contains("introjs-section-design-body-time-cut")) {
-      document.querySelector("#horasTrabajoMaquin-2").value = 20
+      document.querySelector("#horasTrabajoMaquina-3").value = 20
     }
     if (targetElement.classList.contains("introjs-section-machine-popover-1")) {
       showPopoverElements(getPopoverElements())
