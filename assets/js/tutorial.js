@@ -110,6 +110,14 @@ function loadTutorial() {
         intro: "Aquí seleccionaremos el porcentaje de trabajo para el corte del diseño."
       },
       {
+        element: ".introjs-section-design-body-time-engrave",
+        intro: "Aquí se ingresará la cantidad de tiempo aproximado que tardára nuestra máquina en grabar el diseño."
+      },
+      {
+        element: ".introjs-section-design-body-time-cut",
+        intro: "Aquí se ingresará la cantidad de tiempo aproximado que tardára nuestra máquina en cortar el diseño."
+      },
+      {
         element: ".introjs-section-design-body-design",
         intro: "Aquí podrás subir tú diseño. Esto será de utilidad para poder darle un mejor formato a la hoja de resultados."
       },
@@ -248,6 +256,12 @@ function loadTutorial() {
       customScrollY = targetElement.offsetTop
     }
 
+    if(targetElement.classList.contains("introjs-section-design-body-time-engrave")) {
+      document.querySelector("#horasTrabajoMaquin-2").value = 25
+    }
+    if(targetElement.classList.contains("introjs-section-design-body-time-cut")) {
+      document.querySelector("#horasTrabajoMaquin-2").value = 20
+    }
     if (targetElement.classList.contains("introjs-section-machine-popover-1")) {
       showPopoverElements(getPopoverElements())
     }
