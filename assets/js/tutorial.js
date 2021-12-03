@@ -236,11 +236,13 @@ function loadTutorial() {
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-engrave")) {
+      console.log("Entro al consumo aquí jajjaja x1")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
       store.setState("selectedConsumption-2", valueConsumption)
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-cut")) {
+      console.log("Entro al consumo aquí jajjaja x2")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
       store.setState("selectedConsumption-3", valueConsumption)
     }
