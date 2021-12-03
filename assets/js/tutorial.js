@@ -238,12 +238,14 @@ function loadTutorial() {
       selectedOption = "cut-and-engrave"
       console.log("Entro al consumo aquí jajjaja x1")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
+      console.log("El valor del consumo es: ", valueConsumption)
       store.setState("selectedConsumption-2", valueConsumption)
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-cut")) {
       console.log("Entro al consumo aquí jajjaja x2")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
+      console.log("El valor del consumo 3 es: ", valueConsumption)
       store.setState("selectedConsumption-3", valueConsumption)
     }
 
