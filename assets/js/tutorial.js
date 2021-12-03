@@ -235,6 +235,16 @@ function loadTutorial() {
       store.setState("valuePerPiece", 100)
     }
 
+    if(targetElement.classList.contains("introjs-section-design-body-engrave")) {
+      const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
+      store.setState("selectedConsumption-2", valueConsumption)
+    }
+
+    if(targetElement.classList.contains("introjs-section-design-body-cut")) {
+      const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
+      store.setState("selectedConsumption-3", valueConsumption)
+    }
+
     if (targetElement.classList.contains("introjs-section-machine-body") ||
       targetElement.classList.contains("introjs-section-raw-body") ||
       targetElement.classList.contains("introjs-section-design-body") ||
