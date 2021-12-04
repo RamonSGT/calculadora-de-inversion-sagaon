@@ -243,9 +243,7 @@ function loadTutorial() {
     }
 
     if(targetElement.classList.contains("introjs-section-design-body-cut")) {
-      console.log("Entro al consumo aquí jajjaja x2")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
-      console.log("El valor del consumo 3 es: ", valueConsumption)
       store.setState("selectedConsumption-3", valueConsumption)
     }
 
@@ -374,6 +372,8 @@ function loadTutorial() {
   }).onexit(() => {
     sendTutotrialStatus(false)
     showPopoverElements(getPopoverElements())
+    const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
+    store.setState("selectedConsumption-3", valueConsumption)
   })
     .onafterchange(e => {
       if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
