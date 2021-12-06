@@ -370,16 +370,17 @@ function loadTutorial() {
     sendTutotrialStatus(false)
     showPopoverElements(getPopoverElements())
     // Lista consumo select
-    const valueConsumption1 = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
-    store.setState("selectedConsumption-2", valueConsumption1)
-    const valueConsumption2 = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
-    store.setState("selectedConsumption-3", valueConsumption2)
   })
   .onafterchange(e => {
     if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
       sendScrollToMiddle()
     }
     sendScrollIntoViewParent(customScrollY)
+    // Get the value of selected consumption
+    const valueConsumption1 = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
+    store.setState("selectedConsumption-2", valueConsumption1)
+    const valueConsumption2 = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
+    store.setState("selectedConsumption-3", valueConsumption2)
   })
   .start()
 }
