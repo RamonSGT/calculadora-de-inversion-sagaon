@@ -370,18 +370,19 @@ function loadTutorial() {
     }
     // On click on the close button
   }).onexit(() => {
+    console.log("Ha salido de la página ejejeje")
     sendTutotrialStatus(false)
     showPopoverElements(getPopoverElements())
     const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
     store.setState("selectedConsumption-3", valueConsumption)
   })
-    .onafterchange(e => {
-      if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
-        sendScrollToMiddle()
-      }
-      sendScrollIntoViewParent(customScrollY)
-    })
-    .start()
+  .onafterchange(e => {
+    if (customScrollY >= 2000 && e.classList.contains("introjsFloatingElement") && e.classList.contains("introjs-showElement")) {
+      sendScrollToMiddle()
+    }
+    sendScrollIntoViewParent(customScrollY)
+  })
+  .start()
 }
 
 async function messageHandlerParent(e) {
