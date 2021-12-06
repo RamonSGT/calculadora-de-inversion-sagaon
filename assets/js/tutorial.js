@@ -168,7 +168,6 @@ function loadTutorial() {
   }).oncomplete(() => {
     sendTutotrialStatus(false)
   }).onchange(function (targetElement) {
-    console.log("El valo de target element es: ", targetElement)
     if (targetElement.classList.contains("introjs-section-machine") ||
       targetElement.classList.contains("introjs-section-raw") ||
       targetElement.classList.contains("introjs-section-design") ||
@@ -236,9 +235,7 @@ function loadTutorial() {
 
     if(targetElement.classList.contains("introjs-section-design-body-engrave")) {
       selectedOption = "cut-and-engrave"
-      console.log("Entro al consumo aquí jajjaja x1")
       const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
-      console.log("El valor del consumo es: ", valueConsumption)
       store.setState("selectedConsumption-2", valueConsumption)
     }
 
@@ -370,9 +367,11 @@ function loadTutorial() {
     }
     // On click on the close button
   }).onexit(() => {
-    console.log("Ha salido de la página ejejeje")
     sendTutotrialStatus(false)
     showPopoverElements(getPopoverElements())
+    // Lista consumo select
+    const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
+    store.setState("selectedConsumption-2", valueConsumption)
     const valueConsumption = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
     store.setState("selectedConsumption-3", valueConsumption)
   })
