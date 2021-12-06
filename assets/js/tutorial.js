@@ -377,6 +377,7 @@ function loadTutorial() {
     }
     sendScrollIntoViewParent(customScrollY)
     // Get the value of selected consumption
+    setSelectedConsumption()
   })
   .start()
 }
