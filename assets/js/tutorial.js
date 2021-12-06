@@ -377,12 +377,18 @@ function loadTutorial() {
     }
     sendScrollIntoViewParent(customScrollY)
     // Get the value of selected consumption
-    const valueConsumption1 = store.selectConsumption(document.querySelector("#listaConsumosSelect-2").value)
-    store.setState("selectedConsumption-2", valueConsumption1)
-    const valueConsumption2 = store.selectConsumption(document.querySelector("#listaConsumosSelect-3").value)
-    store.setState("selectedConsumption-3", valueConsumption2)
   })
   .start()
+}
+
+function setSelectedConsumption() {
+  const currentSelectedConsumption1 = document.querySelector("#listaConsumosSelect-2").value
+  const currentSelectedConsumption2 = document.querySelector("#listaConsumosSelect-3").value
+  if(!currentSelectedConsumption1 || !currentSelectedConsumption2) return 
+  const valueConsumption1 = store.selectConsumption(currentSelectedConsumption1)
+  const valueConsumption2 = store.selectConsumption(currentSelectedConsumption2)
+  store.setState("selectedConsumption-2", valueConsumption1)
+  store.setState("selectedConsumption-3", valueConsumption2)
 }
 
 async function messageHandlerParent(e) {
