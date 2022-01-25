@@ -26,6 +26,7 @@ let calculatedROI = false
 
 $(async function () {
   $("#hogar").css("background-color", "#757575");
+  $("#hogar").css("color", "#fdfdfd");
   $("#cargosContainer").css("display", "none");
 
   // ========================== Calling APIs ========================== //
@@ -153,7 +154,9 @@ $("#largeLeafDesign").on("input", function (e) {
 
 $("#hogar").on("click", function () {
   $(this).css("background-color", "#757575");
+  $(this).css("color", "#fdfdfd");
   $("#dac").css("background-color", "#DBDBDB");
+  $("#dac").css("color", "#000d");
   $("#cargosContainer").css("display", "none");
   $("#cargoCustomContainer").css("display", "block");
   store.setState("rateFlag", 0);
@@ -162,11 +165,27 @@ $("#hogar").on("click", function () {
 
 $("#dac").on("click", function () {
   $(this).css("background-color", "#757575");
+  $(this).css("color", "#fdfdfd");
   $("#hogar").css("background-color", "#DBDBDB");
+  $("#hogar").css("color", "#000d");
   $("#cargosContainer").css("display", "block");
   $("#cargoCustomContainer").css("display", "none");
   store.setState("rateFlag", 1);
   if (calculatedROI) listDacSelect()
+});
+
+$("#cut-or-engrave").on("click", function () {
+  $(this).css("background-color", "#757575");
+  $(this).css("color", "#fdfdfd");
+  $("#cut-and-engrave").css("background-color", "#DBDBDB");
+  $("#cut-and-engrave").css("color", "#000d");
+});
+
+$("#cut-and-engrave").on("click", function () {
+  $(this).css("background-color", "#757575");
+  $(this).css("color", "#fdfdfd");
+  $("#cut-or-engrave").css("background-color", "#DBDBDB");
+  $("#cut-or-engrave").css("color", "#000d");
 });
 
 $("#currentValueKWh").on('focusout', function () {
@@ -261,10 +280,8 @@ async function changedSelectedMachine(target) {
   $("#costoPorHojaInput").val(costPerChunk).trigger("change");
   $("#costoPedazo").val(costPerChunk).trigger("change");
   const selectedMach = store.getState("selectedMachine")
-  console.log("La maquina seleccionada es: ", selectedMach)
   if (selectedMach) {
     document.querySelectorAll(".container-img").forEach(e => {
-      console.log("El elemento es: ", e)
       e.src = selectedMach.imgurls
     })
     // sendImgMachineToParent(selectedMach.imgurls)
@@ -296,6 +313,12 @@ $("#valuePerPiece").on("input", function () {
   store.setState("valuePerPiece", parseFloat(this.value).toFixed(2));
 });
 
+$("#percentPerPiece").on("input", function () {
+  const valueNumber = this.value;
+  if (Number.isNaN(valueNumber)) return;
+  store.setState("valuePerPieceByPercente", parseFloat(this.value).toFixed(2));
+});
+
 $("#pagoMensuOperador").on("input", function (e) {
   calculateCostOperator(e.target)
 });
@@ -318,12 +341,15 @@ $("#calcular").on("click", function () {
   clickedCalculate()
 });
 
+
 function clickedCalculate() {
   const invalidFields = areInvalidFields();
-  if (invalidFields) return sendMessageToastToParent("error", "Ha ingresado datos erroneos!")
+
+  const unfilledFieldsMessage = $('[required]:visible').filter(function() { return this.value === ""; })[0]?.getAttribute('data-unfilled-message');
+  // trae todos los inputs o select que son required y no estan llenados
+    if ($('[required]:visible').filter(function() { return this.value === ""; }).length > 0) return window.alert(`Han faltado campos por llenar, ${unfilledFieldsMessage ? unfilledFieldsMessage : 'termine de llenar todos los datos'}`)
   handleCalculator()
 }
-
 
 $(".form-input").on("keyup", function () {
   const inputValue = $(this).val();
@@ -489,23 +515,25 @@ function calculateUtility(totalHoursMachinePerDesign) {
   let totalConsumptionKWh = null
   if(selectedOption === "cut-and-engrave") {
     totalConsumptionKWh = store.getState("totalConsumptionKWh-2") + store.getState("totalConsumptionKWh-3")
-    // Se divide entre 2 por que es es el tiempo que se utilizará para calcular el costo del operador por pieza.
-    totalHoursMachinePerDesign = totalHoursMachinePerDesign / 2
+    // Se divide entre 2 por que es es el tiempo que se utilizará para calcular el costo del operador por pieza. horas totales core y grabar en DISEñO
+    totalHoursMachinePerDesign = totalHoursMachinePerDesign
   } else if(selectedOption === "cut-or-engrave") {
     totalConsumptionKWh = store.getState("totalConsumptionKWh")
   }
   const valuePerPiece = parseFloat(store.getState("valuePerPiece"))
   const costPerPiece = parseFloat($("#costoPedazoDesign").val())
-  const numeroPedazosDesign = parseFloat($("#numeroPedazosDesign").val())
+  const numeroPedazosDesign = Math.floor(parseFloat($("#numeroPedazosDesign").val()))
   const priceMachine = store.getState("selectedMachine").precio_shopify
 
   // Si no valor en el campo del trabajador, entonces ponemos por default el 0. Hay redundancia en el valor por si el resultabo obtenido es NaN.
-  const costPerWorkerPiece = ((costPerHourWorker || 0) * (totalHoursMachinePerDesign || 0)) || 0
+  const costElectricity = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(4) > td") : document.querySelector("#listaConsumos > tr:nth-child(3) > td")
+  const costPerWorkerPiece = ((costPerHourWorker || 0) * (( totalHoursMachinePerDesign / 60 ) || 0)) || 0
   store.setState("costPerWorkerPerPiece", costPerWorkerPiece)
-  const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece
-  const utilityPerDesign = valuePerPiece - totalCostPerDesign
-  const totalUtility = utilityPerDesign * numeroPedazosDesign
-  const roiPieces = priceMachine / utilityPerDesign
+  const totalCostPerDesign = costPerPiece + totalConsumptionKWh + costPerWorkerPiece 
+  const utilityPerDesign = (valuePerPiece - totalCostPerDesign) < 0 || !(valuePerPiece - totalCostPerDesign) ? 'No hay utilidad' : (valuePerPiece - totalCostPerDesign).toFixed(2);
+  const totalUtility = (utilityPerDesign * numeroPedazosDesign) < 0 || !(utilityPerDesign * numeroPedazosDesign) ? 'Revise sus datos' : (utilityPerDesign * numeroPedazosDesign).toFixed(2);
+  // console.log(totalUtility)
+  const roiPieces = Math.ceil(priceMachine / utilityPerDesign) < 1 || !(priceMachine / utilityPerDesign) ? '- - -' : Math.ceil(priceMachine / utilityPerDesign);
   const fixedDacPricePerDesign = store.getState("DACFixedPrice")
   if (fixedDacPricePerDesign > 0) {
     // We divide the dac price by the total hours per month that are 730 to get the price per hour
@@ -516,10 +544,11 @@ function calculateUtility(totalHoursMachinePerDesign) {
   } else {
     store.setState("costDACPerDesign", 0)
   }
-
-  $("#totalUtility").val(totalUtility.toFixed(2)).trigger("change");
-  $("#utilityPerPiece").val(utilityPerDesign.toFixed(2)).trigger("change");
-  $("#roiPieces").val(roiPieces >= 0 ? roiPieces.toFixed(2) : 0).trigger("change");
+  // console.log(totalConsumptionKWh)
+  // console.log(costElectricity)
+  store.setState("utilityPerPiece", (utilityPerDesign));
+  store.setState("totalUtility", (totalUtility));
+  store.setState("roiPieces", (roiPieces));
 }
 
 // ========================== End Handlers ========================== //
@@ -531,7 +560,7 @@ function handleCalculator() {
     rateFlag,
   } = store.getState();
 
-  console.log(store.getState("selectedConsumption"), store.getState("selectedConsumption-2"), store.getState("selectedConsumption-3"))
+  // console.log(store.getState("selectedConsumption"), store.getState("selectedConsumption-2"), store.getState("selectedConsumption-3"))
   if (selectedMachine && store.getState("selectedConsumption") || (store.getState("selectedConsumption-2") && store.getState("selectedConsumption-3"))) {
     if(selectedOption === "cut-or-engrave") {
       $("#corrienteMax").text(Number(store.getState("selectedConsumption").corriente_maxima).toFixed(2) + "A")
@@ -549,7 +578,7 @@ function handleCalculator() {
   if(selectedOption === "cut-or-engrave") {
     const horasTrabajoMaquina = parseFloat($("#horasTrabajoMaquina").val())
     totalHours = horasTrabajoMaquina
-    console.log("El consumo seleccionado es: ", store.getState("selectedConsumption"))
+    // console.log("El consumo seleccionado es: ", store.getState("selectedConsumption"))
     calculateExpenses({
       consumption: store.getState("selectedConsumption"),
       charge: selectedCharge,
@@ -588,16 +617,17 @@ function handleCalculator() {
 
   calculateUtility(totalHours);
 
-  const totalPowerKWh = selectedOption === "cut-or-engrave" ? parseFloat(store.getState("selectedConsumption").potencia_kwh) : parseFloat(store.getState("selectedConsumption-2").potencia_kwh) + parseFloat(store.getState("selectedConsumption-3").potencia_kwh)
+  const totalPowerKWh = (selectedOption === "cut-or-engrave") 
+    ? (store.getState("selectedConsumption").potencia / 1000) 
+    : (parseFloat(store.getState("selectedConsumption-2").potencia / 1000) + parseFloat(store.getState("selectedConsumption-2").potencia / 1000) ) 
 
-  console.log("La potencia total es de: ", totalPowerKWh)
+  // console.log("La potencia total es de: ", totalPowerKWh)
 
   let header = `
         <tr>
           <th scope="col" colspan="50%"><strong>Concepto</strong></th>
           <th scope="col" colspan="50%"><strong>Costo (MXN)</strong></th>
         </tr>`;
-
         
   let totalKWh = (
     totalPowerKWh *
@@ -615,17 +645,36 @@ function handleCalculator() {
   }
   // If selectedOption is cut-and-engrave, we need to add the cost of engrave
   let totalConsumptionKWh = null
-  console.log("El consumo total es: ", totalConsumptionKWh)
+  // console.log("El consumo total es: ", totalConsumptionKWh)
   if(selectedOption === "cut-and-engrave") {
-    console.log("El consumo total de electricidad es 1: ", store.getState("totalConsumptionKWh"))
+    // console.log("El consumo total de electricidad es 1: ", store.getState("totalConsumptionKWh"))
     totalConsumptionKWh = (parseFloat(store.getState("totalConsumptionKWh-2")) + parseFloat(store.getState("totalConsumptionKWh-3"))).toFixed(2)
   } else if(selectedOption === "cut-or-engrave") {
-    console.log("El consumo total de electricidad es 2: ", store.getState("totalConsumptionKWh"))
+    // console.log("El consumo total de electricidad es 2: ", store.getState("totalConsumptionKWh"))
     totalConsumptionKWh = parseFloat(store.getState("totalConsumptionKWh"))
   }
-  console.log("El total consumption is: totalConsumptionKWh", totalConsumptionKWh)
+  // console.log("El total consumption is: totalConsumptionKWh", totalConsumptionKWh)
   const totalCost = (parseFloat($("#costoPedazoDesign").val()) + parseFloat(totalConsumptionKWh) + store.getState("costPerWorkerPerPiece") + parseFloat(store.getState("costDACPerDesign"))).toFixed(2);
-  console.log("El costo total es de: ", totalCost)
+  // console.log("El costo total es de: ", totalCost)
+
+  //obtener precio del producto a publico con la utilidad
+  if($('#porcentaje-utilidad').hasClass("active") === true) {
+
+    // define el precio del valor de la pieza a venta a publico y lo guarda en la store
+    const valuePerPiece = ((parseFloat($("#valuePerPieceByPercente").val()) / 100) + 1) * totalCost;
+    store.setState("valuePerPieceByPercente", (valuePerPiece));
+
+    // valores se traen de la store para poder realizar las operaciones
+    const numeroPedazosDesign = Math.floor(parseFloat($("#numeroPedazosDesign").val()))
+    const priceMachine = store.getState("selectedMachine").precio_shopify
+    const utilityPerDesign = (valuePerPiece - totalCost) < 0 || !(valuePerPiece - totalCost) ? 'No hay utilidad' : (valuePerPiece - totalCost).toFixed(2);
+    const totalUtility = (utilityPerDesign * numeroPedazosDesign) < 0 || !(utilityPerDesign * numeroPedazosDesign) ? 'Revise sus datos' : (utilityPerDesign * numeroPedazosDesign).toFixed(2);
+    const roiPieces = Math.ceil(priceMachine / utilityPerDesign) < 1 || !(priceMachine / utilityPerDesign) ? '- - -' : Math.ceil(priceMachine / utilityPerDesign);
+
+    store.setState("utilityPerPiece", (utilityPerDesign));
+    store.setState("totalUtility", (totalUtility));
+    store.setState("roiPieces", (roiPieces));
+  }
 
   let energy = `
         <tr>
@@ -634,7 +683,7 @@ function handleCalculator() {
         </tr>
         ${(store.getState("DACFixedPrice") === 0) ? "" : `
           <tr>
-            <th colspan="50%">Costo de tarifa DAC por pieza <img id="popover-16"
+            <th colspan="50%">Costo de tarifa DAC por pieza <img id="popover-39"
             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
             <td>$ ${store.getState("costDACPerDesign")}</td>
           </tr>
@@ -656,7 +705,8 @@ function handleCalculator() {
           <th colspan="100%" class="txt-red" style="text-align: center;">Otros gastos asociados</td>
         </tr>
         <tr>
-          <th colspan="50%">Costo de energía</th>
+          <th colspan="50%">Costo de energía <img id="popover-16"
+          src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${store.getState("DACFixedPrice")}</td>
         </tr>
         `}
@@ -665,21 +715,21 @@ function handleCalculator() {
         </tr>
         <tr>
           <th colspan="50%">Precio del producto</th>
-          <th colspan="50%">$ ${$("#valuePerPiece").val()}</th>
+          <th colspan="50%">$ ${($('#porcentaje-utilidad').hasClass("active") === false) ? store.getState("valuePerPiece") : store.getState("valuePerPieceByPercente")}</th>
         </tr>
         <tr>
           <th colspan="50%">Utilidad por pieza <img id="popover-17"
           src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
-          <td colspan="50%">$ ${$("#utilityPerPiece").val()}</td>
+          <td colspan="50%">$ ${store.getState("utilityPerPiece")}</td>
         </tr>
         <tr>
           <th colspan="50%">Utilidad total <img id="popover-18"
           src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
-          <td colspan="50%">$ ${$("#totalUtility").val()}</td>
+          <td colspan="50%">$ ${store.getState("totalUtility")}</td>
         </tr>
         <tr>
           <th colspan="50%"><strong>Piezas a vender para recuperar la inversión de la máquina</storng></th>
-          <th colspan="50%"><strong>${$("#roiPieces").val()}</strong></th>
+          <th colspan="50%"><strong>${store.getState("roiPieces")}</strong></th>
         </tr>
         `;
 
@@ -708,7 +758,6 @@ function changedOptionsMachineContainer(target) {
     document.querySelector("#cut-and-engrave").classList.remove("active");
     document.querySelector("#cut-and-engrave").removeAttribute("style");
     target.classList.add("active")
-    target.setAttribute("style", "margin-bottom: 20px; background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-and-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-or-engrave").removeAttribute("style")
     $("#listaConsumosSelect").empty()
@@ -730,7 +779,6 @@ function changedOptionsMachineContainer(target) {
     document.querySelector("#cut-or-engrave").classList.remove("active")
     document.querySelector("#cut-or-engrave").removeAttribute("style")
     target.classList.add("active")
-    target.setAttribute("style", "background-color: rgb(117, 117, 117);")
     document.querySelector("#row-cut-or-engrave").setAttribute("style", "display: none;")
     document.querySelector("#row-cut-and-engrave").removeAttribute("style")
     $("#listaConsumosSelect").empty()
@@ -758,6 +806,42 @@ function changedOptionsMachineContainer(target) {
   }
 }
 
+// hace correr la funcion cuando el dom inicia para que se seleccione la primera opcion
+let selectedPriceOption = 'precio-producto-publico'
+$( document ).ready(function() {
+  changedOptionsProductPrice();
+});
+// Detect if #btn-options-precio-producto is clicked and then get id of clicked element and validate if element clicked is cut or precio-producto-publico or porcentaje-utilidad
+function changedOptionsProductPrice(target) {
+  let selectedPriceOption = (target) ? target.id : 'precio-producto-publico'
+  if (selectedPriceOption === "precio-producto-publico") {
+    $('#precio-producto-publico').addClass("active")
+    $('#porcentaje-utilidad').removeClass("active")
+    // agregar estilo cuando es seleccionado
+    document.querySelector("#precio-producto-publico").setAttribute("style", "color: #fdfdfd; background-color: rgb(117, 117, 117);")
+    document.querySelector("#porcentaje-utilidad").setAttribute("style", "color: #000d; background-color: #dbdbdb;")
+    // desaparecer los inputs que no se requieren cuando se selecciona la otra opcion por utilidad
+    document.querySelector("#producto-por-utilidad").setAttribute("style", "display: none;")
+    document.querySelector("#producto-por-precio").removeAttribute("style");
+    document.querySelector("#producto-por-precio").setAttribute("style", "display: block")
+
+  } else if (selectedPriceOption === "porcentaje-utilidad") {  
+    $('#porcentaje-utilidad').addClass("active")
+    $('#precio-producto-publico').removeClass("active") 
+    // agregar estilo cuando es seleccionado
+    document.querySelector("#porcentaje-utilidad").setAttribute("style", "color: #fdfdfd; background-color: rgb(117, 117, 117);")
+    document.querySelector("#precio-producto-publico").setAttribute("style", "color: #000d; background-color: #dbdbdb;")
+    // desaparecer los inputs que no se requieren cuando se selecciona la otra opcion por precio
+    document.querySelector("#producto-por-precio").setAttribute("style", "display: none;")
+    document.querySelector("#producto-por-utilidad").removeAttribute("style");
+    document.querySelector("#producto-por-utilidad").setAttribute("style", "display: block;")
+  }
+}
+
 document.querySelector("#btn-options-machine-container").addEventListener("click", e => {
-  changedOptionsMachineContainer(e.target)
+  changedOptionsMachineContainer(e.target);
+})
+
+document.querySelector("#btn-options-precio-producto").addEventListener("click", e => {
+  changedOptionsProductPrice(e.target);
 })

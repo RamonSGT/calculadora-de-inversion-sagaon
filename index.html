@@ -38,7 +38,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <div>
-          <p class="required-instructions" style="display: flex; align-items: end;">Los campos con el simbolo (<span class="required-icon-field" style="position: relative; top: 1.2rem;">*</span>) son requeridos</p>
+          <p class="required-instructions" style="display: flex; align-items: end;">Los campos con el simbolo ( * ) son requeridos</p>
         </div>
       </div>
       <div class="col-md-6 d-none d-md-block">
@@ -89,7 +89,7 @@
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
                         </label>
                         <select name="maquinas-select introjs-sectrion-machine-body-machines" id="listaMaquinasSelect"
-                          class="form-field-select form-input form-select" required>
+                          class="form-field-select form-input form-select" data-unfilled-message="seleccione la maquina que desea" required>
                         </select>
                       </div>
                       <!-- ...... -->
@@ -115,7 +115,7 @@
                         <label for="type-material" class="form-label">Tipo de material a utilizar <span
                             class="required-icon-field">*</span> <img data-bottom id="popover-22"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
-                        <select class="form-field-select form-input form-select introjs-section-raw-body-material" id="type-material" required>
+                        <select class="form-field-select form-input form-select introjs-section-raw-body-material" id="type-material" data-unfilled-message="seleccione el tipo de material a utilizar en MATERIA PRIMA" required>
                           <option selected disabled>Selecciona el tipo de material que vas a utilizar</option>
                           <option value="MDF">MDF</option>
                           <option value="Triplay">Triplay</option>
@@ -135,7 +135,7 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-23"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-raw-body-cost" id="costoInput"
-                          placeholder="350" required>
+                          placeholder="350" data-unfilled-message="llene el costo total de la hoja en MATERIA PRIMA"  required>
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -145,7 +145,7 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-24"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-raw-body-width" id="widthLeaf"
-                          placeholder="30" required>
+                          placeholder="30" data-unfilled-message="llene el ancho de la hoja en MATERIA PRIMA" required>
                       </div>
                       <div class="col-sm-12 col-md-4">
                         <!-- ..... -->
@@ -153,23 +153,32 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-25"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-raw-body-large" id="largeLeaf"
-                          placeholder="20" required>
+                          placeholder="20" data-unfilled-message="llene el largo de la hoja en MATERIA PRIMA" required>
                       </div>
                       <div class="col-sm-12 col-md-4">
                         <!-- ..... -->
                         <label for="thicknessLeaf" class="form-label">Grosor de la hoja (mm) <span
                             class="required-icon-field">*</span></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-raw-body-thickness" id="thicknessLeaf"
-                          placeholder="10" required>
+                          placeholder="10" data-unfilled-message="llene el grosor de la hoja en MATERIA PRIMA" required>
                       </div>
                     </div>
                     <div class="row pt-4 introjs-section-raw-body-result">
                       <div class="col-sm-12 col-md-6">
-                        <label for="numeroPedazos" class="form-label"><span class="required-icon-field"></span>Número de
-                          pedazos <img id="popover-2"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+
+                        <div id="container-numero-pedazos-redondear" style="display: flex; justify-content: space-evenly;">
+                          <label for="numeroPedazos" class="form-label"><span class="required-icon-field"></span>Número de pedazos 
+                            <img id="popover-2"src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                          </label>
+                          
+                          <div style="display: flex;">
+                            <label class="form-label"><span class="required-icon-field"></span>Redondear</label>
+                            <input id="redondear-numero-piezas" disabled type="checkbox" style="width: inherit; margin-left: 5px;" />
+                          </div>
+                        </div>
+
                         <input type="number" class="form-field-input form-control introjs-section-raw-body-pedazos" id="numeroPedazos"
-                          placeholder="18.15" disabled>
+                          placeholder="20" disabled>
                       </div>
                       <div class="col-sm-12 col-md-6">
                         <label for="costoPedazo" class="form-label"><span class="required-icon-field"></span>Costo por
@@ -200,14 +209,14 @@
                             class="required-icon-field">*</span> <img id="popover-27"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-design-body-width" id="widthLeafDesign"
-                          placeholder="20" required>
+                          placeholder="20" data-unfilled-message="llene el ancho del DISEÑO" required>
                       </div>
                       <div class="col-sm-12 col-md-6 col-md-6">
                         <label for="largeLeafDesign" class="form-label">Largo del diseño (cm) <span
                             class="required-icon-field">*</span> <img id="popover-28"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-design-body-large" id="largeLeafDesign"
-                          placeholder="10" required>
+                          placeholder="10"  data-unfilled-message="llene el largo del DISEÑO"  required>
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -234,7 +243,7 @@
                     <div class="row py-3 introjs-section-design-body-options mt-4" id="btn-options-machine-container">
                       <div class="col-sm-12 col-md-6">
                         <button id="cut-or-engrave" class="btn mr-lg-3px active"
-                          style="margin-bottom: 20px; background-color: rgb(117, 117, 117);">Cortar <strong>o</strong>
+                          style="margin-bottom: 20px; color: #fdfdfd; background-color: rgb(117, 117, 117);">Cortar <strong>o</strong>
                           grabar</button>
                       </div>
                       <div class="col-sm-12 col-md-6">
@@ -243,28 +252,28 @@
                     </div>
                     <div class="row" id="row-cut-or-engrave">
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaConsumosSelect" class="form-label">Porcentaje de trabajo para el grabado<span
+                        <label for="listaConsumosSelect" class="form-label">Potencia de trabajo para el grabado<span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="maquinas-select" id="listaConsumosSelect"
-                          class="form-field-select form-input form-select" required>
+                          class="form-field-select form-input form-select"  data-unfilled-message="seleccione la potencia de trabajo en DISEÑO"  required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <label for="horasTrabajoMaquina" class="form-label">Duración de grabado (minutos) <span
+                        <label for="horasTrabajoMaquina" class="form-label">Duración de trabajo (minutos) <span
                             class="required-icon-field">*</span> <img id="popover-29"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-design-body-minutes" id="horasTrabajoMaquina"
-                          placeholder="25" required>
+                          placeholder="25" data-unfilled-message="llene la duracion del trabajo en DISEÑO" required>
                       </div>
                     </div>
                     <div class="row" id="row-cut-and-engrave" style="display: none;">
                       <div class="col-sm-12 col-md-6">
-                        <label for="listaConsumosSelect-2" class="form-label">Porcentaje de trabajo para el grabado<span
+                        <label for="listaConsumosSelect-2" class="form-label">Potencia de trabajo para el grabado<span
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="listaSelect-2" id="listaConsumosSelect-2"
-                          class="form-field-select form-input form-select introjs-section-design-body-engrave no-validate" required>
+                          class="form-field-select form-input form-select introjs-section-design-body-engrave no-validate" data-unfilled-message="seleccione la potencia de trabajo para el grabado en DISEÑO" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
@@ -272,7 +281,7 @@
                             class="required-icon-field">*</span> <img data-bottom id="popover-1"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="listaSelect-3" id="listaConsumosSelect-3"
-                          class="form-field-select form-input form-select introjs-section-design-body-cut no-validate" required>
+                          class="form-field-select form-input form-select introjs-section-design-body-cut no-validate" data-unfilled-message="seleccione la potencia de trabajo para el corte en DISEÑO" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6 mt-4">
@@ -280,14 +289,14 @@
                             class="required-icon-field">*</span> <img id="popover-29"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="no-validate form-field-input form-input form-control introjs-section-design-body-time-engrave" id="horasTrabajoMaquina-2"
-                          placeholder="25" required>
+                          placeholder="25" data-unfilled-message="llene la duracion de grabado en DISEÑO" required>
                       </div>
                       <div class="col-sm-12 col-md-6 mt-4 introjs-section-design-body-time-cut">
                         <label for="horasTrabajoMaquina-3" class="form-label">Duración de corte (minutos) <span
                             class="required-icon-field">*</span> <img id="popover-29"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="no-validate form-field-input form-input form-control introjs-section-design-body-time-cut" id="horasTrabajoMaquina-3"
-                          placeholder="25" required>
+                          placeholder="25" data-unfilled-message="llene la duracion de corte en DISEÑO" required>
                       </div>
                     </div>
                     <div class="row pt-4">
@@ -328,7 +337,7 @@
                             class="required-icon-field">*</span> <img id="popover-37"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="tarifas-select" id="listaTarifaHogarSelect"
-                          class="form-field-select form-input form-select introjs-section-electricity-body-rate" required>
+                          class="form-field-select form-input form-select introjs-section-electricity-body-rate" data-unfilled-message="seleccione la tarifa en TARIFA DE ELECTRICIDAD" required>
                         </select>
                       </div>
                       <div class="col-sm-12 col-md-6">
@@ -336,7 +345,7 @@
                           <img id="popover-4" src="./assets/icons/question-mark.svg"
                             style="width: 15px; height: 15px;"></label>
                         <select name="mes-select" id="listaCargoSelect" class="form-field-select form-input form-select introjs-section-electricity-body-month"
-                          required>
+                          data-unfilled-message="seleccione el mes en TARIFA DE ELECTRICIDAD" required>
                         </select>
                       </div>
                     </div>
@@ -348,7 +357,7 @@
                         <label for="listaTarifaDACSelect" class="form-label">Región <img id="popover-5"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <select name="cargos-select" id="listaTarifaDACSelect"
-                          class="form-field-select form-input form-select mt-4" required>
+                          class="form-field-select form-input form-select mt-4">
                         </select>
                       </div>
                     </div>
@@ -373,14 +382,14 @@
                             style="width: 15px; height: 15px;"></span>
                         <span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate introjs-section-operator-body-salary"
-                        id="pagoMensuOperador" placeholder="3000" required>
+                        id="pagoMensuOperador" placeholder="3000" data-unfilled-message="llene el pago mensual del OPERADOR" required>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-4">
                       <label for="horasTrabajoOperador" class="form-label">Horas de trabajo mensuales <img
                           id="popover-35" src="./assets/icons/question-mark.svg"
                           style="width: 15px; height: 15px;"><span class="required-icon-field"></span></label>
                       <input type="number" class="form-field-input form-input form-control no-validate introjs-section-operator-body-hours"
-                        id="horasTrabajoOperador" placeholder="30" required>
+                        id="horasTrabajoOperador" placeholder="30" data-unfilled-message="llene las horas de trabajo mensuales en OPERADOR" required>
                     </div>
                     <div class="col-sm-12 col-lg-4">
                       <label for="costoHoraOperador" class="form-label">Costo por hora del operador <span>(MXN) <img
@@ -405,14 +414,38 @@
               <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive">
                 <div class="accordion-body introjs-section-product-body">
                   <div>
-                    <div class="row pt-4">
-                      <div class="col-sm-12">
-                        <label for="valuePerPiece" class="form-label">Precio a público de diseño/producto
+
+                    <!-- botones de precio del producto a venta o % de utilidad -->
+                    <div class="row py-3 introjs-section-design-body-options mt-4" id="btn-options-precio-producto">
+                      <div class="col-sm-12 col-md-6">
+                        <button id="precio-producto-publico" class="btn mr-lg-3px active"
+                          style="width: 100%">Definir por <strong>$</strong>
+                          de producto a publico</button>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <button id="porcentaje-utilidad" class="btn ml-lg-3px introjs-section-design-body-option"
+                          style="margin-bottom: 20px">
+                          Definir por <strong>%</strong> de utilidad</button>
+                      </div>
+                    </div>
+
+                    <div class="row pt-4" >
+                      <div class="col-sm-12" id="producto-por-precio">
+                        <label for="valuePerPiece" class="form-label">Precio a público del producto/diseño
                           <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7"
                             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
                         <input type="number" class="form-field-input form-input form-control introjs-section-product-body-price" id="valuePerPiece"
-                          placeholder="500">
+                          placeholder="500" data-unfilled-message="llene el precio a publico del producto" required>
                       </div>
+
+                      <div class="col-sm-12" id="producto-por-utilidad">
+                        <label for="valuePerPiece" class="form-label">Porcentaje (%) de utilidad esperado
+                          <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-38"
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                        <input type="number" class="form-field-input form-input form-control introjs-section-product-body-price" id="valuePerPieceByPercente"
+                          placeholder="30" data-unfilled-message="llene el porcentaje de utilidad esperado" required>
+                      </div>
+
                       <div class="col-sm-12 col-md-6" style="display: none;">
                         <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span
                             class="required-icon-field"></span> <img id="popover-8"
@@ -421,6 +454,7 @@
                           disabled>
                       </div>
                     </div>
+
                     <div class="row pt-4" style="display: none;">
                       <div class="col-sm-12 col-md-12">
                         <label for="totalUtility" class="form-label">Utilidad total<span> (MXN)</span> <span
@@ -545,8 +579,16 @@
         </div>
       </div>
     </section>
+    <div class="toast" >
+      <div >
+        <p >
+        Hello, world! This is a toast message.
+        </p>
+        <button type="button">X</button>
+      </div>
     <p class="required-instructions" style="padding-top: 20px; padding-bottom: 20px;"><i>* Los cálculos realizados y
         mostrados anteriormente son solo una aproximación a los gastos y el retorno de la inversión.</i></p>
+
   </main>
 
 
@@ -556,7 +598,7 @@
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
   <!-- DINERO JS -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
   <script type="text/javascript" src="./assets/vendor/dinero.js-1.8.1/package/build/umd/dinero.min.js"></script>
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://unpkg.com/tippy.js@6"></script>

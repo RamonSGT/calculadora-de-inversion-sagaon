@@ -41,7 +41,7 @@ function loadTutorial() {
   introJs().setOptions({
     scrollToElement: false,
     exitOnOverlayClick: false,
-    exitOnEsc: false,
+    exitOnEsc: true,
     scrollTo: 'element',
     nextLabel: 'Siguiente',
     prevLabel: 'Anterior',
@@ -143,7 +143,7 @@ function loadTutorial() {
       },
       {
         element: ".introjs-section-product-body",
-        intro: "En esta sección se establecerá el precio de venta de tu producto a tus clientes"
+        intro: "En esta sección se establecerá el precio de venta de tu producto a tus clientes o el porcentaje de utilidad que usted espera"
       },
       {
         element: ".introjs-section-advanced-body",

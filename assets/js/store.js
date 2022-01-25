@@ -55,42 +55,60 @@ class Store {
 
   // Función para calcular el costo por pedazo de hoja.
   calculateCostPerChunkLeaf() {
-    if(!this.state.selectedMachine || !this.state.totalCost || !this.state.widthLeaf || !this.state.largeLeaf) return null
+    if(!this.state.selectedMachine || !this.state.totalCost || !this.state.widthLeaf || !this.state.largeLeaf) 
+    return null
     const totalChunks = this.calculateChunks()
     if(!this.state.totalCost && !totalChunks) return null
     const costPerChunk = (parseFloat(this.state.totalCost) / totalChunks).toFixed(2)
     return costPerChunk
   }
 
+  /**
+   * obtiene numero de pedazos en MATERIA PRIMA
+   * @returns Número de pedazos ya con sus operaciones
+   */
   calculateChunks() {
     if(!store.getState("widthLeaf") || !store.getState("largeLeaf") || !store.getState("selectedMachine")) return null
     const width = parseFloat(store.getState("widthLeaf"))
     const large = parseFloat(store.getState("largeLeaf"))
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!width || !large || !corte_ancho || !corte_largo) return null
+    if ($('#redondear-numero-piezas').prop('checked') === true) {
+      return Math.floor(parseFloat((width * large) / ((corte_ancho) * (corte_largo))).toFixed(2))
+    }
     return parseFloat((width * large) / ((corte_ancho) * (corte_largo))).toFixed(2)
   }
 
+    /**
+   * obtiene numero de piezas en DISEÑO
+   * @returns Número de piezas ya con sus operaciones
+   */
   calculateDesignChunks() {
     if(!store.getState("widthLeafDesign") || !store.getState("largeLeafDesign") || !store.getState("selectedMachine")) return null
     const widthLeafDesign = store.getState("widthLeafDesign")
     const largeLeafDesign = store.getState("largeLeafDesign")
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
-    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))
+    const designPerChunk = Math.floor(((corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))))
     store.setState("designPerChunk", designPerChunk)
-    const total = parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)
+    const total = $("#redondear-numero-piezas").is(':checked') ? Math.floor(parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)) : (parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2))
+
+    // antes const total = (parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2))
     store.setState("totalDesignChunks", total)
     return total
   }
 
+  /**
+   * retorna el Número de piezas por hoja totales
+   * @returns number
+   */
   calculateDesignsChunksPerLeaf() {
     if(!store.getState("widthLeafDesign") || !store.getState("largeLeafDesign") || !store.getState("selectedMachine")) return null
     const widthLeafDesign = store.getState("widthLeafDesign")
     const largeLeafDesign = store.getState("largeLeafDesign")
     const { corte_ancho, corte_largo } = store.getState("selectedMachine")
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
-    const designPerChunk = (corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))
+    const designPerChunk = Math.floor((corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125)))
     store.setState("designPerChunk", designPerChunk)
     const total = parseFloat(designPerChunk).toFixed(2)
     store.setState("totalDesignChunks", total)

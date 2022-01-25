@@ -80,7 +80,7 @@ function calculateExpenses({
   const consumos = cargosDACList.map((c) => {
     const totalPeriod = ((c === "fijo") ? "" : totalKWh)
     const subtotal = ((c === "fijo") ? charge[c].toFixed(2) : (totalKWh * charge[c]).toFixed(2))
-    console.log("El consumo aactual es: ", subtotal)
+    // console.log("El consumo actual es: ", subtotal)
     store.setState(stateKey, (parseFloat(store.getState(stateKey)) + parseFloat(subtotal)))
     return `<tr>
             <th scope="col" colspan="2">Consumo ${c}</th>
@@ -160,8 +160,8 @@ async function getDataCalculator() {
     timePerDesign += "Corte " + document.querySelector("#horasTrabajoMaquina-2").value.toString()
     timePerDesign += " Grabado " + document.querySelector("#horasTrabajoMaquina-3").value.toString()
   }
-  console.log("El valor de power rate is: ", powerRate)
-  console.log("El valor del time per design is: ", timePerDesign)
+  // console.log("El valor de power rate is: ", powerRate)
+  // console.log("El valor del time per design is: ", timePerDesign)
   return {
     machine: document.querySelector("#listaMaquinasSelect").value.toString(),
     power_rate: powerRate,
@@ -170,7 +170,7 @@ async function getDataCalculator() {
     width_material: document.querySelector("#widthLeaf").value.toString(),
     height_material: document.querySelector("#largeLeaf").value.toString(),
     thickness_material: document.querySelector("#thicknessLeaf").value.toString(),
-    number_pieces_material: document.querySelector("#numeroPedazos").value.toString(),
+    number_pieces_material: Math.floor(document.querySelector("#numeroPedazos").value.toString()),
     cost_per_piece_material: document.querySelector("#costoPedazo").value.toString(),
     width_design: document.querySelector("#widthLeafDesign").value.toString(),
     height_design: document.querySelector("#largeLeafDesign").value.toString(),
@@ -184,6 +184,7 @@ async function getDataCalculator() {
     worker_hours_monthly: document.querySelector("#horasTrabajoOperador").value.toString(),
     cost_per_hour_worker: document.querySelector("#costoHoraOperador").value.toString(),
     value_per_piece: document.querySelector("#valuePerPiece").value.toString(),
+    value_per_piece_by_percente: document.querySelector("#valuePerPieceByPercente").value.toString(),
     utilty_per_piece: document.querySelector("#utilityPerPiece").value.toString(),
     total_utility: document.querySelector("#totalUtility").value.toString(),
     return_of_investment: document.querySelector("#roiPieces").value.toString(),
@@ -212,6 +213,35 @@ async function getImgDesignData() {
     mimetype
   }
 }
+
+/**
+ * obliga a que el checkbox solo se pueda actualizar si los datos de los inputos estan llenadas y si el valor es mayor a 0
+ */
+function disableCheckbox() {
+  if(!store.getState("widthLeaf") || !store.getState("largeLeaf") || $("#numeroPedazos").val() < 1) {
+    $('#redondear-numero-piezas').prop('disabled', true);
+  } else {
+    $('#redondear-numero-piezas').prop('disabled', false);
+  }
+}
+
+/**
+ * llama la funcion para disableCheckbox() cada vez que se cambia el valor del checkbox
+ */
+$("#widthLeaf, #largeLeaf").on("change", function() {
+  disableCheckbox();
+});
+
+
+/**
+ * redondea el valor de numero de pedazos completas en MATERIA PRIMA
+ */
+ $('#redondear-numero-piezas').on( "click", function() {
+  const costPerChunk = store.calculateChunks();
+  $("#numeroPedazos").val(costPerChunk?.toString()).trigger("change");
+  disableCheckbox();
+  $("#numeroPedazosDesign").val(store.calculateDesignChunks())
+});
 
 /**
  * Actualiza el tiempo que el usuario pasa en la calculadora y lo manda al padre (Página de Sagaon y posteriormente envia el tiempo actualizado a la base de datos.).
@@ -397,7 +427,7 @@ function createPopOver() {
     "Es la lectura actual que se muestra en tu medidor.",
     "Es el consumo anterior que tuviste en tu recibo de pago de la CFE. <img src='./assets/images/tarifas_CFE.jpg' height=400px width=100%>",
     "Es la diferencia entre la lectura actual y el consumo anterior.",
-    `Por defecto la CFE aplica un costo fijo a la tarifa DAC. Según la selcción de tú región el costo que se te aplica es de: <strong>$ ${store.getState("DACFixedPrice")}</strong>. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo para cada pieza.`,
+    `Por defecto la CFE aplica un costo fijo a tu recibo de luz debido a la tarifa DAC (tarifa domestica de alto consumo). Según la selcción de tú región el costo que se te aplica es de: <strong>$ ${store.getState("DACFixedPrice")}</strong>.`,
     "Es la cantidad de dinero que obtendrías por una sola pieza después de contemplar los costos del material, uso de electricidad y salario del operador.",
     "Es el monto de dinero que obtendrías después de vender todas las piezas según el tamaño del material ingresado anteriormente.",
     "En esta sección se ingresan los datos relacionados con tu máquina, es decir, el módelo que usarás para hacer el cálculo.",
@@ -407,7 +437,7 @@ function createPopOver() {
     "Es el precio al cual adquiriste la hoja de material.",
     "Es la medida (ancho) de la hoja.",
     "Es la medida (largo) de la hoja.",
-    "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja. Se hace una proyección de ",
+    "Es el costo calculado según la cantidad de pedazos resultantes y el costo total de la hoja. Se hace una proyección",
     "Es la medida (ancho) del diseño.",
     "Es la medida (largo) del diseño.",
     "Es la cantidad de minutos que tardará tu máquina de forma aproximada para plasmar el diseño.",
@@ -419,6 +449,8 @@ function createPopOver() {
     "Es la cantidad de horas trabajadas por el operador de la máquina.",
     "Es el resultado del pago mensual del operador entre la cantidad de horas que trabaja.",
     "Es el tipo de tarifa que aparece en tu recibo de la CFE.",
+    "Es el porcentaje de utilidad que le asignas a tu diseño para tener las ganancias esperadas.",
+    `Al ser tarifa DAC (tarifa domestica de alto consumo), implica un costo extra por la CFE. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo extra para cada pieza.`,
   ]
   for (let i = 1; i <= contents.length; i++) {
     tippy(`#popover-${i}`, {

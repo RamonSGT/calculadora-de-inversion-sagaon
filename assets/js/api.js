@@ -106,6 +106,7 @@ async function generatePdf() {
   const costElectricity = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(4) > td") : document.querySelector("#listaConsumos > tr:nth-child(3) > td")
   const costOperator = store.getState("selectedRate").tipo === "DAC" ? document.querySelector("#listaConsumos > tr:nth-child(5) > td") : document.querySelector("#listaConsumos > tr:nth-child(4) > td")
   const cutOrEngraveActived = document.querySelector("#cut-or-engrave").classList.contains("active")
+  const pricePerDesign = ($('#porcentaje-utilidad').hasClass("active") === false) ? store.getState("valuePerPiece") : store.getState("valuePerPieceByPercente")
   let powerRate = ""
   let timePerDesign = ""
   let currentRate = ""
@@ -146,7 +147,7 @@ async function generatePdf() {
       designWidth: document.querySelector("#widthLeafDesign").value,
       designLarge: document.querySelector("#largeLeafDesign").value,
       timePerDesign,
-      pricePerDesign: document.querySelector("#valuePerPiece").value,
+      pricePerDesign,
       rateElectricity: store.getState("selectedRate").id_tarifa,
       typeRateElectricity: store.getState("selectedRate").tipo,
       fixedCostElectricity: fixedCostElectricity.innerText
@@ -154,6 +155,7 @@ async function generatePdf() {
     contentType: 'application/json',
   })
     .then(pdf => {
+      console.log(pdf)
       const pdfurl = `data:application/pdf;base64,${pdf}`
       const downloadLink = document.createElement("a");
       const fileName = "detalles-gastos.pdf";
@@ -162,6 +164,8 @@ async function generatePdf() {
       downloadLink.click()
     })
     .catch(error => {
+      console.log(error)
+
       return { error: { message: error.responseJSON?.message } }
     })
 }
