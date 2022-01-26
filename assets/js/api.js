@@ -155,7 +155,6 @@ async function generatePdf() {
     contentType: 'application/json',
   })
     .then(pdf => {
-      console.log(pdf)
       const pdfurl = `data:application/pdf;base64,${pdf}`
       const downloadLink = document.createElement("a");
       const fileName = "detalles-gastos.pdf";
@@ -164,8 +163,6 @@ async function generatePdf() {
       downloadLink.click()
     })
     .catch(error => {
-      console.log(error)
-
       return { error: { message: error.responseJSON?.message } }
     })
 }

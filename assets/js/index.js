@@ -509,6 +509,68 @@ function getParentAccordion(element) {
   return null;
 }
 
+
+// Cada vez que un input se actualiza o select, se correra esta funcion
+$('input, select, #listaTarifaDACSelect').change(function () {   
+    
+    // datos para llevar a cabo las operaciones  
+    const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
+    const horasTrabajoMaquina = parseFloat($("#horasTrabajoMaquina").val())
+    const horasTrabajoMaquina2 = parseFloat($("#horasTrabajoMaquina-2").val())
+    const horasTrabajoMaquina3 = parseFloat($("#horasTrabajoMaquina-3").val())
+    let totalHours = 0
+    let totalConsumptionKWh = null
+
+    if(selectedOption === "cut-or-engrave" && store.state.selectedCharge) {
+      const horasTrabajoMaquina = parseFloat($("#horasTrabajoMaquina").val())
+      totalHours = horasTrabajoMaquina
+      // console.log("El consumo seleccionado es: ", store.getState("selectedConsumption"))
+      calculateExpenses({
+        consumption: store.getState("selectedConsumption"),
+        charge: store.state.selectedCharge,
+        workHours: horasTrabajoMaquina / 60,
+        rateFlag: store.state.rateFlag,
+        stateKey: "totalConsumptionKWh"
+      });
+    }
+    if(selectedOption === "cut-and-engrave" && store.state.selectedCharge) {
+      const horasTrabajoMaquina2 = parseFloat($("#horasTrabajoMaquina-2").val())
+      const horasTrabajoMaquina3 = parseFloat($("#horasTrabajoMaquina-3").val())
+      totalHours = horasTrabajoMaquina2 + horasTrabajoMaquina3
+      calculateExpenses({
+        consumption: store.getState("selectedConsumption-2"),
+        charge: store.state.selectedCharge,
+        workHours: horasTrabajoMaquina2 / 60,
+        rateFlag: store.state.rateFlag,
+        stateKey: "totalConsumptionKWh-2"
+      })
+      calculateExpenses({
+        consumption: store.getState("selectedConsumption-3"),
+        charge: store.state.selectedCharge,
+        workHours: horasTrabajoMaquina3 / 60,
+        rateFlag: store.state.rateFlag,
+        stateKey: "totalConsumptionKWh-3"
+      })
+    }
+    const dacPricePerHour = store.state.selectedCharge.fijo / 730
+    const totalDacPricePerDesign = dacPricePerHour * (totalHours)
+
+    const costPerWorkerPiece = ((costPerHourWorker || 0) * (( totalHours / 60 ) || 0)) || 0
+    const costPerPiece = parseFloat($("#costoPedazoDesign").val())
+
+    const dacCost = totalDacPricePerDesign ? totalDacPricePerDesign : 0
+    const totalCostPerDesign = 
+      (costPerPiece 
+      + (selectedOption === "cut-or-engrave" ? store.getState("totalConsumptionKWh") : store.getState("totalConsumptionKWh-2") + store.getState("totalConsumptionKWh-3"))
+      + costPerWorkerPiece
+      + (dacCost)).toFixed(2);
+
+    if (totalCostPerDesign) {
+      $('#costo-total').text(`${totalCostPerDesign}`);
+    }
+});
+
+
 function calculateUtility(totalHoursMachinePerDesign) {
   // Primero obtenemos todos los datos necesarios para realizar el cálculo
   const costPerHourWorker = parseFloat($("#costoHoraOperador").val())
@@ -661,7 +723,7 @@ function handleCalculator() {
   if($('#porcentaje-utilidad').hasClass("active") === true) {
 
     // define el precio del valor de la pieza a venta a publico y lo guarda en la store
-    const valuePerPiece = ((parseFloat($("#valuePerPieceByPercente").val()) / 100) + 1) * totalCost;
+    const valuePerPiece = (((parseFloat($("#valuePerPieceByPercente").val()) / 100) + 1) * totalCost).toFixed(2);
     store.setState("valuePerPieceByPercente", (valuePerPiece));
 
     // valores se traen de la store para poder realizar las operaciones
@@ -683,7 +745,7 @@ function handleCalculator() {
         </tr>
         ${(store.getState("DACFixedPrice") === 0) ? "" : `
           <tr>
-            <th colspan="50%">Costo de tarifa DAC por pieza <img id="popover-39"
+            <th colspan="50%">Costo de tarifa DAC por pieza <img data-bottom id="popover-39"
             src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
             <td>$ ${store.getState("costDACPerDesign")}</td>
           </tr>
@@ -705,7 +767,7 @@ function handleCalculator() {
           <th colspan="100%" class="txt-red" style="text-align: center;">Otros gastos asociados</td>
         </tr>
         <tr>
-          <th colspan="50%">Costo de energía <img id="popover-16"
+          <th colspan="50%">Costo de energía <img data-bottom id="popover-16"
           src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${store.getState("DACFixedPrice")}</td>
         </tr>
@@ -718,12 +780,12 @@ function handleCalculator() {
           <th colspan="50%">$ ${($('#porcentaje-utilidad').hasClass("active") === false) ? store.getState("valuePerPiece") : store.getState("valuePerPieceByPercente")}</th>
         </tr>
         <tr>
-          <th colspan="50%">Utilidad por pieza <img id="popover-17"
+          <th colspan="50%">Utilidad por pieza <img data-bottom id="popover-17"
           src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${store.getState("utilityPerPiece")}</td>
         </tr>
         <tr>
-          <th colspan="50%">Utilidad total <img id="popover-18"
+          <th colspan="50%">Utilidad total <img data-bottom data-bottom id="popover-18"
           src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></th>
           <td colspan="50%">$ ${store.getState("totalUtility")}</td>
         </tr>
@@ -843,5 +905,6 @@ document.querySelector("#btn-options-machine-container").addEventListener("click
 })
 
 document.querySelector("#btn-options-precio-producto").addEventListener("click", e => {
+  console.log('hola')
   changedOptionsProductPrice(e.target);
 })

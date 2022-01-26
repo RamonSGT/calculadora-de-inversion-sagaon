@@ -172,7 +172,7 @@
                           </label>
                           
                           <div style="display: flex;">
-                            <label class="form-label"><span class="required-icon-field"></span>Redondear</label>
+                            <label class="form-label" id="label-redondear"><span class="required-icon-field"></span>Redondear</label>
                             <input id="redondear-numero-piezas" disabled type="checkbox" style="width: inherit; margin-left: 5px;" />
                           </div>
                         </div>
@@ -431,25 +431,38 @@
 
                     <div class="row pt-4" >
                       <div class="col-sm-12" id="producto-por-precio">
-                        <label for="valuePerPiece" class="form-label">Precio a público del producto/diseño
+                        <div id="insertar-costo-total" style="display: flex; flex-direction: column;">
+                          <label for="valuePerPiece" class="form-label">Precio a público del producto/diseño
                           <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-7"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                          </label>
+                            
+                            <label  for="valuePerPiece" class="form-label">Costo Total del producto
+                              <span>(MXN)</span> <span class="required-icon-field">* </span><span id="costo-total"> - </span> <img id="popover-40"
+                              src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                            </label>
+                          </div>
+
                         <input type="number" class="form-field-input form-input form-control introjs-section-product-body-price" id="valuePerPiece"
                           placeholder="500" data-unfilled-message="llene el precio a publico del producto" required>
                       </div>
 
                       <div class="col-sm-12" id="producto-por-utilidad">
-                        <label for="valuePerPiece" class="form-label">Porcentaje (%) de utilidad esperado
-                          <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-38"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                            <label for="valuePerPiece" class="form-label">Porcentaje (%) de utilidad esperado
+                            <span>(MXN)</span> <span class="required-icon-field">*</span> <img id="popover-38"
+                              src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                            </label>
+
                         <input type="number" class="form-field-input form-input form-control introjs-section-product-body-price" id="valuePerPieceByPercente"
                           placeholder="30" data-unfilled-message="llene el porcentaje de utilidad esperado" required>
                       </div>
 
                       <div class="col-sm-12 col-md-6" style="display: none;">
-                        <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span
-                            class="required-icon-field"></span> <img id="popover-8"
-                            src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;"></label>
+                          <label for="utilityPerPiece" class="form-label">Utilidad por pieza <span>(MXN)</span> <span
+                              class="required-icon-field"></span> <img id="popover-8"
+                              src="./assets/icons/question-mark.svg" style="width: 15px; height: 15px;">
+                          </label>
+                  
                         <input type="number" class="form-field-input form-control" id="utilityPerPiece" placeholder="0"
                           disabled>
                       </div>

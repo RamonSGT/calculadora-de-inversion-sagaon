@@ -451,6 +451,7 @@ function createPopOver() {
     "Es el tipo de tarifa que aparece en tu recibo de la CFE.",
     "Es el porcentaje de utilidad que le asignas a tu diseño para tener las ganancias esperadas.",
     `Al ser tarifa DAC (tarifa domestica de alto consumo), implica un costo extra por la CFE. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo extra para cada pieza.`,
+    'Este sera el costo de su diseño por pieza, contemplelo para poder agregar un precio de venta a su producto'
   ]
   for (let i = 1; i <= contents.length; i++) {
     tippy(`#popover-${i}`, {
