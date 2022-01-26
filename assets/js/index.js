@@ -552,7 +552,7 @@ $('input, select, #listaTarifaDACSelect').change(function () {
         stateKey: "totalConsumptionKWh-3"
       })
     }
-    const dacPricePerHour = store.state.selectedCharge.fijo / 730
+    const dacPricePerHour = store.state.selectedCharge ? store.state.selectedCharge.fijo / 730 : 0
     const totalDacPricePerDesign = dacPricePerHour * (totalHours)
 
     const costPerWorkerPiece = ((costPerHourWorker || 0) * (( totalHours / 60 ) || 0)) || 0

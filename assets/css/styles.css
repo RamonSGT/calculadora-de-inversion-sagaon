@@ -397,7 +397,7 @@ input::-webkit-input-placeholder {
 .required-instructions {
   margin-bottom: 0;
   padding: 25px;
-  background: #fdfdfd;
+  background: #ffffff;
 }
 
 .col-sm-12.col-md-6 {
@@ -512,6 +512,14 @@ input#valuePerPieceByPercente {
     font-size: 13px !important;
   }
 }
+
+@media (max-width: 360px) {
+  .container-img {
+    left: calc(60%);
+
+  }
+}
+
 
 @media (min-width: 576px) and (max-width: 992px) {
   .accordion-button {

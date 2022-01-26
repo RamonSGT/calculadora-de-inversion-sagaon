@@ -189,6 +189,8 @@ function loadTutorial() {
     }
 
     if (targetElement.classList.contains("introjs-section-raw-body")) {
+      targetElement.parentElement.click()
+      console.log(targetElement.classList.contains("introjs-section-raw-body"))
       const materialsList = document.querySelector("#type-material")
       const selectedIndex = 1
       const selectedValue = materialsList.options[selectedIndex].value
