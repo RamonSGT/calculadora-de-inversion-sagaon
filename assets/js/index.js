@@ -253,7 +253,9 @@ async function listDacSelect() {
   }
 }
 
-$("#listaMaquinasSelect").on("change", e => changedSelectedMachine(e.target));
+$("#listaMaquinasSelect").on("change", (e) => {
+  changedSelectedMachine(e.target);
+});
 
 async function changedSelectedMachine(target) {
   $("#listaConsumosSelect").empty();
@@ -262,6 +264,7 @@ async function changedSelectedMachine(target) {
   const consumos = await getConsumptionsByProduct(target.value);
   store.setState("consumptions", consumos);
   store.selectMachine(target.value);
+  
   if (!consumos.error) {
     displaySelects({
       tagId: "listaConsumosSelect",
@@ -284,6 +287,10 @@ async function changedSelectedMachine(target) {
       text: "porcentaje_trabajo",
       decorator: "%",
     });
+    const machineWidth = store.state.selectedMachine.corte_ancho;
+    const machineLength = store.state.selectedMachine.corte_largo;
+
+    $('#machine-width-length').text(`Considere las siguientes medidas de la maquina para su diseño: ${machineWidth} cm de ancho y ${machineLength} cm de largo`)
   }
 
   const totalChunks = store.calculateChunks();
@@ -520,7 +527,6 @@ function getParentAccordion(element) {
   }
   return null;
 }
-
 
 // Cada vez que un input se actualiza o select, se correra esta funcion
 $('input, select, #listaTarifaDACSelect').change(function () {   

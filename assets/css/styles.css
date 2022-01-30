@@ -392,6 +392,16 @@ input::-webkit-input-placeholder {
 
 .row {
   width: calc(100% - 60px);
+  display: flex;
+  align-items: end;
+}
+
+.py-3 {
+  align-items: flex-start;
+}
+
+#label-redondear {
+  margin-left: 5px;
 }
 
 .required-instructions {
