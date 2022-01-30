@@ -441,7 +441,7 @@ function createPopOver() {
     "Es la medida (ancho) del diseño.",
     "Es la medida (largo) del diseño.",
     "Es la cantidad de minutos que tardará tu máquina de forma aproximada para plasmar el diseño.",
-    "Es la cantidad de diseños que se pueden obtener. Esto se calcula en base a las medidas ingresadas en la sección de <i>Materia prima</i> y el tamaño del diseño.",
+    "Es la cantidad de diseños que se pueden obtener contemplando el 100% de la hoja a utilizar. Esto se calcula en base a las medidas ingresadas en la sección de <i>Materia prima</i> y el tamaño del diseño.",
     "Es el precio calculado de tu diseño según la medida y el costo de material.",
     "Es el diseño que se plasmará en la máquina CNC, el mismo aparecerá en el resumen de los gastos que usted podrá imprimir posteriormente.",
     "En esta sección se detallarán los costos asociados con el salario del operador. Es importante resaltar que a pesar de que el dueño de la máquina sea el operador tome en cuenta asignarse un salario, esto con la finalidad de que el resultado sea más exacto.",
@@ -451,7 +451,9 @@ function createPopOver() {
     "Es el tipo de tarifa que aparece en tu recibo de la CFE.",
     "Es el porcentaje de utilidad que le asignas a tu diseño para tener las ganancias esperadas.",
     `Al ser tarifa DAC (tarifa domestica de alto consumo), implica un costo extra por la CFE. Esto se divide por la cantidad de piezas totales calculadas anteriormente, que nos dará el costo extra para cada pieza.`,
-    'Este sera el costo de su diseño por pieza, contemplelo para poder agregar un precio de venta a su producto'
+    'Este sera el costo de su diseño por pieza, contemplelo para poder agregar un precio de venta a su producto',
+    'Es el numero de diseños que se pueden hacer por pedazo de tu hoja. Las medidas de 1 pedazo es equivalente al ancho y largo que tiene la maquina seleccionada',
+
   ]
   for (let i = 1; i <= contents.length; i++) {
     tippy(`#popover-${i}`, {

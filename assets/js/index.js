@@ -107,6 +107,8 @@ $("#costoInput").on("input", function (e) {
   calculateCostInput(e.target)
 });
 
+
+
 /**
   En esta función se cálcula el costo de de un pedoazo de material, es el input que se encuentra en la sección de "Materia Prima"
  */
@@ -137,6 +139,16 @@ $("#largeLeaf").on("input", function (e) {
 $("#widthLeafDesign").on("input", function (e) {
   calculatePieces(e.target, "widthLeafDesign")
 })
+
+/**
+ * si el checkbox de redondear es seleccionado efectua una funcion para volver a calcular el costo por pedazo de material
+ */
+ $('#redondear-numero-piezas').on("click", function(){
+    const costPerChunk = store.calculateCostPerChunkLeaf();
+    $("#costoPedazo").val(costPerChunk?.toString()).trigger("change");
+    const costPerDesign = store.calculateCostDesignChunk();
+    $("#costoPedazoDesign").val(store.calculateCostDesignChunk())
+});
 
 /**
  * Es una función que centraliza la llamada a otras funciones, que calculan el número de pedazos que se necesitan para la máquina. 

@@ -59,7 +59,7 @@ class Store {
     return null
     const totalChunks = this.calculateChunks()
     if(!this.state.totalCost && !totalChunks) return null
-    const costPerChunk = (parseFloat(this.state.totalCost) / totalChunks).toFixed(2)
+    const costPerChunk = ( totalChunks > 1 ) ? (parseFloat(this.state.totalCost) / totalChunks).toFixed(2) : this.state.totalCost; 
     return costPerChunk
   }
 
@@ -91,7 +91,7 @@ class Store {
     if(!widthLeafDesign || !largeLeafDesign || !corte_ancho || !corte_largo) return null
     const designPerChunk = Math.floor(((corte_ancho * corte_largo ) / ((widthLeafDesign + 0.125) * (largeLeafDesign + 0.125))))
     store.setState("designPerChunk", designPerChunk)
-    const total = $("#redondear-numero-piezas").is(':checked') ? Math.floor(parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2)) : (parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2))
+    const total = Math.floor(parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2));
 
     // antes const total = (parseFloat(designPerChunk * parseFloat($("#numeroPedazos").val())).toFixed(2))
     store.setState("totalDesignChunks", total)
